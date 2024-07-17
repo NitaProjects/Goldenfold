@@ -1,0 +1,47 @@
+﻿@model HospitalApi.HistorialAlta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>HistorialAlta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID_Paciente" class="control-label"></label>
+                <select asp-for="ID_Paciente" class ="form-control" asp-items="ViewBag.ID_Paciente"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fecha_Alta" class="control-label"></label>
+                <input asp-for="Fecha_Alta" class="form-control" />
+                <span asp-validation-for="Fecha_Alta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diagnostico" class="control-label"></label>
+                <input asp-for="Diagnostico" class="form-control" />
+                <span asp-validation-for="Diagnostico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tratamiento" class="control-label"></label>
+                <input asp-for="Tratamiento" class="form-control" />
+                <span asp-validation-for="Tratamiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

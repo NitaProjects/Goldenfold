@@ -1,0 +1,49 @@
+<div class="dashboard-container">
+    <header class="header">
+      <div class="header-content">
+        <h1>Dashboard del Controlador de Camas</h1>
+        <div class="user-info">
+          <span>Controlador. Luis Martínez</span>
+          <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+        </div>
+      </div>
+    </header>
+  
+    <div class="content">
+      <div class="register-section">
+        <h2>Registrar Nueva Cama</h2>
+        <form (submit)="addBed()">
+          <div class="form-group">
+            <label for="ubicacion">Ubicación</label>
+            <input type="text" id="ubicacion" name="ubicacion" required [(ngModel)]="newBed.ubicacion" placeholder="Ubicación de la cama">
+          </div>
+          <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <input type="text" id="tipo" name="tipo" required [(ngModel)]="newBed.tipo" placeholder="Tipo de cama">
+          </div>
+          <button type="submit" class="submit-btn">Registrar Cama</button>
+        </form>
+      </div>
+  
+      <div class="beds-section">
+        <h2>Camas Disponibles</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Ubicación</th>
+              <th>Estado</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bed of availableBeds">
+              <td>{{ bed.ubicacion }}</td>
+              <td>{{ bed.estado }}</td>
+              <td>{{ bed.tipo }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

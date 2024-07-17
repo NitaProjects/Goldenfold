@@ -1,0 +1,67 @@
+<div class="dashboard-container">
+    <header class="header">
+      <div class="header-content">
+        <h1>Dashboard del Administrador del Sistema</h1>
+        <div class="user-info">
+          <span>Admin. Carlos Fernández</span>
+          <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+        </div>
+      </div>
+    </header>
+  
+    <div class="content">
+      <div class="register-section">
+        <h2>Registrar Nuevo Rol</h2>
+        <form (submit)="addRole()">
+          <div class="form-group">
+            <label for="name">Nombre del Rol</label>
+            <input type="text" id="name" name="name" required placeholder="Nombre del rol">
+          </div>
+          <div class="form-group">
+            <label for="permissions">Permisos</label>
+            <input type="text" id="permissions" name="permissions" required placeholder="Permisos del rol">
+          </div>
+          <button type="submit" class="submit-btn">Registrar Rol</button>
+        </form>
+      </div>
+  
+      <div class="roles-section">
+        <h2>Roles Registrados</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Permisos</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let role of roles">
+              <td>{{ role.name }}</td>
+              <td>{{ role.permissions.join(', ') }}</td>
+              <td>
+                <button class="edit-btn" (click)="editRole(role)">Editar</button>
+                <button class="delete-btn" (click)="deleteRole(role)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="edit-section" *ngIf="selectedRole">
+        <h2>Editar Rol</h2>
+        <form (submit)="updateRole()">
+          <div class="form-group">
+            <label for="edit-name">Nombre del Rol</label>
+            <input type="text" id="edit-name" name="edit-name" required placeholder="Nombre del rol">
+          </div>
+          <div class="form-group">
+            <label for="edit-permissions">Permisos</label>
+            <input type="text" id="edit-permissions" name="edit-permissions" required placeholder="Permisos del rol">
+          </div>
+          <button type="submit" class="submit-btn">Actualizar Rol</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

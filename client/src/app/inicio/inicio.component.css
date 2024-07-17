@@ -1,0 +1,38 @@
+.header {
+    background-image: url('../../assets/images/cover.jpg.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: 300px; 
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* Filtro de opacidad */
+    z-index: 1; /* Coloca la capa sobre la imagen de fondo */
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-family: "Nunito", sans-serif;
+    margin: 0;
+    position: relative; /* Asegura que el texto esté encima del fondo */
+    z-index: 2; /* Coloca el texto sobre la capa de filtro */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra opcional para mejorar la legibilidad */
+}
+
+.header h2 {
+    font-size: 1.4rem;
+    margin: 10px 40vh 0px 0px; 
+    position: relative; /* Asegura que el texto esté encima del fondo */
+    z-index: 2; /* Coloca el texto sobre la capa de filtro */
+   
+}
+

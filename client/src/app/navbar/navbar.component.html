@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-dark">
+        <a class="navbar-brand" href="#">
+            <h1 class="sm-title" >Hospital Goldenfold</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" >
+                    <a class="nav-link" routerLink="/inicio" routerLinkActive="active">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/administrativo-dashboard" routerLinkActive="active">Administrativo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/medico-dashboard" routerLinkActive="active">Médico</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/controlador-camas-dashboard" routerLinkActive="active">Controlador de Camas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/administrador-sistema-dashboard" routerLinkActive="active">Administrador Sistema</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>

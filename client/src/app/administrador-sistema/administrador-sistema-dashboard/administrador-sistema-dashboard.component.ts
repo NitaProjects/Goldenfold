@@ -1,58 +1,100 @@
-import { Component, OnInit } from '@angular/core';
-
-interface Role {
-  name: string;
-  permissions: string[];
-}
+import { Component, AfterViewInit } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-administrador-sistema-dashboard',
   templateUrl: './administrador-sistema-dashboard.component.html',
   styleUrls: ['./administrador-sistema-dashboard.component.css']
 })
-export class AdministradorSistemaDashboardComponent implements OnInit {
-  roles: Role[] = [];
-  newRole: Role = {
-    name: '',
-    permissions: []
-  };
-  selectedRole: Role | null = null;
+export class AdministradorSistemaDashboardComponent implements AfterViewInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-    // Inicializar con algunos datos de ejemplo
-    this.roles = [
-      { name: 'Administrador', permissions: ['Crear', 'Editar', 'Eliminar'] },
-      { name: 'Usuario', permissions: ['Ver', 'Comentar'] },
-    ];
+  constructor() {
+    // Registrar todos los componentes necesarios de Chart.js
+    Chart.register(...registerables);
   }
 
-  addRole(): void {
-    this.roles.push({ ...this.newRole });
-    this.newRole = { name: '', permissions: [] };
+  ngAfterViewInit(): void {
+    this.initializeCharts();
   }
 
-  editRole(role: Role): void {
-    this.selectedRole = { ...role };
+  logout() {
+    alert('Sesión cerrada');
   }
 
-  updateRole(): void {
-    if (this.selectedRole) {
-      const index = this.roles.findIndex(r => r.name === this.selectedRole!.name);
-      if (index !== -1) {
-        this.roles[index] = { ...this.selectedRole };
-        this.selectedRole = null;
+  filterUsuarios() {
+    const rol = (document.getElementById('filter-rol') as HTMLSelectElement).value;
+
+    const rows = document.querySelectorAll('#usuarios-table-body tr');
+    rows.forEach(row => {
+      const tableRow = row as HTMLTableRowElement;
+      const userRol = tableRow.cells[3].innerText.toLowerCase();
+
+      if (rol && userRol !== rol.toLowerCase()) {
+        tableRow.style.display = 'none';
+      } else {
+        tableRow.style.display = '';
       }
+    });
+  }
+
+  editUser(userId: number) {
+    alert(`Editando usuario ${userId}`);
+  }
+
+  initializeCharts() {
+    const ctx1 = document.getElementById('userRolesChart') as HTMLCanvasElement;
+    if (ctx1) {
+      new Chart(ctx1, {
+        type: 'pie',
+        data: {
+          labels: ['Administrador', 'Doctor', 'Enfermera', 'Personal'],
+          datasets: [{
+            label: 'Distribución de Roles de Usuarios',
+            data: [10, 5, 15, 7],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
     }
-  }
 
-  deleteRole(role: Role): void {
-    this.roles = this.roles.filter(r => r !== role);
-  }
-
-  logout(): void {
-    // Aquí iría la lógica para cerrar sesión
-    console.log('Cerrando sesión...');
+    const ctx2 = document.getElementById('userRegistrationChart') as HTMLCanvasElement;
+    if (ctx2) {
+      new Chart(ctx2, {
+        type: 'line',
+        data: {
+          labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+          datasets: [{
+            label: 'Registros de Usuarios por Mes',
+            data: [5, 10, 8, 6, 7, 9, 15, 20, 17, 14, 12, 10],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
   }
 }

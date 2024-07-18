@@ -1,95 +1,190 @@
 <div class="dashboard-container">
-      <header class="header">
-        <div class="header-content">
-          <h1>Dashboard del Médico</h1>
-          <div class="user-info">
-            <span>Dr. Juan Pérez</span>
-            <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
-          </div>
+  <header class="header">
+    <div class="header-content">
+      <h1>Dashboard Médico</h1>
+      <div class="user-info">
+        <span>Dr. Juan Pérez</span>
+        <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <input type="text" class="search-bar" placeholder="Buscar paciente...">
+  </nav>
+
+  <div class="content">
+    <div class="patients-section">
+      <h2>Pacientes Registrados</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Síntomas</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Juan Garcia</td>
+            <td>45</td>
+            <td>Fiebre, Tos</td>
+            <td>Pendiente de cama</td>
+            <td>
+              <button class="toggle-btn" (click)="toggleSection('view-edit-section-1')">Evaluar Paciente</button>
+              <button class="toggle-btn" (click)="toggleSection('assign-bed-section-1')">Asignar Cama</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Maria Rodriguez</td>
+            <td>30</td>
+            <td>Dolor de Cabeza</td>
+            <td>Pendiente de cama</td>
+            <td>
+              <button class="toggle-btn" (click)="toggleSection('view-edit-section-2')">Evaluar Paciente</button>
+              <button class="toggle-btn" (click)="toggleSection('assign-bed-section-2')">Asignar Cama</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="toggle-section view-edit-section" id="view-edit-section-1">
+      <h2>Evaluar Paciente</h2>
+      <form (submit)="updatePatient($event, 1)">
+        <div class="form-group">
+          <label for="edit-nombre-1">Nombre</label>
+          <input type="text" id="edit-nombre-1" name="edit-nombre" required>
         </div>
-      </header>
-    
-      <div class="content">
-        <div class="link-section">
-          <a routerLink="/medico-dashboard/pacientes" class="dashboard-link">Ver Pacientes</a>
+        <div class="form-group">
+          <label for="edit-edad-1">Edad</label>
+          <input type="number" id="edit-edad-1" name="edit-edad" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-fecha-nacimiento-1">Fecha de Nacimiento</label>
+          <input type="date" id="edit-fecha-nacimiento-1" name="edit-fecha-nacimiento" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-sintomas-1">Síntomas</label>
+          <textarea id="edit-sintomas-1" name="edit-sintomas" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="edit-estado-1">Estado</label>
+          <input type="text" id="edit-estado-1" name="edit-estado" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-seguridad-social-1">Número de Seguridad Social</label>
+          <input type="text" id="edit-seguridad-social-1" name="edit-seguridad-social" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-direccion-1">Dirección</label>
+          <input type="text" id="edit-direccion-1" name="edit-direccion" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-telefono-1">Teléfono</label>
+          <input type="text" id="edit-telefono-1" name="edit-telefono" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-email-1">Email</label>
+          <input type="email" id="edit-email-1" name="edit-email" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-historial-medico-1">Historial Médico</label>
+          <textarea id="edit-historial-medico-1" name="edit-historial-medico" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Actualizar Paciente</button>
+      </form>
+    </div>
+
+    <div class="toggle-section assign-bed-section" id="assign-bed-section-1">
+      <h2>Asignar Cama</h2>
+      <form (submit)="submitAssignment($event, 1)">
+        <div class="form-group">
+          <label for="bed-type-1">Tipo de Cama</label>
+          <select id="bed-type-1" name="bed-type" required>
+            <option value="general">General</option>
+            <option value="uci">UCI</option>
+            <option value="postoperatorio">Postoperatorio</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">Asignar Cama</button>
+      </form>
+    </div>
+
+    <div class="toggle-section view-edit-section" id="view-edit-section-2">
+      <h2>Evaluar Paciente</h2>
+      <form (submit)="updatePatient($event, 2)">
+        <div class="form-group">
+          <label for="edit-nombre-2">Nombre</label>
+          <input type="text" id="edit-nombre-2" name="edit-nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-edad-2">Edad</label>
+          <input type="number" id="edit-edad-2" name="edit-edad" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-fecha-nacimiento-2">Fecha de Nacimiento</label>
+          <input type="date" id="edit-fecha-nacimiento-2" name="edit-fecha-nacimiento" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-sintomas-2">Síntomas</label>
+          <textarea id="edit-sintomas-2" name="edit-sintomas" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="edit-estado-2">Estado</label>
+          <input type="text" id="edit-estado-2" name="edit-estado" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-seguridad-social-2">Número de Seguridad Social</label>
+          <input type="text" id="edit-seguridad-social-2" name="edit-seguridad-social" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-direccion-2">Dirección</label>
+          <input type="text" id="edit-direccion-2" name="edit-direccion" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-telefono-2">Teléfono</label>
+          <input type="text" id="edit-telefono-2" name="edit-telefono" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-email-2">Email</label>
+          <input type="email" id="edit-email-2" name="edit-email" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-historial-medico-2">Historial Médico</label>
+          <textarea id="edit-historial-medico-2" name="edit-historial-medico" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Actualizar Paciente</button>
+      </form>
+    </div>
+
+    <div class="toggle-section assign-bed-section" id="assign-bed-section-2">
+      <h2>Asignar Cama</h2>
+      <form (submit)="submitAssignment($event, 2)">
+        <div class="form-group">
+          <label for="bed-type-2">Tipo de Cama</label>
+          <select id="bed-type-2" name="bed-type" required>
+            <option value="general">General</option>
+            <option value="uci">UCI</option>
+            <option value="postoperatorio">Postoperatorio</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">Asignar Cama</button>
+      </form>
+    </div>
+
+    <div class="statistics-section">
+      <h2>Estadísticas</h2>
+      <div class="charts">
+        <div class="chart-container">
+          <canvas id="patientAgeChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <canvas id="bedStatusChart"></canvas>
         </div>
       </div>
     </div>
-    
-  
-    <div class="content">
-      <div class="patients-section">
-        <h2>Pacientes Pendientes de Evaluación</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Edad</th>
-              <th>Síntomas</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let patient of patients">
-              <td>Juan Garcia</td>
-              <td>45</td>
-              <td>Fiebre, Tos</td>
-              <td>En espera</td>
-              <td>
-                <button class="evaluate-btn" (click)="evaluatePatient(patient)">Evaluar</button>
-              </td>
-            </tr>
-            <tr *ngFor="let patient of patients">
-              <td>Maria Rodriguez</td>
-              <td>30</td>
-              <td>Dolor de Cabeza</td>
-              <td>En espera</td>
-              <td>
-                <button class="evaluate-btn" (click)="evaluatePatient(patient)">Evaluar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-  
-      <div class="beds-section">
-        <h2>Disponibilidad de Camas</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Ubicación</th>
-              <th>Estado</th>
-              <th>Tipo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bed of availableBeds">
-              <td>Piso 1</td>
-              <td>Disponible</td>
-              <td>UCI</td>
-            </tr>
-            <tr *ngFor="let bed of availableBeds">
-              <td>Piso 2</td>
-              <td>Ocupada</td>
-              <td>General</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-  
-      <div class="evaluation-form" *ngIf="selectedPatient">
-        <h2>Evaluar Paciente</h2>
-        <form (submit)="submitEvaluation()">
-          <div class="form-group">
-            <label for="diagnostico">Diagnóstico Inicial</label>
-            <textarea id="diagnostico" name="diagnostico" required>Diagnóstico provisional</textarea>
-          </div>
-          <div class="form-group">
-            <label for="necesidades">Necesidades de Hospitalización</label>
-            <textarea id="necesidades" name="necesidades" required>Necesidades específicas</textarea>
-          </div>
-          <button type="submit" class="submit-btn">Solicitar Asignación de Cama</button>
-        </form>
-      </div>
-    </div>
+  </div>
+</div>

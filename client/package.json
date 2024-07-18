@@ -19,7 +19,9 @@
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
     "@popperjs/core": "^2.11.8",
+    "@types/chart.js": "^2.9.41",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

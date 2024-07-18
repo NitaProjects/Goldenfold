@@ -1,79 +1,134 @@
 <div class="dashboard-container">
-  <div class="dashboard-container">
-    <header class="header">
-      <div class="header-content">
-        <h1>Dashboard del Administrativo</h1>
-        <div class="user-info">
-          <span>Admin. Laura García</span>
-          <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  <header class="header">
+    <div class="header-content">
+      <h1>Dashboard Administrativo Hospital</h1>
+      <div class="user-info">
+        <span>Admin. Laura García</span>
+        <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <input type="text" class="search-bar" placeholder="Buscar...">
+    <select class="filter" name="medico">
+      <option value="">Medico</option>
+      <option value="dr-smith">Dr. Smith</option>
+      <option value="dr-jones">Dr. Jones</option>
+    </select>
+    <select class="filter" name="unidad">
+      <option value="">Unidad</option>
+      <option value="cardiology">Cardiología</option>
+      <option value="neurology">Neurología</option>
+    </select>
+    <select class="filter" name="tipo-consulta">
+      <option value="">Tipo de Consulta</option>
+      <option value="general">General</option>
+      <option value="specialist">Especialista</option>
+    </select>
+  </nav>
+
+  <div class="content">
+    <div class="overview-section">
+      <h2>Visión General</h2>
+      <div class="overview-cards">
+        <div class="card">
+          <h3>Pacientes este Mes</h3>
+          <p>200</p>
+        </div>
+        <div class="card">
+          <h3>Consultas Pendientes</h3>
+          <p>15</p>
+        </div>
+        <div class="card">
+          <h3>Altas Registradas</h3>
+          <p>50</p>
         </div>
       </div>
-    </header>
-  
-    <div class="content">
-      <div class="link-section">
-        <a routerLink="/administrativo/pacientes" class="dashboard-link">Ver Pacientes</a>
-        <a routerLink="/administrativo/altas" class="dashboard-link">Ver Altas</a>
+      <div class="charts">
+        <div class="chart-container">
+          <canvas id="hospitalOccupancyChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <canvas id="registeredPatientsChart"></canvas>
+        </div>
       </div>
     </div>
-  </div>
-  
-  
-    <div class="content">
-      <div class="register-section">
-        <h2>Registrar Nuevo Paciente</h2>
-        <form (submit)="registerPatient()">
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required placeholder="Nombre del paciente">
-          </div>
-          <div class="form-group">
-            <label for="edad">Edad</label>
-            <input type="number" id="edad" name="edad" required placeholder="Edad del paciente">
-          </div>
-          <div class="form-group">
-            <label for="sintomas">Síntomas</label>
-            <textarea id="sintomas" name="sintomas" required placeholder="Síntomas del paciente"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="seguridad-social">Número de Seguridad Social</label>
-            <input type="text" id="seguridad-social" name="seguridad-social" required placeholder="Número de Seguridad Social">
-          </div>
-          <div class="form-group">
-            <label for="contacto">Información de Contacto</label>
-            <input type="text" id="contacto" name="contacto" required placeholder="Información de contacto">
-          </div>
-          <button type="submit" class="submit-btn">Registrar Paciente</button>
-        </form>
-      </div>
-  
-      <div class="patients-section">
-        <h2>Pacientes Registrados</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Edad</th>
-              <th>Síntomas</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let patient of patients">
-              <td>Juan Garcia</td>
-              <td>45</td>
-              <td>Fiebre, Tos</td>
-              <td>Estable</td>
-            </tr>
-            <tr *ngFor="let patient of patients">
-              <td>Maria Rodriguez</td>
-              <td>30</td>
-              <td>Dolor de Cabeza</td>
-              <td>Estable</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
+    <div class="register-section">
+      <h2>Registrar Nuevo Paciente</h2>
+      <button class="toggle-btn" (click)="toggleSection('register-form')">Mostrar/Ocultar Formulario</button>
+      <form id="register-form" (submit)="registerPatient($event)" style="display: none;">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Nombre del paciente">
+        </div>
+        <div class="form-group">
+          <label for="edad">Edad</label>
+          <input type="number" id="edad" name="edad" required placeholder="Edad del paciente">
+        </div>
+        <div class="form-group">
+          <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+          <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+        </div>
+        <div class="form-group">
+          <label for="sintomas">Síntomas</label>
+          <textarea id="sintomas" name="sintomas" required placeholder="Síntomas del paciente"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input type="text" id="estado" name="estado" value="Pendiente de cama" required>
+        </div>
+        <div class="form-group">
+          <label for="seguridad-social">Número de Seguridad Social</label>
+          <input type="text" id="seguridad-social" name="seguridad-social" required placeholder="Número de Seguridad Social">
+        </div>
+        <div class="form-group">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" required placeholder="Dirección del paciente">
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="text" id="telefono" name="telefono" required placeholder="Teléfono de contacto">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="Correo electrónico">
+        </div>
+        <div class="form-group">
+          <label for="historial-medico">Historial Médico</label>
+          <textarea id="historial-medico" name="historial-medico" required placeholder="Historial médico del paciente"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Registrar Paciente</button>
+      </form>
+    </div>
+
+    <div class="patients-section">
+      <h2>Pacientes Registrados</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Síntomas</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Juan Garcia</td>
+            <td>45</td>
+            <td>Fiebre, Tos</td>
+            <td>Estable</td>
+          </tr>
+          <tr>
+            <td>Maria Rodriguez</td>
+            <td>30</td>
+            <td>Dolor de Cabeza</td>
+            <td>Estable</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  
+</div>

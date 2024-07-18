@@ -10,18 +10,12 @@
   </header>
 
   <nav class="navbar">
-    <input type="text" class="search-bar" placeholder="Buscar cama...">
-    <select class="filter" id="filter-tipo-cama" (change)="filterCamas()">
-      <option value="">Tipo de Cama</option>
-      <option value="general">General</option>
-      <option value="uci">UCI</option>
-      <option value="postoperatorio">Postoperatorio</option>
-    </select>
-    <select class="filter" id="filter-estado-cama" (change)="filterCamas()">
-      <option value="">Estado</option>
-      <option value="disponible">Disponible</option>
-      <option value="ocupada">Ocupada</option>
-    </select>
+    <ul>
+      <li><a routerLink="/administrativo/pacientes" class="nav-link">Pacientes</a></li>
+      <li><a routerLink="/administrativo/altas" class="nav-link">Altas</a></li>
+      <li><a routerLink="/administrativo/consultar-ingresados" class="nav-link">Consultar Pacientes Ingresados</a></li>
+      <!-- Añade más enlaces según sea necesario -->
+    </ul>
   </nav>
 
   <div class="content">

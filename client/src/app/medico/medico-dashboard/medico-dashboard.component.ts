@@ -1,5 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { Router } from '@angular/router';
+  
+  
 
 @Component({
   selector: 'app-medico-dashboard',
@@ -8,7 +11,7 @@ import { Chart, registerables } from 'chart.js';
 })
 export class MedicoDashboardComponent implements AfterViewInit {
 
-  constructor() {
+  constructor(private router: Router) {
     // Registrar todos los componentes necesarios de Chart.js
     Chart.register(...registerables);
   }
@@ -19,6 +22,7 @@ export class MedicoDashboardComponent implements AfterViewInit {
 
   logout() {
     alert('Sesión cerrada');
+    this.router.navigate(["/inicio"]);
   }
 
   toggleSection(sectionId: string) {

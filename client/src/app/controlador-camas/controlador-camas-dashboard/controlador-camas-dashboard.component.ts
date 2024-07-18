@@ -1,6 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-
+import { Router } from '@angular/router';
+  
+  
 @Component({
   selector: 'app-controlador-camas-dashboard',
   templateUrl: './controlador-camas-dashboard.component.html',
@@ -8,7 +10,7 @@ import { Chart, registerables } from 'chart.js';
 })
 export class ControladorCamasDashboardComponent implements AfterViewInit {
 
-  constructor() {
+  constructor(private router: Router) {
     // Registrar todos los componentes necesarios de Chart.js
     Chart.register(...registerables);
   }
@@ -19,6 +21,7 @@ export class ControladorCamasDashboardComponent implements AfterViewInit {
 
   logout() {
     alert('Sesión cerrada');
+    this.router.navigate(["/inicio"])
   }
 
   filterCamas() {

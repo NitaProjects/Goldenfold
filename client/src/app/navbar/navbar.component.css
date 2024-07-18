@@ -1,18 +1,25 @@
-body, p, h1, h2, h3, span, .nav-link {
-    color: #ffffff; 
-    font-family: "Nunito Sans", sans-serif; 
+body,
+p,
+h1,
+h2,
+h3,
+span,
+.nav-link {
+    color: #ffffff;
+    font-family: "Nunito Sans", sans-serif;
 }
-  
+
 .navbar .navbar-brand,
 .navbar .nav-link {
     color: white;
-   
+
 }
 
 .navbar {
     background-color: #383838;
 }
-.sm-title { 
+
+.sm-title {
     font-size: 1.4rem;
     font-family: "Nunito Sans", sans-serif;
     margin: 0;
@@ -24,13 +31,15 @@ body, p, h1, h2, h3, span, .nav-link {
     align-items: center;
     padding: 1rem;
 }
+
 .navbar-brand img {
     width: 150px;
     height: auto;
 }
+
 .nav-item .nav-link.active,
 .nav-item .nav-link:hover {
-    color: #81e6ff; 
+    color: #81e6ff;
 }
 
 .nav-item {
@@ -40,4 +49,155 @@ body, p, h1, h2, h3, span, .nav-link {
 
 .nav-link {
     font-size: 0.89em;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    /* 10% from the top and centered horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    /* Fixed width */
+    border-radius: 10px;
+    animation: animatezoom 0.3s;
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.container {
+    padding: 16px;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc;
+    /* Placeholder color */
+}
+
+.container label {
+    font-weight: bold;
+    color: #0078d4;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.container input[type=text],
+.container input[type=password] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.container button {
+    background-color: #0078d4;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+/* Agregar animación de hover para el botón Cancelar */
+.container button.cancelbtn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 8px 14px;
+    /* Tamaño más pequeño */
+    border-color: #f44336;
+    /* Contorno inicial rojo */
+    border: solid red;
+    transition: background-color 0.3s, border-color 0.3s;
+    /* Transiciones */
+}
+
+.container button.cancelbtn:hover {
+    background-color: #c82333;
+    /* Relleno rojo al pasar el ratón */
+    border-color: #c82333;
+    /* Contorno rojo al pasar el ratón */
+    transform: scale(1.05);
+    /* Efecto de escala al pasar el ratón */
+    color: white;
+}
+
+.container button[type=submit] {
+    width: 100%;
+}
+
+.container button[type=submit]:hover {
+    background-color: #0056b3;
+}
+
+.psw {
+    float: right;
+    margin-top: 0;
+}
+
+.psw a {
+    color: #007bff;
+}
+
+.psw a:hover {
+    text-decoration: underline;
+}
+
+nav-item button{
+    border-radius: 5px;
+    background-color: #0056b3;
 }

@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrador-sistema-dashboard',
@@ -7,8 +8,8 @@ import { Chart, registerables } from 'chart.js';
   styleUrls: ['./administrador-sistema-dashboard.component.css']
 })
 export class AdministradorSistemaDashboardComponent implements AfterViewInit {
-
-  constructor() {
+  
+  constructor(private router: Router) {
     // Registrar todos los componentes necesarios de Chart.js
     Chart.register(...registerables);
   }
@@ -19,6 +20,7 @@ export class AdministradorSistemaDashboardComponent implements AfterViewInit {
 
   logout() {
     alert('Sesión cerrada');
+    this.router.navigate(["/inicio"])
   }
 
   filterUsuarios() {

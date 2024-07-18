@@ -1,16 +1,20 @@
 body, p, h1, h2, h3, span, .nav-link {
     color: #ffffff; 
-    font-family: "Nunito", sans-serif; 
+    font-family: "Nunito Sans", sans-serif; 
 }
   
 .navbar .navbar-brand,
 .navbar .nav-link {
     color: white;
+   
 }
 
+.navbar {
+    background-color: #383838;
+}
 .sm-title { 
     font-size: 1.4rem;
-    font-family: "Nunito", sans-serif;
+    font-family: "Nunito Sans", sans-serif;
     margin: 0;
 }
 
@@ -20,12 +24,20 @@ body, p, h1, h2, h3, span, .nav-link {
     align-items: center;
     padding: 1rem;
 }
-
+.navbar-brand img {
+    width: 150px;
+    height: auto;
+}
 .nav-item .nav-link.active,
 .nav-item .nav-link:hover {
-    color: #85fffb; 
+    color: #81e6ff; 
 }
 
 .nav-item {
     cursor: pointer;
+    padding: 0px 10px 0px 10px;
+}
+
+.nav-link {
+    font-size: 0.89em;
 }

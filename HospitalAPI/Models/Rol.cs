@@ -14,6 +14,7 @@ public class Rol
     [StringLength(50)]
     public string Nombre_Rol { get; set; }
 
-    // Navigation properties
+    // Propiedad de navegación
     public ICollection<Usuarios> Usuarios { get; set; }
+
 }

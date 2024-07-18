@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,8 +25,9 @@ public class Usuarios
 
     [ForeignKey("Rol")]
     public int ID_Rol { get; set; }
-    public Rol Rol { get; set; }
 
-    // Navigation properties
+    // Propiedades de navegación
+    public Rol Rol { get; set; }
     public ICollection<Asignacion> Asignaciones { get; set; }
+
 }

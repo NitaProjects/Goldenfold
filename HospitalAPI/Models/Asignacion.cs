@@ -13,12 +13,10 @@ public class Asignacion
 
     [ForeignKey("Paciente")]
     public int ID_Paciente { get; set; }
-    public Paciente Paciente { get; set; }
 
     [ForeignKey("Cama")]
-    [StringLength(10)]
+    [MaxLength(10)]
     public string Ubicacion { get; set; }
-    public Cama Cama { get; set; }
 
     [Required]
     public DateTime Fecha_Asignacion { get; set; } = DateTime.Now;
@@ -27,6 +25,10 @@ public class Asignacion
 
     [ForeignKey("Usuario")]
     public int Asignado_Por { get; set; }
+
+    // Propiedades de navegación
+    public Paciente Paciente { get; set; }
+    public Cama Cama { get; set; }
     public Usuarios Usuario { get; set; }
 
 }

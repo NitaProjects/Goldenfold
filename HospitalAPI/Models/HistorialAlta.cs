@@ -13,14 +13,17 @@ public class HistorialAlta
 
     [ForeignKey("Paciente")]
     public int ID_Paciente { get; set; }
-    public Paciente Paciente { get; set; }
 
     [Required]
-    public DateTime Fecha_Alta { get; set; }
+    public DateTime Fecha_Alta { get; set; } = DateTime.Now;
 
     [StringLength(255)]
     public string Diagnostico { get; set; }
 
     [StringLength(255)]
     public string Tratamiento { get; set; }
+
+    // Propiedad de navegación
+    public Paciente Paciente { get; set; }
+
 }

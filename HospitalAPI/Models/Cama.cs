@@ -5,18 +5,35 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalApi;
 
+public enum EstadoCama
+{
+    Disponible,
+    Ocupado,
+    EnLimpieza
+}
+
+public enum TipoCama
+{
+    General,
+    UCI,
+    Postoperatorio
+}
+
 public class Cama
 {
     [Key]
     [StringLength(10)]
     public string Ubicacion { get; set; }
 
+    [Required]
     [StringLength(50)]
-    public string Estado { get; set; } = "Disponible";
+    public EstadoCama Estado { get; set; } = EstadoCama.Disponible;
 
+    [Required]
     [StringLength(50)]
-    public string Tipo { get; set; }
+    public string TipoCama { get; set; }
 
-    // Navigation properties
+    // Propiedad de navegación
     public ICollection<Asignacion> Asignaciones { get; set; }
+
 }

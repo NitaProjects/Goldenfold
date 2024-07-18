@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { AdministrativoRoutingModule } from './administrativo-routing.module';
 import { AdministrativoDashboardComponent } from './administrativo-dashboard/administrativo-dashboard.component';
+import { SharedModule } from '../shared/shared.module';
+import { AdministrativoRoutingModule } from './administrativo-routing.module';
 
 @NgModule({
-  declarations: [
-    AdministrativoDashboardComponent
-  ],
   imports: [
     CommonModule,
-    FormsModule,
+    SharedModule,
     AdministrativoRoutingModule
+  ],
+  declarations: [
+    AdministrativoDashboardComponent
   ]
 })
 export class AdministrativoModule { }

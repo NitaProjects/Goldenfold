@@ -1,0 +1,30 @@
+<div class="patients-section">
+  <h2>Historial de Altas Médicas</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID Historial</th>
+        <th>ID Paciente</th>
+        <th>Fecha de Alta</th>
+        <th>Diagnóstico</th>
+        <th>Tratamiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paciente of pacientes">
+        <td>{{ paciente.idHistorial }}</td>
+        <td>{{ paciente.idPaciente }}</td>
+        <td>{{ paciente.fechaAlta | date: 'shortDate' }}</td>
+        <td>{{ paciente.diagnostico }}</td>
+        <td>{{ paciente.tratamiento }}</td>
+        <td>
+          <button (click)="editRecord(paciente.idHistorial)">Editar</button>
+          <button (click)="copyRecord(paciente.idHistorial)">Copiar</button>
+          <button (click)="deleteRecord(paciente.idHistorial)">Borrar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

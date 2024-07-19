@@ -9,7 +9,7 @@
     </div>
   </header>
 
-  <nav class="navbar">
+ <!-- <nav class="navbar">
     <ul>
       <li><a routerLink="pacientes" class="nav-link">Pacientes</a></li>
       <li><a routerLink="altas" class="nav-link">Altas</a></li>
@@ -19,7 +19,7 @@
         >
       </li>
     </ul>
-  </nav>
+  </nav>-->
 
   <div class="content">
     <div class="register-section">
@@ -133,27 +133,17 @@
       </form>
     </div>
     <div class="overview-section">
-      <h2>Visión General</h2>
-      <div class="overview-cards">
-        <div class="card">
-          <h3>Pacientes este Mes</h3>
-          <p>200</p>
-        </div>
-        <div class="card">
-          <h3>Consultas Pendientes</h3>
-          <p>15</p>
-        </div>
-        <div class="card">
-          <h3>Altas Registradas</h3>
-          <p>50</p>
-        </div>
-      </div>
-      <div class="charts">
-        <div class="chart-container">
-          <canvas id="hospitalOccupancyChart"></canvas>
-        </div>
-        <div class="chart-container">
-          <canvas id="registeredPatientsChart"></canvas>
+      <div class="content">
+        <div class="statistics-section">
+          <h2>Estadísticas</h2>
+          <div class="charts">
+            <div class="chart-container">
+              <canvas id="patientHealthStatusChart"></canvas>
+            </div>
+            <div class="chart-container">
+              <canvas id="dailyAdmissionsDischargesChart"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>

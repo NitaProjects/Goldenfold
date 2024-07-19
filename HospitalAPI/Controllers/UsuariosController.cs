@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HospitalApi;
+﻿using Microsoft.AspNetCore.Mvc; // Para definir la api
+using Microsoft.EntityFrameworkCore; // Utilitzar el contexto de BD
 using HospitalApi.Models;
-using AutoMapper;
-using HospitalAPI.DTO;
+using HospitalApi.DTO;
+using AutoMapper; // Mapear datos de BD-DTO
 
-namespace HospitalAPI.Controllers
+namespace HospitalApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class UsuariosController : ControllerBase
+    [Route("api/[controller]")] // Indica la ruta base para las solicitudes "api/Usuarios
+    public class UsuariosController : ControllerBase // Hereda de la clase controlador
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IMapper _mapper;
+        private readonly ApplicationDbContext _context; // acceder al contexto de la base de datos.
+        private readonly IMapper _mapper; // usar el automapper
 
         public UsuariosController(ApplicationDbContext context, IMapper mapper)
         {
-            _context = context;
+            // Constructor que inyecta el contexto de la base de datos y el mapeador.
+            _context = context; 
             _mapper = mapper;
         }
 
@@ -29,57 +24,68 @@ namespace HospitalAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsuariosDTO>>> GetUsuarios()
         {
-            var usuarios = await _context.Usuarios.ToListAsync();
-            var usuariosDTO = _mapper.Map<IEnumerable<UsuariosDTO>>(usuarios);
-            return Ok(usuariosDTO);
+            var usuarios = await _context.Usuarios.ToListAsync(); // Obtiene todos los usuarios de la bd
+            var usuariosDTO = _mapper.Map<IEnumerable<UsuariosDTO>>(usuarios); // Con automapper convierte esta lista en una de DTO
+            return Ok(usuariosDTO); // Devuelve la lista de DTOs con un código de estado HTTP 200 OK.
         }
 
         // GET: api/Usuarios/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<UsuariosDTO>> GetUsuario(int id)
         {
-            var usuario = await _context.Usuarios.FindAsync(id);
+            var usuario = await _context.Usuarios.FindAsync(id); // Busca con el id indicado en la bd
 
             if (usuario == null)
             {
-                return NotFound();
+                return NotFound();  // Si no encuentra nada pues 404...
             }
 
-            var usuarioDTO = _mapper.Map<UsuariosDTO>(usuario);
-            return Ok(usuarioDTO);
+            var usuarioDTO = _mapper.Map<UsuariosDTO>(usuario); // convertir al usuario en uno de DTO
+            return Ok(usuarioDTO); // Retorna el usuario y un OK 200
         }
 
         // POST: api/Usuarios
         [HttpPost]
-        public async Task<ActionResult<UsuariosDTO>> PostUsuario(UsuariosDTO usuarioDTO)
+        public async Task<ActionResult<UsuariosDTO>> AddUsuario(UsuariosDTO usuarioDTO)
         {
-            var usuario = _mapper.Map<Usuarios>(usuarioDTO);
+            // Verificar si el nombre de usuario ya existe
+            if (await _context.Usuarios.AnyAsync(u => u.Usuario == usuarioDTO.Usuario))
+            {
+                return Conflict("El nombre de usuario ya está en uso.");
+            }
 
-            _context.Usuarios.Add(usuario);
-            await _context.SaveChangesAsync();
+            var usuario = _mapper.Map<Usuarios>(usuarioDTO); // convertir el user encontrado a uno dto
 
-            usuarioDTO.ID_Usuario = usuario.ID_Usuario;
-            return CreatedAtAction("GetUsuario", new { id = usuarioDTO.ID_Usuario }, usuarioDTO);
+            _context.Usuarios.Add(usuario); // Agrega el nuevo usuario al contexto de la DB
+            await _context.SaveChangesAsync(); // Guarda los cambios en la db
+
+            usuarioDTO.ID_Usuario = usuario.ID_Usuario; // Actualizo el id del dto con el generao
+            return CreatedAtAction(nameof(GetUsuario), new { id = usuarioDTO.ID_Usuario }, usuarioDTO); // Retorna el nuevo usuario creado con un código de estado HTTP 201 Created.
         }
 
         // PUT: api/Usuarios/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, UsuariosDTO usuarioDTO)
+        public async Task<IActionResult> EditUsuario(int id, UsuariosDTO usuarioDTO)
         {
             if (id != usuarioDTO.ID_Usuario)
             {
-                return BadRequest();
+                return BadRequest("El ID del usuario proporcionado no coincide con el ID en la solicitud.");
             }
 
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario == null)
+            var usuarioExistente = await _context.Usuarios.FindAsync(id);
+
+            if (usuarioExistente == null)
             {
-                return NotFound();
+                return NotFound("No se encontró el usuario especificado.");
             }
 
-            _mapper.Map(usuarioDTO, usuario);
+            // Verificar si el nombre de usuario ya existe (excepto para el usuario actual)
+            if (await _context.Usuarios.AnyAsync(u => u.ID_Usuario != id && u.Usuario == usuarioDTO.Usuario))
+            {
+                return Conflict("El nombre de usuario ya está en uso.");
+            }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _mapper.Map(usuarioDTO, usuarioExistente);
 
             try
             {
@@ -89,7 +95,7 @@ namespace HospitalAPI.Controllers
             {
                 if (!UsuarioExists(id))
                 {
-                    return NotFound();
+                    return NotFound("No se encontró el usuario especificado.");
                 }
                 else
                 {
@@ -105,9 +111,10 @@ namespace HospitalAPI.Controllers
         public async Task<IActionResult> DeleteUsuario(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
+
             if (usuario == null)
             {
-                return NotFound();
+                return NotFound("No se encontró el usuario especificado.");
             }
 
             _context.Usuarios.Remove(usuario);

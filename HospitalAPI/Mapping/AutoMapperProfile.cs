@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using HospitalApi.Models;
-using HospitalAPI.DTO;
+using HospitalApi.DTO;
 using HospitalApi;
 
-namespace HospitalAPI.Mapping
+namespace HospitalApi.Mapping
 {
     public class AutoMapperProfile : Profile
     {

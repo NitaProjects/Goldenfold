@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using HospitalApi.Models;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
-using HospitalAPI.Mapping;
+using HospitalApi.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 

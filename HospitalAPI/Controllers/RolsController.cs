@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HospitalApi;
 using HospitalApi.Models;
+using HospitalApi.DTO;
 using AutoMapper;
-using HospitalAPI.DTO;
 
-namespace HospitalAPI.Controllers
+namespace HospitalApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -53,13 +47,19 @@ namespace HospitalAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<RolDTO>> PostRol(RolDTO rolDTO)
         {
+            // Verificar si el nombre de rol ya existe
+            if (await _context.Rol.AnyAsync(r => r.Nombre_Rol.ToLower() == rolDTO.Nombre_Rol.ToLower()))
+            {
+                return Conflict("Este rol ya existe.");
+            }
+
             var rol = _mapper.Map<Rol>(rolDTO);
 
             _context.Rol.Add(rol);
             await _context.SaveChangesAsync();
 
             rolDTO.ID_Rol = rol.ID_Rol; // Actualizar el DTO con el ID generado
-            return CreatedAtAction("GetRol", new { id = rolDTO.ID_Rol }, rolDTO);
+            return CreatedAtAction(nameof(GetRol), new { id = rolDTO.ID_Rol }, rolDTO);
         }
 
         // PUT: api/Roles/{id}
@@ -68,18 +68,23 @@ namespace HospitalAPI.Controllers
         {
             if (id != rolDTO.ID_Rol)
             {
-                return BadRequest();
+                return BadRequest("El ID del rol proporcionado no coincide con el ID en la solicitud.");
             }
 
-            var rol = await _context.Rol.FindAsync(id);
-            if (rol == null)
+            var rolExistente = await _context.Rol.FindAsync(id);
+
+            if (rolExistente == null)
             {
-                return NotFound();
+                return NotFound("No se encontró el rol especificado.");
             }
 
-            _mapper.Map(rolDTO, rol);
+            // Verificar si el nombre de rol ya existe (excepto para el rol actual que se está actualizando)
+            if (await _context.Rol.AnyAsync(r => r.ID_Rol != id && r.Nombre_Rol.ToLower() == rolDTO.Nombre_Rol.ToLower()))
+            {
+                return Conflict("El nombre de rol ya está en uso.");
+            }
 
-            _context.Entry(rol).State = EntityState.Modified;
+            _mapper.Map(rolDTO, rolExistente);
 
             try
             {
@@ -89,7 +94,7 @@ namespace HospitalAPI.Controllers
             {
                 if (!RolExists(id))
                 {
-                    return NotFound();
+                    return NotFound("No se encontró el rol especificado.");
                 }
                 else
                 {
@@ -105,9 +110,10 @@ namespace HospitalAPI.Controllers
         public async Task<IActionResult> DeleteRol(int id)
         {
             var rol = await _context.Rol.FindAsync(id);
+
             if (rol == null)
             {
-                return NotFound();
+                return NotFound("No se encontró el rol especificado.");
             }
 
             _context.Rol.Remove(rol);

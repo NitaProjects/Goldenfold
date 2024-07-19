@@ -48,44 +48,44 @@ public class ApplicationDbContext : DbContext
 
         // Habitacion
         modelBuilder.Entity<Habitaciones>()
-            .HasKey(h => h.ID_Habitacion);
+            .HasKey(h => h.ID_Habitacion); //ID_Habitacion es la clave primaria de la entidad Habitacion.
 
         // Asignacion
         modelBuilder.Entity<Asignacion>()
-            .HasKey(a => a.ID_Asignacion); 
+            .HasKey(a => a.ID_Asignacion); //ID_Asignación es la clave primaria en la entidad Asignación
 
         modelBuilder.Entity<Asignacion>()
-            .HasOne(a => a.Paciente)
-            .WithMany(p => p.Asignaciones)
-            .HasForeignKey(a => a.ID_Paciente); 
+            .HasOne(a => a.Paciente)  //Relación 1 a 1 o 1 a N.
+            .WithMany(p => p.Asignaciones) //Un Paciente puede estar relacionado con N Asignaciones
+            .HasForeignKey(a => a.ID_Paciente); //ID_Paciente es la clave foránea en la Entidad Asignación
 
         modelBuilder.Entity<Asignacion>()
-            .HasOne(a => a.Cama)
-            .WithMany(c => c.Asignaciones)
-            .HasForeignKey(a => a.Ubicacion); 
+            .HasOne(a => a.Cama)  //Relación 1 a 1 o 1 a N.
+            .WithMany(c => c.Asignaciones) // Una Cama puede estar relacionada con N Asignaciones
+            .HasForeignKey(a => a.Ubicacion); //Ubicación es la clave foránea en la Entidad Asignación
 
         modelBuilder.Entity<Asignacion>()
-            .HasOne(a => a.Usuario)
-            .WithMany(u => u.Asignaciones)
-            .HasForeignKey(a => a.Asignado_Por); 
+            .HasOne(a => a.Usuario) //Relación 1 a 1 o 1 a N.
+            .WithMany(u => u.Asignaciones) //Un Usuario puede estar relacionado con N Asignaciones
+            .HasForeignKey(a => a.Asignado_Por); //Asignado_Por es la clave foránea en la Entidad Asignación
 
         // HistorialAltas
         modelBuilder.Entity<HistorialAlta>()
-            .HasKey(ha => ha.ID_Historial); 
+            .HasKey(ha => ha.ID_Historial); //ID_Hisotiral como clave primaria de HistorialAlta. 
 
         modelBuilder.Entity<HistorialAlta>()
-            .HasOne(ha => ha.Paciente)
-            .WithMany(p => p.HistorialAltas)
-            .HasForeignKey(ha => ha.ID_Paciente); 
+            .HasOne(ha => ha.Paciente)  //Relación 1 a 1 o 1 a N.
+            .WithMany(p => p.HistorialAltas) //Un Paciente puede estar relacionado con N Historiales de Alta
+            .HasForeignKey(ha => ha.ID_Paciente); //ID_Paciente es la clave foránea en la Entidad HistorialAlta.
 
         // Usuario
         modelBuilder.Entity<Usuarios>() // Indicar qué Entidad estamos configurando
-            .HasKey(u => u.ID_Usuario); // Definir ID_Usuario como clave primaria de Usuarios. 
+            .HasKey(u => u.ID_Usuario); // ID_Usuario como clave primaria de Usuarios. 
 
         modelBuilder.Entity<Usuarios>()
             .HasOne(u => u.Rol) //Relación 1 a 1 o N Usuarios pueden tener el mismo rol.
             .WithMany(r => r.Usuarios) //Un rol puede estar relacionado con N Usuarios
-            .HasForeignKey(u => u.ID_Rol); //Definir que ID_Rol es la clave foránea en a entidad Usuarios
+            .HasForeignKey(u => u.ID_Rol); //ID_Rol es la clave foránea en a entidad Usuarios
 
         modelBuilder.Entity<Usuarios>()
             .HasMany(u => u.Asignaciones) //Relación 1 a N con Asignaciones
@@ -98,12 +98,12 @@ public class ApplicationDbContext : DbContext
 
         // Rol
         modelBuilder.Entity<Rol>()
-            .HasKey(r => r.ID_Rol); 
+            .HasKey(r => r.ID_Rol); //ID_Rol como clave primaria de Rol. 
 
         modelBuilder.Entity<Rol>()
-            .HasMany(r => r.Usuarios)
-            .WithOne(u => u.Rol)
-            .HasForeignKey(u => u.ID_Rol); 
+            .HasMany(r => r.Usuarios) //Relación 1 a N con Usuarios
+            .WithOne(u => u.Rol) //Cada Rol tiene una referencia a Usuario 
+            .HasForeignKey(u => u.ID_Rol); // ID_Rol es la clave foránea en a entidad Usuarios
 
         base.OnModelCreating(modelBuilder);
     }

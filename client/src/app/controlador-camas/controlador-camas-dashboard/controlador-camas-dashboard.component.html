@@ -3,91 +3,58 @@
     <div class="header-content">
       <h1>Dashboard Controlador de Camas</h1>
       <div class="user-info">
-        <span>Controlador: Ana López</span>
+        <span>Controlador de Camas</span>
         <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
       </div>
     </div>
   </header>
 
-  <!--<nav class="navbar">
-    <ul>
-      <li><a routerLink="/administrativo/pacientes" class="nav-link">Pacientes</a></li>
-      <li><a routerLink="/administrativo/altas" class="nav-link">Altas</a></li>
-      <li><a routerLink="/administrativo/consultar-ingresados" class="nav-link">Consultar Pacientes Ingresados</a></li>
-      <!-- Añade más enlaces según sea necesario
-    </ul>
-  </nav> -->
-
   <div class="content">
-    <div class="solicitudes-section">
-      <h2>Solicitudes de Asignación de Camas</h2>
+    <div class="requests-section">
+      <h2>Solicitudes de Ingreso</h2>
       <table>
         <thead>
           <tr>
-            <th>ID Paciente</th>
-            <th>Nombre</th>
+            <th>Paciente</th>
             <th>Tipo de Cama Solicitada</th>
-            <th>Fecha de Solicitud</th>
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody id="solicitudes-table-body">
-          <tr>
-            <td>1</td>
-            <td>Juan Garcia</td>
-            <td>General</td>
-            <td>2023-07-10 14:32</td>
-            <td><button class="assign-btn" (click)="assignBed(1)">Asignar Cama</button></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Maria Rodriguez</td>
-            <td>UCI</td>
-            <td>2023-07-10 15:45</td>
-            <td><button class="assign-btn" (click)="assignBed(2)">Asignar Cama</button></td>
+        <tbody>
+          <tr *ngFor="let request of admissionRequests">
+            <td>{{ request.patientName }}</td>
+            <td>{{ request.requestedBedType }}</td>
+            <td>
+              <button (click)="toggleAssignSection(request)">Asignar Cama</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="camas-section">
-      <h2>Camas </h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Ubicación</th>
-            <th>Tipo de Cama</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody id="camas-table-body">
-          <tr>
-            <td>7A010101</td>
-            <td>General</td>
-            <td>Disponible</td>
-          </tr>
-          <tr>
-            <td>7A010102</td>
-            <td>UCI</td>
-            <td>Ocupada</td>
-          </tr>
-          <tr>
-            <td>7A010201</td>
-            <td>Postoperatorio</td>
-            <td>Disponible</td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngIf="selectedRequest" class="assignment-section">
+      <h2>Asignar Cama a {{ selectedRequest.patientName }}</h2>
+      <form (submit)="assignBed($event)">
+        <div class="form-group">
+          <label for="bed-selection">Seleccionar Cama Disponible</label>
+          <select id="bed-selection" [(ngModel)]="selectedBedId" name="bed-selection" required>
+            <option *ngFor="let bed of getAvailableBeds(selectedRequest.requestedBedType)" [value]="bed.id">
+              Cama ID: {{ bed.id }}
+            </option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">Asignar Cama</button>
+      </form>
     </div>
 
     <div class="statistics-section">
       <h2>Estadísticas</h2>
       <div class="charts">
         <div class="chart-container">
-          <canvas id="hospitalMapChart"></canvas>
+          <canvas id="bedAvailabilityChart"></canvas>
         </div>
         <div class="chart-container">
-          <canvas id="bedRequestsChart"></canvas>
+          <canvas id="bedOccupancyChart"></canvas>
         </div>
       </div>
     </div>

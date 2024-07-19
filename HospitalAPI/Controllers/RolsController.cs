@@ -45,7 +45,7 @@ namespace HospitalApi.Controllers
 
         // POST: api/Roles
         [HttpPost]
-        public async Task<ActionResult<RolDTO>> PostRol(RolDTO rolDTO)
+        public async Task<ActionResult<RolDTO>> AddRol(RolDTO rolDTO)
         {
             // Verificar si el nombre de rol ya existe
             if (await _context.Rol.AnyAsync(r => r.Nombre_Rol.ToLower() == rolDTO.Nombre_Rol.ToLower()))
@@ -58,13 +58,13 @@ namespace HospitalApi.Controllers
             _context.Rol.Add(rol);
             await _context.SaveChangesAsync();
 
-            rolDTO.ID_Rol = rol.ID_Rol; // Actualizar el DTO con el ID generado
+            rolDTO.ID_Rol = rol.ID_Rol;
             return CreatedAtAction(nameof(GetRol), new { id = rolDTO.ID_Rol }, rolDTO);
         }
 
         // PUT: api/Roles/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRol(int id, RolDTO rolDTO)
+        public async Task<IActionResult> EditRol(int id, RolDTO rolDTO)
         {
             if (id != rolDTO.ID_Rol)
             {
@@ -81,7 +81,7 @@ namespace HospitalApi.Controllers
             // Verificar si el nombre de rol ya existe (excepto para el rol actual que se está actualizando)
             if (await _context.Rol.AnyAsync(r => r.ID_Rol != id && r.Nombre_Rol.ToLower() == rolDTO.Nombre_Rol.ToLower()))
             {
-                return Conflict("El nombre de rol ya está en uso.");
+                return Conflict("Este rol ya existe.");
             }
 
             _mapper.Map(rolDTO, rolExistente);

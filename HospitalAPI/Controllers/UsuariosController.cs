@@ -54,6 +54,8 @@ namespace HospitalApi.Controllers
                 return Conflict("El nombre de usuario ya está en uso.");
             }
 
+            // Verificar si el rol asignado existe
+
             var usuario = _mapper.Map<Usuarios>(usuarioDTO); // convertir el user encontrado a uno dto
 
             _context.Usuarios.Add(usuario); // Agrega el nuevo usuario al contexto de la DB
@@ -69,10 +71,11 @@ namespace HospitalApi.Controllers
         {
             if (id != usuarioDTO.ID_Usuario)
             {
+                // Compara el id de la URL con ID_Usuario del dto.
                 return BadRequest("El ID del usuario proporcionado no coincide con el ID en la solicitud.");
             }
 
-            var usuarioExistente = await _context.Usuarios.FindAsync(id);
+            var usuarioExistente = await _context.Usuarios.FindAsync(id); // Busca en la bd el user con ese id
 
             if (usuarioExistente == null)
             {
@@ -85,11 +88,11 @@ namespace HospitalApi.Controllers
                 return Conflict("El nombre de usuario ya está en uso.");
             }
 
-            _mapper.Map(usuarioDTO, usuarioExistente);
+            _mapper.Map(usuarioDTO, usuarioExistente); // Mapea las propiedades del dto al usuario existente.
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); // Guardará los cambios en la bd
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -103,22 +106,22 @@ namespace HospitalApi.Controllers
                 }
             }
 
-            return NoContent();
+            return NoContent(); 
         }
 
         // DELETE: api/Usuarios/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuario(int id)
         {
-            var usuario = await _context.Usuarios.FindAsync(id);
+            var usuario = await _context.Usuarios.FindAsync(id); //  Busca el usuario por su id.
 
             if (usuario == null)
             {
                 return NotFound("No se encontró el usuario especificado.");
             }
 
-            _context.Usuarios.Remove(usuario);
-            await _context.SaveChangesAsync();
+            _context.Usuarios.Remove(usuario); // Elimina de la bd
+            await _context.SaveChangesAsync(); // Guarda los cambios
 
             return NoContent();
         }

@@ -187,10 +187,13 @@ span,
 .psw {
     float: right;
     margin-top: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .psw a {
     color: #007bff;
+    
 }
 
 .psw a:hover {

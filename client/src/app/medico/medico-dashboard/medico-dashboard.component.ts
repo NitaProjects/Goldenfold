@@ -1,8 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { Router } from '@angular/router';
-  
-  
 
 @Component({
   selector: 'app-medico-dashboard',
@@ -32,28 +30,39 @@ export class MedicoDashboardComponent implements AfterViewInit {
     }
   }
 
-  updatePatient(event: Event, patientId: number) {
+  evaluatePatient(event: Event, patientId: number) {
     event.preventDefault();
-    alert(`Paciente ${patientId} actualizado`);
-  }
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-  submitAssignment(event: Event, patientId: number) {
-    event.preventDefault();
-    alert(`Cama asignada al paciente ${patientId}`);
+    // Aquí enviarías los datos al backend
+    console.log('Evaluando paciente:', patientId, formData);
+
+    // Ejemplo: resetear formulario y ocultar sección
+    form.reset();
+    this.toggleSection(`view-evaluate-section-${patientId}`);
+    alert(`Paciente ${patientId} evaluado para ingreso`);
   }
 
   initializeCharts() {
-    const ctx1 = document.getElementById('patientAgeChart') as HTMLCanvasElement;
+    // Gráfico de disponibilidad de camas por tipo
+    const ctx1 = document.getElementById('bedAvailabilityChart') as HTMLCanvasElement;
     if (ctx1) {
       new Chart(ctx1, {
         type: 'bar',
         data: {
-          labels: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '90+'],
+          labels: ['General', 'UCI', 'Postoperatorio'],
           datasets: [{
-            label: 'Número de Pacientes',
-            data: [2, 3, 1, 5, 4, 6, 2, 1, 1, 0],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            label: 'Camas Disponibles',
+            data: [20, 5, 10], // Datos de ejemplo
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }, {
+            label: 'Camas Ocupadas',
+            data: [10, 3, 5], // Datos de ejemplo
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
           }]
         },
@@ -67,24 +76,22 @@ export class MedicoDashboardComponent implements AfterViewInit {
       });
     }
 
-    const ctx2 = document.getElementById('bedStatusChart') as HTMLCanvasElement;
+    // Gráfico de capacidad total del hospital
+    const ctx2 = document.getElementById('totalCapacityChart') as HTMLCanvasElement;
     if (ctx2) {
       new Chart(ctx2, {
-        type: 'pie',
+        type: 'doughnut',
         data: {
-          labels: ['Disponible', 'Ocupada', 'Mantenimiento'],
+          labels: ['Capacidad Total', 'Capacidad Usada'],
           datasets: [{
-            label: 'Estado de las Camas',
-            data: [10, 5, 1],
+            data: [100, 60], // Datos de ejemplo
             backgroundColor: [
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(255, 206, 86, 0.2)'
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
-              'rgba(75, 192, 192, 1)',
-              'rgba(255, 99, 132, 1)',
-              'rgba(255, 206, 86, 1)'
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1
           }]

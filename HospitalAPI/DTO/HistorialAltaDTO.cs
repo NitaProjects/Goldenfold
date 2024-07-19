@@ -1,4 +1,4 @@
-﻿namespace HospitalAPI.DTO
+﻿namespace HospitalApi.DTO
 {
     public class HistorialAltaDTO
     {

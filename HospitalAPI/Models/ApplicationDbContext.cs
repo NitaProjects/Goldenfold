@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using HospitalApi;
 
 namespace HospitalApi.Models;
 
@@ -9,13 +8,13 @@ public class ApplicationDbContext : DbContext
         : base(options)
     {
     }
-    public DbSet<HospitalApi.Paciente> Pacientes { get; set; } = default!;
-    public DbSet<HospitalApi.Asignacion> Asignacion { get; set; } = default!;
-    public DbSet<HospitalApi.Cama> Cama { get; set; } = default!;
-    public DbSet<HospitalApi.Habitaciones> Habitaciones { get; set; } = default!;
-    public DbSet<HospitalApi.HistorialAlta> HistorialAlta { get; set; } = default!;
-    public DbSet<HospitalApi.Rol> Rol { get; set; } = default!;
-    public DbSet<HospitalApi.Usuarios> Usuarios { get; set; } = default!;
+    public DbSet<Paciente> Pacientes { get; set; } = default!;
+    public DbSet<Asignacion> Asignacion { get; set; } = default!;
+    public DbSet<Cama> Cama { get; set; } = default!;
+    public DbSet<Habitaciones> Habitaciones { get; set; } = default!;
+    public DbSet<HistorialAlta> HistorialAlta { get; set; } = default!;
+    public DbSet<Rol> Rol { get; set; } = default!;
+    public DbSet<Usuarios> Usuarios { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

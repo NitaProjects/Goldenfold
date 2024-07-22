@@ -3,6 +3,7 @@ using HospitalApi.Models;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
 using HospitalApi.Mapping;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,10 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 // Add Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllersWithViews()
+                .AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddCors(options =>
 {

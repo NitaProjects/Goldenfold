@@ -2,13 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using HospitalApi.Models;
 using HospitalApi.DTO;
-<<<<<<< HEAD
 using AutoMapper;
 
-=======
-using AutoMapper; // Mapear datos de BD-DTO
-//contraseñas en texto plano ojo!!
->>>>>>> 8366e689a7139d51f25ab8ed6ba5a7ed76d8c201
 namespace HospitalApi.Controllers
 {
     [ApiController]

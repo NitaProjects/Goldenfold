@@ -1,42 +1,45 @@
-
 <div class="patients-section">
   <h2>Pacientes Registrados</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID Paciente</th>
-        <th>Nombre</th>
-        <th>Edad</th>
-        <th>Síntomas</th>
-        <th>Estado</th>
-        <th>Fecha de Registro</th>
-        <th>Seguridad Social</th>
-        <th>Dirección</th>
-        <th>Teléfono</th>
-        <th>Historial Médico</th>
-        <th>Fecha de Nacimiento</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let paciente of pacientes">
-        <td>{{ paciente.iD_Paciente }}</td>
-        <td>{{ paciente.nombre }}</td>
-        <td>{{ paciente.edad }}</td>
-        <td>{{ paciente.sintomas }}</td>
-        <td>{{ paciente.estado }}</td>
-        <td>{{ paciente.fecha_Registro | date: 'shortDate' }}</td>
-        <td>{{ paciente.seguridad_Social }}</td>
-        <td>{{ paciente.direccion }}</td>
-        <td>{{ paciente.telefono }}</td>
-        <td>{{ paciente.historial_Medico }}</td>
-        <td>{{ paciente.fecha_Nacimiento | date: 'shortDate' }}</td>
-        <td>
-          <button (click)="editarRegistro(paciente.iD_Paciente)">Editar</button>
-          <button (click)="copiarRegistro(paciente.iD_Paciente)">Copiar</button>
-          <button (click)="borrarRegistro(paciente.iD_Paciente)">Borrar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Paciente</th>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Síntomas</th>
+          <th>Estado</th>
+          <th>Fecha de Registro</th>
+          <th>Seguridad Social</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>Historial Médico</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paciente of pacientes">
+          <td>{{ paciente.iD_Paciente }}</td>
+          <td>{{ paciente.nombre }}</td>
+          <td>{{ paciente.edad }}</td>
+          <td>{{ paciente.sintomas }}</td>
+          <td>{{ paciente.estado }}</td>
+          <td>{{ paciente.fecha_Registro | date: 'shortDate' }}</td>
+          <td>{{ paciente.seguridad_Social }}</td>
+          <td>{{ paciente.direccion }}</td>
+          <td>{{ paciente.telefono }}</td>
+          <td>{{ paciente.historial_Medico }}</td>
+          <td>{{ paciente.fecha_Nacimiento | date: 'shortDate' }}</td>
+          <td>
+            <button (click)="editarRegistro(paciente.iD_Paciente)">Editar</button>
+            <button (click)="copiarRegistro(paciente.iD_Paciente)">Copiar</button>
+            <button (click)="borrarRegistro(paciente.iD_Paciente)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
 </div>

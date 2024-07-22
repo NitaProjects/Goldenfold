@@ -1,30 +1,46 @@
-<div class="patients-section">
-  <h2>Historial de Altas Médicas</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID Historial</th>
-        <th>ID Paciente</th>
-        <th>Fecha de Alta</th>
-        <th>Diagnóstico</th>
-        <th>Tratamiento</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let paciente of pacientes">
-        <td>{{ paciente.idHistorial }}</td>
-        <td>{{ paciente.idPaciente }}</td>
-        <td>{{ paciente.fechaAlta | date: 'shortDate' }}</td>
-        <td>{{ paciente.diagnostico }}</td>
-        <td>{{ paciente.tratamiento }}</td>
-        <td>
-          <button (click)="editRecord(paciente.idHistorial)">Editar</button>
-          <button (click)="copyRecord(paciente.idHistorial)">Copiar</button>
-          <button (click)="deleteRecord(paciente.idHistorial)">Borrar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div class="historial-altas-section">
+  <h2>Historial de Altas</h2>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Historial</th>
+          <th>ID Paciente</th>
+          <th>Fecha de Alta</th>
+          <th>Diagnóstico</th>
+          <th>Tratamiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let historialAlta of historialAltas">
+          <td>{{ historialAlta.iD_Historial }}</td>
+          <td>{{ historialAlta.iD_Paciente }}</td>
+          <td>{{ historialAlta.fecha_Alta | date: 'shortDate' }}</td>
+          <td>{{ historialAlta.diagnostico }}</td>
+          <td>{{ historialAlta.tratamiento }}</td>
+          <td>
+            <button (click)="borrarHistorialAlta(historialAlta.iD_Historial)">Borrar</button>
+            <!-- Botón para actualizar podría abrir un formulario de edición -->
+            <button (click)="actualizarHistorialAlta(historialAlta.iD_Historial, historialAlta)">Actualizar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
+  <div class="form-container">
+    <h3>Agregar Historial de Alta</h3>
+    <form (ngSubmit)="agregarHistorialAlta()">
+      <label for="idPaciente">ID Paciente:</label>
+      <input type="number" id="idPaciente" [(ngModel)]="nuevoHistorialAlta.iD_Paciente" name="idPaciente">
+      <label for="fechaAlta">Fecha de Alta:</label>
+      <input type="date" id="fechaAlta" [(ngModel)]="nuevoHistorialAlta.fecha_Alta" name="fechaAlta">
+      <label for="diagnostico">Diagnóstico:</label>
+      <input type="text" id="diagnostico" [(ngModel)]="nuevoHistorialAlta.diagnostico" name="diagnostico">
+      <label for="tratamiento">Tratamiento:</label>
+      <input type="text" id="tratamiento" [(ngModel)]="nuevoHistorialAlta.tratamiento" name="tratamiento">
+      <button type="submit">Agregar</button>
+    </form>
+  </div>
+</div>

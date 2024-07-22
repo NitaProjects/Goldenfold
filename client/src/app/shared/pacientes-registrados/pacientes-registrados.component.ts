@@ -1,9 +1,14 @@
 // src/app/shared/pacientes-registrados/pacientes-registrados.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ApiService, Paciente } from '../../services/api.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-pacientes-registrados',
+  standalone: true,
+  imports: [CommonModule, FormsModule], // Asegúrate de importar CommonModule aquí
   templateUrl: './pacientes-registrados.component.html',
   styleUrls: ['./pacientes-registrados.component.css']
 })

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore; // Utilitzar el contexto de BD
 using HospitalApi.Models;
 using HospitalApi.DTO;
 using AutoMapper; // Mapear datos de BD-DTO
-
+//contraseñas en texto plano ojo!!
 namespace HospitalApi.Controllers
 {
     [ApiController]

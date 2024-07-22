@@ -7,7 +7,7 @@
         public int Edad { get; set; }
         public DateTime Fecha_Nacimiento { get; set; }
         public string Sintomas { get; set; }
-        public string Estado { get; set; }
+        public EstadoPaciente Estado { get; set; }
         public DateTime Fecha_Registro { get; set; }
         public string Seguridad_Social { get; set; }
         public string Direccion { get; set; }

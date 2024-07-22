@@ -39,7 +39,7 @@
           <label for="bed-selection">Seleccionar Cama Disponible</label>
           <select id="bed-selection" [(ngModel)]="selectedBedId" name="bed-selection" required>
             <option *ngFor="let bed of getAvailableBeds(selectedRequest.requestedBedType)" [value]="bed.id">
-              Cama ID: {{ bed.id }}
+              Cama : {{ bed.id }}
             </option>
           </select>
         </div>

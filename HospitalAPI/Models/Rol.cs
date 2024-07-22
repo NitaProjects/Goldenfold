@@ -2,6 +2,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalApi;
+
+public enum RoleType
+{
+    Administrativo = 1,
+    Medico = 2,
+    ControladorCamas = 3,
+    AdministrativoSistemas = 4
+}
 public class Rol
 {
     [Key]
@@ -10,7 +18,7 @@ public class Rol
 
     [Required]
     [StringLength(50)]
-    public string Nombre_Rol { get; set; }
+    public RoleType Nombre_Rol { get; set; }
 
     // Propiedad de navegación
     public ICollection<Usuarios> Usuarios { get; set; }

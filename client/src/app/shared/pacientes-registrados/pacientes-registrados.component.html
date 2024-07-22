@@ -1,3 +1,4 @@
+
 <div class="patients-section">
   <h2>Pacientes Registrados</h2>
   <table class="table">
@@ -19,21 +20,21 @@
     </thead>
     <tbody>
       <tr *ngFor="let paciente of pacientes">
-        <td>{{ paciente.idPaciente }}</td>
+        <td>{{ paciente.iD_Paciente }}</td>
         <td>{{ paciente.nombre }}</td>
         <td>{{ paciente.edad }}</td>
         <td>{{ paciente.sintomas }}</td>
         <td>{{ paciente.estado }}</td>
-        <td>{{ paciente.fechaRegistro | date: 'shortDate' }}</td>
-        <td>{{ paciente.seguridadSocial }}</td>
+        <td>{{ paciente.fecha_Registro | date: 'shortDate' }}</td>
+        <td>{{ paciente.seguridad_Social }}</td>
         <td>{{ paciente.direccion }}</td>
         <td>{{ paciente.telefono }}</td>
-        <td>{{ paciente.historialMedico }}</td>
-        <td>{{ paciente.fechaNacimiento | date: 'shortDate' }}</td>
+        <td>{{ paciente.historial_Medico }}</td>
+        <td>{{ paciente.fecha_Nacimiento | date: 'shortDate' }}</td>
         <td>
-          <button (click)="editRecord(paciente.idPaciente)">Editar</button>
-          <button (click)="copyRecord(paciente.idPaciente)">Copiar</button>
-          <button (click)="deleteRecord(paciente.idPaciente)">Borrar</button>
+          <button (click)="editarRegistro(paciente.iD_Paciente)">Editar</button>
+          <button (click)="copiarRegistro(paciente.iD_Paciente)">Copiar</button>
+          <button (click)="borrarRegistro(paciente.iD_Paciente)">Borrar</button>
         </td>
       </tr>
     </tbody>

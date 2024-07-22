@@ -33,7 +33,6 @@
           <td>{{ paciente.fecha_Nacimiento | date: 'shortDate' }}</td>
           <td>
             <button (click)="editarRegistro(paciente.iD_Paciente)">Editar</button>
-            <button (click)="copiarRegistro(paciente.iD_Paciente)">Copiar</button>
             <button (click)="borrarRegistro(paciente.iD_Paciente)">Borrar</button>
           </td>
         </tr>

@@ -36,34 +36,32 @@
                 </li>
                 <button class="nav-item" onclick="document.getElementById('id01').style.display='block'">
                     Login
-                  </button>
-     
-                  <!-- The Modal -->
-                  <div id="id01" class="modal">
+                </button>
+                
+                <div id="id01" class="modal">
                     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-     
-                    <!-- Modal Content -->
+                
                     <form class="modal-content animate" action="/action_page.php">
-     
-                      <div class="container">
-                        <label for="uname"><b>Usuario</b></label>
-                        <input type="text" placeholder="Ingresa tu usuario" name="uname" required>
-     
-                        <label for="psw"><b>Contraseña</b></label>
-                        <input  type="password" placeholder="Ingresa tu contraseña" name="@contrase" required>
-     
-                        <button type="submit">Ingresar</button>
-                        <label>
-                          <input type="checkbox" checked="checked" name="remember"> Recordarme
-                        </label>
-                      </div>
-     
-                      <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
-                        <a href="#">¿Has perdido tu contraseña? ...   pues no me quedan mas.</a>
-                      </div>
+                        <div class="container">
+                            <label for="uname"><b>Usuario</b></label>
+                            <input type="text" placeholder="Ingresa tu usuario" name="uname" id="uname" required>
+                
+                            <label for="psw"><b>Contraseña</b></label>
+                            <input type="password" placeholder="Ingresa tu contraseña" name="psw" id="psw" required>
+                
+                            <button type="submit">Ingresar</button>
+                            <label>
+                                <input type="checkbox" checked="checked" name="remember"> Recordarme
+                            </label>
+                        </div>
+                
+                        <div class="container" style="background-color:#f1f1f1">
+                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
+                            <a href="#">¿Has perdido tu contraseña? ... pues no me quedan mas.</a>
+                        </div>
                     </form>
-                  </div>
+                </div>
+                
             </ul>
         </div>
     </nav>

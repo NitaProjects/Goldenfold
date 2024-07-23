@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdministrativoDashboardComponent } from './administrativo-dashboard/administrativo-dashboard.component';
-import { PacientesRegistradosComponent } from '../shared/pacientes-registrados/pacientes-registrados.component';
+import { PacientesComponent } from '../shared/pacientes/pacientes.component';
 import { HistorialAltasComponent } from '../shared/historial-altas/historial-altas.component';
 
 const routes: Routes = [
   { path: '', component: AdministrativoDashboardComponent },
-  { path: 'pacientes', component: PacientesRegistradosComponent },
+  { path: 'pacientes', component: PacientesComponent },
   { path: 'altas', component: HistorialAltasComponent },
 ];
 

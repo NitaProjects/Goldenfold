@@ -14,14 +14,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let historialAlta of historialAltas">
-          <td>{{ historialAlta.iD_Historial }}</td>
-          <td>{{ historialAlta.iD_Paciente }}</td>
-          <td>{{ historialAlta.fecha_Alta | date: 'shortDate' }}</td>
-          <td>{{ historialAlta.diagnostico }}</td>
-          <td>{{ historialAlta.tratamiento }}</td>
+          <td>{{ historialAlta.IdHistorial }}</td>
+          <td>{{ historialAlta.IdPaciente }}</td>
+          <td>{{ historialAlta.FechaAlta | date: 'shortDate' }}</td>
+          <td>{{ historialAlta.Diagnostico }}</td>
+          <td>{{ historialAlta.Tratamiento }}</td>
           <td>
-            <button (click)="borrarHistorialAlta(historialAlta.iD_Historial)">Borrar</button>
-            <button (click)="actualizarHistorialAlta(historialAlta.iD_Historial, historialAlta)">Actualizar</button>
+            <button (click)="borrarHistorialAlta(historialAlta.IdHistorial)">Borrar</button>
+            <button (click)="actualizarHistorialAlta(historialAlta.IdHistorial, historialAlta)">Actualizar</button>
           </td>
         </tr>
       </tbody>
@@ -32,13 +32,13 @@
     <h3>Agregar Historial de Alta</h3>
     <form (ngSubmit)="agregarHistorialAlta()">
       <label for="idPaciente">ID Paciente:</label>
-      <input type="number" id="idPaciente" [(ngModel)]="nuevoHistorialAlta.iD_Paciente" name="idPaciente">
+      <input type="number" id="idPaciente" [(ngModel)]="nuevoHistorialAlta.IdPaciente" name="idPaciente">
       <label for="fechaAlta">Fecha de Alta:</label>
-      <input type="date" id="fechaAlta" [(ngModel)]="nuevoHistorialAlta.fecha_Alta" name="fechaAlta">
+      <input type="date" id="fechaAlta" [(ngModel)]="nuevoHistorialAlta.FechaAlta" name="fechaAlta">
       <label for="diagnostico">Diagnóstico:</label>
-      <input type="text" id="diagnostico" [(ngModel)]="nuevoHistorialAlta.diagnostico" name="diagnostico">
+      <input type="text" id="diagnostico" [(ngModel)]="nuevoHistorialAlta.Diagnostico" name="diagnostico">
       <label for="tratamiento">Tratamiento:</label>
-      <input type="text" id="tratamiento" [(ngModel)]="nuevoHistorialAlta.tratamiento" name="tratamiento">
+      <input type="text" id="tratamiento" [(ngModel)]="nuevoHistorialAlta.Tratamiento" name="tratamiento">
       <button type="submit">Agregar</button>
     </form>
   </div>

@@ -19,8 +19,13 @@ public class Paciente
     public string Nombre { get; set; }
 
     [Required]
+<<<<<<< HEAD
     [Range(0, int.MaxValue, ErrorMessage = "La edad debe ser un número positivo.")]
     public int Edad { get; set; }
+=======
+    [Range(0, int.MaxValue, ErrorMessage = "La edad debe ser un nï¿½mero positivo.")]
+    public int edad { get; set; }
+>>>>>>> d5fd78553ab31daa6453350de79b8d1a56371661
 
     public DateTime? FechaNacimiento { get; set; }
 
@@ -50,9 +55,15 @@ public class Paciente
 
     public string HistorialMedico { get; set; }
 
+<<<<<<< HEAD
     // Propiedades de navegación
     public ICollection<HistorialAlta> HistorialAltas { get; set; }
     public ICollection<Asignacion> Asignaciones { get; set; }
+=======
+    // Propiedades de navegaciï¿½n
+    public ICollection<HistorialAlta> historial_altas { get; set; }
+    public ICollection<Asignacion> asignaciones { get; set; }
+>>>>>>> d5fd78553ab31daa6453350de79b8d1a56371661
 
 }
 

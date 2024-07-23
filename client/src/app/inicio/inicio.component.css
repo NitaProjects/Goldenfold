@@ -4,7 +4,7 @@ body {
 
 .header {
     position: relative;
-    background-image: url('../../assets/images/cover2.jpg');
+    background-image: url('../../assets/images/cover2.jpg'); /* Ruta ajustada */
     background-size: cover;
     background-repeat: no-repeat;
     height: 200px;

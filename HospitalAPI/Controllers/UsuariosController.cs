@@ -2,13 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using HospitalApi.Models;
 using HospitalApi.DTO;
-<<<<<<< HEAD
 using AutoMapper;
 
-=======
-using AutoMapper; // Mapear datos de BD-DTO
-//contraseñas en texto plano ojo!!
->>>>>>> 8366e689a7139d51f25ab8ed6ba5a7ed76d8c201
 namespace HospitalApi.Controllers
 {
     [ApiController]
@@ -52,22 +47,22 @@ namespace HospitalApi.Controllers
         [HttpPost]
         public async Task<ActionResult<UsuariosDTO>> AddUsuario(UsuariosDTO usuarioDTO)
         {
-            if (await _context.Usuarios.AnyAsync(u => u.Usuario == usuarioDTO.Usuario))
+            if (await _context.Usuarios.AnyAsync(u => u.usuario == usuarioDTO.usuario))
             {
                 return Conflict("El nombre de usuario ya está en uso.");
             }
 
-            if (!await _context.Rol.AnyAsync(r => r.ID_Rol == usuarioDTO.ID_Rol))
+            if (!await _context.Roles.AnyAsync(r => r.id_rol == usuarioDTO.id_rol))
             {
                 return Conflict("Este rol no existe.");
             }
 
-            var usuario = _mapper.Map<Usuarios>(usuarioDTO);
+            var usuario = _mapper.Map<Usuario>(usuarioDTO);
 
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
-            usuarioDTO.ID_Usuario = usuario.ID_Usuario;
+            usuarioDTO.id_usuario = usuario.id_usuario;
             return CreatedAtAction(nameof(GetUsuario), new { id = usuarioDTO.ID_Usuario }, usuarioDTO);
         }
 

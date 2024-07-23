@@ -21,17 +21,17 @@ public class Cama
 {
     [Key]
     [StringLength(10)]
-    public string Ubicacion { get; set; }
+    public string ubicacion { get; set; }
 
     [Required]
     [StringLength(50)]
-    public EstadoCama Estado { get; set; } = EstadoCama.Disponible;
+    public EstadoCama estado { get; set; } = EstadoCama.Disponible;
 
     [Required]
     [StringLength(50)]
-    public string TipoCama { get; set; }
+    public string tipo_cama { get; set; }
 
     // Propiedad de navegación
-    public ICollection<Asignacion> Asignaciones { get; set; }
+    public ICollection<Asignacion> asignaciones { get; set; }
 
 }

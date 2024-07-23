@@ -12,46 +12,47 @@ public class Paciente
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
-    public int ID_Paciente { get; set; }
+    public int id_paciente { get; set; }
 
     [Required]
     [StringLength(100)]
-    public string Nombre { get; set; }
+    public string nombre { get; set; }
 
     [Required]
     [Range(0, int.MaxValue, ErrorMessage = "La edad debe ser un número positivo.")]
-    public int Edad { get; set; }
+    public int edad { get; set; }
 
-    public DateTime? Fecha_Nacimiento { get; set; }
+    public DateTime? fecha_nacimiento { get; set; }
 
     [StringLength(255)]
-    public string Sintomas { get; set; }
+    public string sintomas { get; set; }
 
     [StringLength(50)]
-    public EstadoPaciente Estado { get; set; } = EstadoPaciente.PendienteDeCama;
+    public EstadoPaciente estado { get; set; } = EstadoPaciente.PendienteDeCama;
 
     [Required]
-    public DateTime Fecha_Registro { get; set; } = DateTime.Now;
+    public DateTime fecha_registro { get; set; } = DateTime.Now;
 
     [Required]
     [StringLength(12, MinimumLength = 12)]
-    public string Seguridad_Social { get; set; }
+    public string seguridad_social { get; set; }
 
     [StringLength(255)]
-    public string Direccion { get; set; }
+    public string direccion { get; set; }
 
     [StringLength(20)]
-    public string Telefono { get; set; }
+    [DataType(DataType.PhoneNumber)]
+    public string telefono { get; set; }
 
     [StringLength(100)]
     [EmailAddress]
-    public string Email { get; set; }
+    public string email { get; set; }
 
-    public string Historial_Medico { get; set; }
+    public string historial_medico { get; set; }
 
     // Propiedades de navegación
-    public ICollection<HistorialAlta> HistorialAltas { get; set; }
-    public ICollection<Asignacion> Asignaciones { get; set; }
+    public ICollection<HistorialAlta> historial_altas { get; set; }
+    public ICollection<Asignacion> asignaciones { get; set; }
 
 }
 

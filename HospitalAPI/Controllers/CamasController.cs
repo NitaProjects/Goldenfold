@@ -21,16 +21,16 @@ namespace HospitalApi.Controllers
 
         // GET: api/Camas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CamaDTO>>> GetCamas()
+        public async Task<ActionResult<IEnumerable<CamasDTO>>> GetCamas()
         {
             var camas = await _context.Cama.ToListAsync();
-            var camasDTO = _mapper.Map<IEnumerable<CamaDTO>>(camas);
+            var camasDTO = _mapper.Map<IEnumerable<CamasDTO>>(camas);
             return Ok(camasDTO);
         }
 
         // GET: api/Camas/{ubicacion}
         [HttpGet("{ubicacion}")]
-        public async Task<ActionResult<CamaDTO>> GetCama(string ubicacion)
+        public async Task<ActionResult<CamasDTO>> GetCama(string ubicacion)
         {
             var cama = await _context.Cama.FindAsync(ubicacion);
 
@@ -39,13 +39,13 @@ namespace HospitalApi.Controllers
                 return NotFound();
             }
 
-            var camaDTO = _mapper.Map<CamaDTO>(cama);
+            var camaDTO = _mapper.Map<CamasDTO>(cama);
             return Ok(camaDTO);
         }
 
         // POST: api/Camas
         [HttpPost]
-        public async Task<ActionResult<CamaDTO>> PostCama(CamaDTO camaDTO)
+        public async Task<ActionResult<CamasDTO>> PostCama(CamasDTO camaDTO)
         {
             var cama = _mapper.Map<Cama>(camaDTO);
 
@@ -57,7 +57,7 @@ namespace HospitalApi.Controllers
 
         // PUT: api/Camas/{ubicacion}
         [HttpPut("{ubicacion}")]
-        public async Task<IActionResult> PutCama(string ubicacion, CamaDTO camaDTO)
+        public async Task<IActionResult> PutCama(string ubicacion, CamasDTO camaDTO)
         {
             if (ubicacion != camaDTO.Ubicacion)
             {

@@ -2,29 +2,29 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalApi;
-public class Usuarios
+public class Usuario
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int ID_Usuario { get; set; }
+    public int id_usuario { get; set; }
 
     [Required]
     [StringLength(100)]
-    public string Nombre { get; set; }
+    public string nombre { get; set; }
 
     [Required]
     [StringLength(50)]
-    public string Usuario { get; set; }
+    public string usuario { get; set; }
 
     [Required]
     [StringLength(255)]
-    public string Contraseña { get; set; }
+    public string contrasenya { get; set; }
 
     [ForeignKey("Rol")]
-    public int ID_Rol { get; set; }
+    public int id_rol { get; set; }
 
     // Propiedades de navegación
-    public Rol Rol { get; set; }
-    public ICollection<Asignacion> Asignaciones { get; set; }
+    public Rol rol { get; set; }
+    public ICollection<Asignacion> asignaciones { get; set; }
 
 }

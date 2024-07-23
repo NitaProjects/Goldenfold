@@ -21,16 +21,16 @@ namespace HospitalApi.Controllers
 
         // GET: api/Pacientes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PacienteDTO>>> GetPacientes()
+        public async Task<ActionResult<IEnumerable<PacientesDTO>>> GetPacientes()
         {
             var pacientes = await _context.Pacientes.ToListAsync();
-            var pacientesDTO = _mapper.Map<IEnumerable<PacienteDTO>>(pacientes);
+            var pacientesDTO = _mapper.Map<IEnumerable<PacientesDTO>>(pacientes);
             return Ok(pacientesDTO);
         }
 
         // GET: api/Pacientes/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<PacienteDTO>> GetPaciente(int id)
+        public async Task<ActionResult<PacientesDTO>> GetPaciente(int id)
         {
             var paciente = await _context.Pacientes.FindAsync(id);
 
@@ -39,13 +39,13 @@ namespace HospitalApi.Controllers
                 return NotFound();
             }
 
-            var pacienteDTO = _mapper.Map<PacienteDTO>(paciente);
+            var pacienteDTO = _mapper.Map<PacientesDTO>(paciente);
             return Ok(pacienteDTO);
         }
 
         // POST: api/Pacientes
         [HttpPost]
-        public async Task<ActionResult<PacienteDTO>> PostPaciente(PacienteDTO pacienteDTO)
+        public async Task<ActionResult<PacientesDTO>> PostPaciente(PacientesDTO pacienteDTO)
         {
             var paciente = _mapper.Map<Paciente>(pacienteDTO);
 
@@ -58,7 +58,7 @@ namespace HospitalApi.Controllers
 
         // PUT: api/Pacientes/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPaciente(int id, PacienteDTO pacienteDTO)
+        public async Task<IActionResult> PutPaciente(int id, PacientesDTO pacienteDTO)
         {
             if (id != pacienteDTO.ID_Paciente)
             {

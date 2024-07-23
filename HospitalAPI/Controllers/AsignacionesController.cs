@@ -21,16 +21,16 @@ namespace HospitalApi.Controllers
 
         // GET: api/Asignaciones
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AsignacionDTO>>> GetAsignaciones()
+        public async Task<ActionResult<IEnumerable<AsignacionesDTO>>> GetAsignaciones()
         {
             var asignaciones = await _context.Asignacion.ToListAsync();
-            var asignacionesDTO = _mapper.Map<IEnumerable<AsignacionDTO>>(asignaciones);
+            var asignacionesDTO = _mapper.Map<IEnumerable<AsignacionesDTO>>(asignaciones);
             return Ok(asignacionesDTO);
         }
 
         // GET: api/Asignaciones/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<AsignacionDTO>> GetAsignacion(int id)
+        public async Task<ActionResult<AsignacionesDTO>> GetAsignacion(int id)
         {
             var asignacion = await _context.Asignacion.FindAsync(id);
 
@@ -39,13 +39,13 @@ namespace HospitalApi.Controllers
                 return NotFound();
             }
 
-            var asignacionDTO = _mapper.Map<AsignacionDTO>(asignacion);
+            var asignacionDTO = _mapper.Map<AsignacionesDTO>(asignacion);
             return Ok(asignacionDTO);
         }
 
         // POST: api/Asignaciones
         [HttpPost]
-        public async Task<ActionResult<AsignacionDTO>> PostAsignacion(AsignacionDTO asignacionDTO)
+        public async Task<ActionResult<AsignacionesDTO>> PostAsignacion(AsignacionesDTO asignacionDTO)
         {
             var asignacion = _mapper.Map<Asignacion>(asignacionDTO);
 
@@ -58,7 +58,7 @@ namespace HospitalApi.Controllers
 
         // PUT: api/Asignaciones/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsignacion(int id, AsignacionDTO asignacionDTO)
+        public async Task<IActionResult> PutAsignacion(int id, AsignacionesDTO asignacionDTO)
         {
             if (id != asignacionDTO.ID_Asignacion)
             {

@@ -3,21 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalApi;
 
-public class Habitaciones
+public class Habitacion
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int ID_Habitacion { get; set; }
+    public int id_habitacion { get; set; }
 
     [Required]
     [StringLength(2)]
-    public string Edificio { get; set; }
+    public string edificio { get; set; }
 
     [Required]
     [StringLength(2)]
-    public string Planta { get; set; }
+    public string planta { get; set; }
 
     [Required]
     [StringLength(2)]
-    public string Habitacion { get; set; }
+    public string habitacion { get; set; }
 }

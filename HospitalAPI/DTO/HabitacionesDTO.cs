@@ -2,9 +2,9 @@
 {
     public class HabitacionesDTO
     {
-        public int ID_Habitacion { get; set; }
-        public string Edificio { get; set; }
-        public string Planta { get; set; }
-        public string Habitacion { get; set; }
+        public int id_habitacion { get; set; }
+        public string edificio { get; set; }
+        public string planta { get; set; }
+        public string habitacion { get; set; }
     }
 }

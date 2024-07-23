@@ -10,19 +10,19 @@ namespace HospitalApi.Mapping
         public AutoMapperProfile()
         {
             // Paciente mappings
-            CreateMap<Paciente, PacienteDTO>().ReverseMap();
+            CreateMap<Paciente, PacientesDTO>().ReverseMap();
 
             // Cama mappings
-            CreateMap<Cama, CamaDTO>().ReverseMap();
+            CreateMap<Cama, CamasDTO>().ReverseMap();
 
             // Habitacion mappings
             CreateMap<Habitaciones, HabitacionesDTO>().ReverseMap();
 
             // Asignacion mappings
-            CreateMap<Asignacion, AsignacionDTO>().ReverseMap();
+            CreateMap<Asignacion, AsignacionesDTO>().ReverseMap();
 
             // HistorialAlta mappings
-            CreateMap<HistorialAlta, HistorialAltaDTO>().ReverseMap();
+            CreateMap<HistorialAlta, HistorialAltasDTO>().ReverseMap();
 
             // Usuario mappings
             CreateMap<Usuarios, UsuariosDTO>().ReverseMap();

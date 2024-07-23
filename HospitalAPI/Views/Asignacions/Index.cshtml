@@ -19,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.Cama)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fecha_Asignacion)
+                @Html.DisplayNameFor(model => model.FechaAsignacion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fecha_Liberacion)
+                @Html.DisplayNameFor(model => model.FechaLiberacion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Usuario)
@@ -40,18 +40,18 @@
                 @Html.DisplayFor(modelItem => item.Cama.Ubicacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fecha_Asignacion)
+                @Html.DisplayFor(modelItem => item.FechaAsignacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fecha_Liberacion)
+                @Html.DisplayFor(modelItem => item.FechaLiberacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Contraseña)
+                @Html.DisplayFor(modelItem => item.Usuario.Contrasenya)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID_Asignacion">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID_Asignacion">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID_Asignacion">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdAsignacion">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdAsignacion">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdAsignacion">Delete</a>
             </td>
         </tr>
 }

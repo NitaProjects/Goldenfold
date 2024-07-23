@@ -12,16 +12,16 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID_Historial" />
+            <input type="hidden" asp-for="IdHistorial" />
             <div class="form-group">
-                <label asp-for="ID_Paciente" class="control-label"></label>
-                <select asp-for="ID_Paciente" class="form-control" asp-items="ViewBag.ID_Paciente"></select>
-                <span asp-validation-for="ID_Paciente" class="text-danger"></span>
+                <label asp-for="IdPaciente" class="control-label"></label>
+                <select asp-for="IdPaciente" class="form-control" asp-items="ViewBag.IdPaciente"></select>
+                <span asp-validation-for="IdPaciente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Fecha_Alta" class="control-label"></label>
-                <input asp-for="Fecha_Alta" class="form-control" />
-                <span asp-validation-for="Fecha_Alta" class="text-danger"></span>
+                <label asp-for="FechaAlta" class="control-label"></label>
+                <input asp-for="FechaAlta" class="form-control" />
+                <span asp-validation-for="FechaAlta" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Diagnostico" class="control-label"></label>

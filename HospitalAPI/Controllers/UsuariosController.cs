@@ -21,40 +21,63 @@ namespace HospitalApi.Controllers
 
         // GET: api/Usuarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuariosDTO>>> GetUsuarios()
+        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> GetUsuarios()
         {
             var usuarios = await _context.Usuarios.ToListAsync();
-            var usuariosDTO = _mapper.Map<IEnumerable<UsuariosDTO>>(usuarios);
+
+            if (!usuarios.Any())
+            {
+                return NotFound("No se han encontrado usuarios.");
+            }
+
+            var usuariosDTO = _mapper.Map<IEnumerable<UsuarioDTO>>(usuarios);
+
             return Ok(usuariosDTO);
         }
 
         // GET: api/Usuarios/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<UsuariosDTO>> GetUsuario(int id)
+        public async Task<ActionResult<UsuarioDTO>> GetUserById(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
 
             if (usuario == null)
             {
-                return NotFound();
+                return NotFound("No se ha encontrado ningun usuario con este id.");
             }
 
-            var usuarioDTO = _mapper.Map<UsuariosDTO>(usuario);
+            var usuarioDTO = _mapper.Map<UsuarioDTO>(usuario);
             return Ok(usuarioDTO);
+        }
+
+        // GET: api/Usuarios/ByName/{NombreUsuario}
+        [HttpGet("/ByName/{NombreUsuario}")]
+        public async Task<ActionResult<UsuarioDTO>> GetUserByName(string nombre)
+        {
+            var usuarios = await _context.Usuarios.Where(u => u.NombreUsuario.Contains(nombre))
+                .ToListAsync();
+            
+            if (!usuarios.Any())
+            {
+                return NotFound("No se ha encontrado ningun usuario con este nombre.");
+            }
+
+            var usuariosDTO = _mapper.Map<IEnumerable<UsuarioDTO>>(usuarios);
+            return Ok(usuariosDTO);
         }
 
         // POST: api/Usuarios
         [HttpPost]
-        public async Task<ActionResult<UsuariosDTO>> AddUsuario(UsuariosDTO usuarioDTO)
+        public async Task<ActionResult<UsuarioDTO>> AddUser(UsuarioDTO usuarioDTO)
         {
-            if (await _context.Usuarios.AnyAsync(u => u.usuario == usuarioDTO.usuario))
+            if (await _context.Usuarios.AnyAsync(u => u.NombreUsuario == usuarioDTO.NombreUsuario))
             {
                 return Conflict("El nombre de usuario ya está en uso.");
             }
 
-            if (!await _context.Roles.AnyAsync(r => r.id_rol == usuarioDTO.id_rol))
+            if (!await _context.Roles.AnyAsync(r => r.IdRol == usuarioDTO.IdRol))
             {
-                return Conflict("Este rol no existe.");
+                return Conflict("El rol no existe.");
             }
 
             var usuario = _mapper.Map<Usuario>(usuarioDTO);
@@ -62,15 +85,15 @@ namespace HospitalApi.Controllers
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
-            usuarioDTO.id_usuario = usuario.id_usuario;
-            return CreatedAtAction(nameof(GetUsuario), new { id = usuarioDTO.ID_Usuario }, usuarioDTO);
+            usuarioDTO.IdUsuario = usuario.IdUsuario;
+            return CreatedAtAction(nameof(GetUserById), new { id = usuarioDTO.IdUsuario }, usuarioDTO);
         }
 
         // PUT: api/Usuarios/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditUsuario(int id, UsuariosDTO usuarioDTO)
+        public async Task<IActionResult> EditUserById(int id, UsuarioDTO usuarioDTO)
         {
-            if (id != usuarioDTO.ID_Usuario)
+            if (id != usuarioDTO.IdUsuario)
             {
                 return BadRequest("El ID del usuario proporcionado no coincide con el ID en la solicitud.");
             }
@@ -82,14 +105,14 @@ namespace HospitalApi.Controllers
                 return NotFound("No se encontró el usuario especificado.");
             }
 
-            if (await _context.Usuarios.AnyAsync(u => u.ID_Usuario != id && u.Usuario == usuarioDTO.Usuario))
+            if (await _context.Usuarios.AnyAsync(u => u.IdUsuario != id && u.NombreUsuario == usuarioDTO.NombreUsuario))
             {
                 return Conflict("El nombre de usuario ya está en uso.");
             }
 
-            if (!await _context.Rol.AnyAsync(r => r.ID_Rol == usuarioDTO.ID_Rol))
+            if (!await _context.Roles.AnyAsync(r => r.IdRol == usuarioDTO.IdRol))
             {
-                return Conflict("Este rol no existe");
+                return Conflict("El rol no existe");
             }
 
                 _mapper.Map(usuarioDTO, usuarioExistente);
@@ -113,9 +136,40 @@ namespace HospitalApi.Controllers
             return NoContent();
         }
 
+        // PUT: api/Usuarios/ByName/{NombreUsuario}
+        [HttpPut("/ByName/{NombreUsuario}")]
+        public async Task<IActionResult> EditUserByName(string name, UsuarioDTO usuarioDTO)
+        {
+            var usuarioExiste = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == name);
+
+            if (usuarioExiste == null)
+            {
+                return NotFound("No se ha encontrado ningun usuario con ese nombre de usuario.");
+            }
+
+            if (await _context.Usuarios.AnyAsync(u => u.IdUsuario != usuarioExiste.IdUsuario && u.NombreUsuario == usuarioDTO.NombreUsuario))
+            {
+                return Conflict("El nombre de usuario ya está en uso.");
+            }
+
+            _mapper.Map(usuarioDTO, usuarioExiste);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(500, "Ocurrió un error al actualizar el usuario.");
+            }
+
+            return NoContent();
+
+        }
+
         // DELETE: api/Usuarios/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario(int id)
+        public async Task<IActionResult> DeleteUserById(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
 
@@ -130,9 +184,26 @@ namespace HospitalApi.Controllers
             return NoContent();
         }
 
+        // DELETE: api/Usuarios/ByName/{NombreUsuario}
+        [HttpDelete("/ByName/{NombreUsuario}")]
+        public async Task<IActionResult> DeleteUserByName(string name)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == name);
+
+            if (usuario == null)
+            {
+                return NotFound("No se ha encontrado este usuario. Asegurate de que el nombre de usuario es correcto");
+            }
+
+            _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         private bool UsuarioExists(int id)
         {
-            return _context.Usuarios.Any(e => e.ID_Usuario == id);
+            return _context.Usuarios.Any(e => e.IdUsuario == id);
         }
     }
 }

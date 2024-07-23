@@ -1,4 +1,4 @@
-﻿@model HospitalApi.Habitaciones
+﻿@model HospitalApi.Habitacion
 
 @{
     ViewData["Title"] = "Create";
@@ -23,9 +23,9 @@
                 <span asp-validation-for="Planta" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Habitacion" class="control-label"></label>
-                <input asp-for="Habitacion" class="form-control" />
-                <span asp-validation-for="Habitacion" class="text-danger"></span>
+                <label asp-for="NumeroHabitacion" class="control-label"></label>
+                <input asp-for="NumeroHabitacion" class="form-control" />
+                <span asp-validation-for="NumeroHabitacion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

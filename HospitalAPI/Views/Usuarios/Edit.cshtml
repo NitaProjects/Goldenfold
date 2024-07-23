@@ -1,4 +1,4 @@
-﻿@model HospitalApi.Usuarios
+﻿@model HospitalApi.Usuario
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,26 +12,26 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID_Usuario" />
+            <input type="hidden" asp-for="IdUsuario" />
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario" class="control-label"></label>
-                <input asp-for="Usuario" class="form-control" />
-                <span asp-validation-for="Usuario" class="text-danger"></span>
+                <label asp-for="NombreUsuario" class="control-label"></label>
+                <input asp-for="NombreUsuario" class="form-control" />
+                <span asp-validation-for="NombreUsuario" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Contraseña" class="control-label"></label>
-                <input asp-for="Contraseña" class="form-control" />
-                <span asp-validation-for="Contraseña" class="text-danger"></span>
+                <label asp-for="Contrasenya" class="control-label"></label>
+                <input asp-for="Contrasenya" class="form-control" />
+                <span asp-validation-for="Contrasenya" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ID_Rol" class="control-label"></label>
-                <select asp-for="ID_Rol" class="form-control" asp-items="ViewBag.ID_Rol"></select>
-                <span asp-validation-for="ID_Rol" class="text-danger"></span>
+                <label asp-for="IdRol" class="control-label"></label>
+                <select asp-for="IdRol" class="form-control" asp-items="ViewBag.IdRol"></select>
+                <span asp-validation-for="IdRol" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

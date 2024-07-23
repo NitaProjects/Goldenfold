@@ -1,4 +1,4 @@
-﻿@model HospitalApi.Habitaciones
+﻿@model HospitalApi.Habitacion
 
 @{
     ViewData["Title"] = "Details";
@@ -23,14 +23,14 @@
             @Html.DisplayFor(model => model.Planta)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Habitacion)
+            @Html.DisplayNameFor(model => model.NumeroHabitacion)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Habitacion)
+            @Html.DisplayFor(model => model.NumeroHabitacion)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ID_Habitacion">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.IdHabitacion">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

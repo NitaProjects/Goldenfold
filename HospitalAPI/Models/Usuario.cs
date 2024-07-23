@@ -6,25 +6,25 @@ public class Usuario
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int id_usuario { get; set; }
+    public int IdUsuario { get; set; }
 
     [Required]
     [StringLength(100)]
-    public string nombre { get; set; }
+    public string Nombre { get; set; }
 
     [Required]
     [StringLength(50)]
-    public string usuario { get; set; }
+    public string NombreUsuario { get; set; }
 
     [Required]
     [StringLength(255)]
-    public string contrasenya { get; set; }
+    public string Contrasenya { get; set; }
 
     [ForeignKey("Rol")]
-    public int id_rol { get; set; }
+    public int IdRol { get; set; }
 
     // Propiedades de navegación
-    public Rol rol { get; set; }
-    public ICollection<Asignacion> asignaciones { get; set; }
+    public Rol Rol { get; set; }
+    public ICollection<Asignacion> Asignaciones { get; set; }
 
 }

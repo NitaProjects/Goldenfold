@@ -21,16 +21,16 @@ namespace HospitalApi.Controllers
 
         // GET: api/HistorialAltas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HistorialAltasDTO>>> GetHistorialAltas()
+        public async Task<ActionResult<IEnumerable<HistorialAltaDTO>>> GetHistorialAltas()
         {
             var historialAltas = await _context.HistorialAlta.ToListAsync();
-            var historialAltasDTO = _mapper.Map<IEnumerable<HistorialAltasDTO>>(historialAltas);
+            var historialAltasDTO = _mapper.Map<IEnumerable<HistorialAltaDTO>>(historialAltas);
             return Ok(historialAltasDTO);
         }
 
         // GET: api/HistorialAltas/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<HistorialAltasDTO>> GetHistorialAlta(int id)
+        public async Task<ActionResult<HistorialAltaDTO>> GetHistorialAlta(int id)
         {
             var historialAlta = await _context.HistorialAlta.FindAsync(id);
 
@@ -39,13 +39,13 @@ namespace HospitalApi.Controllers
                 return NotFound();
             }
 
-            var historialAltaDTO = _mapper.Map<HistorialAltasDTO>(historialAlta);
+            var historialAltaDTO = _mapper.Map<HistorialAltaDTO>(historialAlta);
             return Ok(historialAltaDTO);
         }
 
         // POST: api/HistorialAltas
         [HttpPost]
-        public async Task<ActionResult<HistorialAltasDTO>> PostHistorialAlta(HistorialAltasDTO historialAltaDTO)
+        public async Task<ActionResult<HistorialAltaDTO>> PostHistorialAlta(HistorialAltaDTO historialAltaDTO)
         {
             var historialAlta = _mapper.Map<HistorialAlta>(historialAltaDTO);
 
@@ -58,7 +58,7 @@ namespace HospitalApi.Controllers
 
         // PUT: api/HistorialAltas/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHistorialAlta(int id, HistorialAltasDTO historialAltaDTO)
+        public async Task<IActionResult> PutHistorialAlta(int id, HistorialAltaDTO historialAltaDTO)
         {
             if (id != historialAltaDTO.ID_Historial)
             {

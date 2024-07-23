@@ -7,26 +7,26 @@ public class Asignacion
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int id_asignacion { get; set; }
+    public int IdAsignacion { get; set; }
 
     [ForeignKey("Paciente")]
-    public int id_paciente { get; set; }
+    public int IdPaciente { get; set; }
 
     [ForeignKey("Cama")]
     [MaxLength(10)]
-    public string ubicacion { get; set; }
+    public string Ubicacion { get; set; }
 
     [Required]
-    public DateTime fecha_asignacion { get; set; } = DateTime.Now;
+    public DateTime FechaAsignacion { get; set; } = DateTime.Now;
 
-    public DateTime? fecha_liberacion { get; set; }
+    public DateTime? FechaLiberacion { get; set; }
 
     [ForeignKey("Usuario")]
-    public int asignado_por { get; set; }
+    public int AsignadoPor { get; set; }
 
     // Propiedades de navegación
-    public Paciente paciente { get; set; }
-    public Cama cama { get; set; }
-    public Usuario usuario { get; set; }
+    public Paciente Paciente { get; set; }
+    public Cama Cama { get; set; }
+    public Usuario Usuario { get; set; }
 
 }

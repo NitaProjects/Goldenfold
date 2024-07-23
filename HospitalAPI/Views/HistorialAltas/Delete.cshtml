@@ -18,10 +18,10 @@
             @Html.DisplayFor(model => model.Paciente.Nombre)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fecha_Alta)
+            @Html.DisplayNameFor(model => model.FechaAlta)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fecha_Alta)
+            @Html.DisplayFor(model => model.FechaAlta)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Diagnostico)
@@ -38,7 +38,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID_Historial" />
+        <input type="hidden" asp-for="IdHistorial" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

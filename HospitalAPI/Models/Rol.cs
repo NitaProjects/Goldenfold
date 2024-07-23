@@ -14,13 +14,13 @@ public class Rol
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int id_rol { get; set; }
+    public int IdRol { get; set; }
 
     [Required]
     [StringLength(50)]
-    public RoleType nombre_rol { get; set; }
+    public RoleType NombreRol { get; set; }
 
     // Propiedad de navegación
-    public ICollection<Usuario> usuarios { get; set; }
+    public ICollection<Usuario> Usuarios { get; set; }
 
 }

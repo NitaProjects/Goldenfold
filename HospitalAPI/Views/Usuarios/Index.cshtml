@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalApi.Usuarios>
+﻿@model IEnumerable<HospitalApi.Usuario>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Usuario)
+                @Html.DisplayNameFor(model => model.NombreUsuario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Contraseña)
+                @Html.DisplayNameFor(model => model.Contrasenya)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rol)
@@ -34,18 +34,18 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Usuario)
+                @Html.DisplayFor(modelItem => item.NombreUsuario)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Contraseña)
+                @Html.DisplayFor(modelItem => item.Contrasenya)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rol.Nombre_Rol)
+                @Html.DisplayFor(modelItem => item.Rol.NombreRol)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID_Usuario">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID_Usuario">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID_Usuario">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdUsuario">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdUsuario">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdUsuario">Delete</a>
             </td>
         </tr>
 }

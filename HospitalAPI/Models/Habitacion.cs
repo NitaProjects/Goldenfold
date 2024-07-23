@@ -7,17 +7,17 @@ public class Habitacion
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int id_habitacion { get; set; }
+    public int IdHabitacion { get; set; }
 
     [Required]
     [StringLength(2)]
-    public string edificio { get; set; }
+    public string Edificio { get; set; }
 
     [Required]
     [StringLength(2)]
-    public string planta { get; set; }
+    public string Planta { get; set; }
 
     [Required]
     [StringLength(2)]
-    public string habitacion { get; set; }
+    public string NumeroHabitacion { get; set; }
 }

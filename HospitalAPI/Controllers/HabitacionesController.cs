@@ -21,16 +21,16 @@ namespace HospitalApi.Controllers
 
         // GET: api/Habitaciones
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HabitacionesDTO>>> GetHabitaciones()
+        public async Task<ActionResult<IEnumerable<HabitacionDTO>>> GetHabitaciones()
         {
             var habitaciones = await _context.Habitaciones.ToListAsync();
-            var habitacionesDTO = _mapper.Map<IEnumerable<HabitacionesDTO>>(habitaciones);
+            var habitacionesDTO = _mapper.Map<IEnumerable<HabitacionDTO>>(habitaciones);
             return Ok(habitacionesDTO);
         }
 
         // GET: api/Habitaciones/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<HabitacionesDTO>> GetHabitacion(int id)
+        public async Task<ActionResult<HabitacionDTO>> GetHabitacion(int id)
         {
             var habitacion = await _context.Habitaciones.FindAsync(id);
 
@@ -39,13 +39,13 @@ namespace HospitalApi.Controllers
                 return NotFound();
             }
 
-            var habitacionDTO = _mapper.Map<HabitacionesDTO>(habitacion);
+            var habitacionDTO = _mapper.Map<HabitacionDTO>(habitacion);
             return Ok(habitacionDTO);
         }
 
         // POST: api/Habitaciones
         [HttpPost]
-        public async Task<ActionResult<HabitacionesDTO>> PostHabitacion(HabitacionesDTO habitacionDTO)
+        public async Task<ActionResult<HabitacionDTO>> PostHabitacion(HabitacionDTO habitacionDTO)
         {
             var habitacion = _mapper.Map<Habitaciones>(habitacionDTO);
 
@@ -58,7 +58,7 @@ namespace HospitalApi.Controllers
 
         // PUT: api/Habitaciones/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHabitacion(int id, HabitacionesDTO habitacionDTO)
+        public async Task<IActionResult> PutHabitacion(int id, HabitacionDTO habitacionDTO)
         {
             if (id != habitacionDTO.ID_Habitacion)
             {

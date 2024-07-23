@@ -7,21 +7,21 @@ public class HistorialAlta
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int id_historial { get; set; }
+    public int IdHistorial { get; set; }
 
     [ForeignKey("Paciente")]
-    public int id_paciente { get; set; }
+    public int IdPaciente { get; set; }
 
     [Required]
-    public DateTime fecha_alta { get; set; } = DateTime.Now;
+    public DateTime FechaAlta { get; set; } = DateTime.Now;
 
     [StringLength(255)]
-    public string diagnostico { get; set; }
+    public string Diagnostico { get; set; }
 
     [StringLength(255)]
-    public string tratamiento { get; set; }
+    public string Tratamiento { get; set; }
 
     // Propiedad de navegación
-    public Paciente paciente { get; set; }
+    public Paciente Paciente { get; set; }
 
 }

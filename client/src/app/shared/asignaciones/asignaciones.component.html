@@ -1,1 +1,50 @@
-<p>asignaciones works!</p>
+<div class="asignaciones-section">
+    <h2>Asignaciones</h2>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Asignación</th>
+            <th>ID Paciente</th>
+            <th>Ubicación</th>
+            <th>Fecha de Asignación</th>
+            <th>Fecha de Liberación</th>
+            <th>Asignado Por</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asignacion of asignaciones">
+            <td>{{ asignacion.IdAsignacion }}</td>
+            <td>{{ asignacion.IdPaciente }}</td>
+            <td>{{ asignacion.Ubicacion }}</td>
+            <td>{{ asignacion.FechaAsignacion | date: 'shortDate' }}</td>
+            <td>{{ asignacion.FechaLiberacion | date: 'shortDate' }}</td>
+            <td>{{ asignacion.AsignadoPor }}</td>
+            <td>
+              <button (click)="borrarAsignacion(asignacion.IdAsignacion)">Borrar</button>
+              <button (click)="actualizarAsignacion(asignacion)">Actualizar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="form-container">
+      <h3>Agregar Asignación</h3>
+      <form (ngSubmit)="agregarAsignacion()">
+        <label for="idPaciente">ID Paciente:</label>
+        <input type="number" id="idPaciente" [(ngModel)]="nuevaAsignacion.IdPaciente" name="idPaciente">
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" [(ngModel)]="nuevaAsignacion.Ubicacion" name="ubicacion">
+        <label for="fechaAsignacion">Fecha de Asignación:</label>
+        <input type="date" id="fechaAsignacion" [(ngModel)]="nuevaAsignacion.FechaAsignacion" name="fechaAsignacion">
+        <label for="fechaLiberacion">Fecha de Liberación:</label>
+        <input type="date" id="fechaLiberacion" [(ngModel)]="nuevaAsignacion.FechaLiberacion" name="fechaLiberacion">
+        <label for="asignadoPor">Asignado Por:</label>
+        <input type="number" id="asignadoPor" [(ngModel)]="nuevaAsignacion.AsignadoPor" name="asignadoPor">
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+  

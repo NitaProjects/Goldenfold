@@ -1,1 +1,46 @@
-<p>usuarios works!</p>
+<div class="usuarios-section">
+    <h2>Usuarios</h2>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Usuario</th>
+            <th>Nombre</th>
+            <th>Nombre de Usuario</th>
+            <th>Contraseña</th>
+            <th>ID Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{ usuario.IdUsuario }}</td>
+            <td>{{ usuario.Nombre }}</td>
+            <td>{{ usuario.NombreUsuario }}</td>
+            <td>{{ usuario.Contrasenya }}</td>
+            <td>{{ usuario.IdRol }}</td>
+            <td>
+              <button (click)="borrarUsuario(usuario.IdUsuario)">Borrar</button>
+              <button (click)="actualizarUsuario(usuario)">Actualizar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="form-container">
+      <h3>Agregar Usuario</h3>
+      <form (ngSubmit)="agregarUsuario()">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="nuevoUsuario.Nombre" name="nombre">
+        <label for="nombreUsuario">Nombre de Usuario:</label>
+        <input type="text" id="nombreUsuario" [(ngModel)]="nuevoUsuario.NombreUsuario" name="nombreUsuario">
+        <label for="contrasenya">Contraseña:</label>
+        <input type="password" id="contrasenya" [(ngModel)]="nuevoUsuario.Contrasenya" name="contrasenya">
+        <label for="idRol">ID Rol:</label>
+        <input type="number" id="idRol" [(ngModel)]="nuevoUsuario.IdRol" name="idRol">
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+  

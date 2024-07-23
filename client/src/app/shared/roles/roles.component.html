@@ -1,1 +1,34 @@
-<p>roles works!</p>
+<div class="roles-section">
+    <h2>Roles</h2>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Rol</th>
+            <th>Nombre Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rol of roles">
+            <td>{{ rol.IdRol }}</td>
+            <td>{{ rol.NombreRol }}</td>
+            <td>
+              <button (click)="borrarRol(rol.IdRol)">Borrar</button>
+              <button (click)="actualizarRol(rol)">Actualizar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="form-container">
+      <h3>Agregar Rol</h3>
+      <form (ngSubmit)="agregarRol()">
+        <label for="nombreRol">Nombre Rol:</label>
+        <input type="text" id="nombreRol" [(ngModel)]="nuevoRol.NombreRol" name="nombreRol">
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+  

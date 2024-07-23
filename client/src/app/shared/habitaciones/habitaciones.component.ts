@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ApiService, Habitacion } from '../../services/api.service';
 
 @Component({
   selector: 'app-habitaciones',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './habitaciones.component.html',
   styleUrls: ['./habitaciones.component.css']
 })

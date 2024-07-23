@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-pacientes',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Asegúrate de importar CommonModule aquí
+  imports: [CommonModule, FormsModule], 
   templateUrl: './pacientes.component.html',
   styleUrls: ['./pacientes.component.css']
 })

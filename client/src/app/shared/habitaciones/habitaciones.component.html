@@ -1,42 +1,41 @@
 <div class="habitaciones-section">
-    <h2>Habitaciones</h2>
-    <div class="table-container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID Habitación</th>
-            <th>Edificio</th>
-            <th>Planta</th>
-            <th>Número Habitación</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let habitacion of habitaciones">
-            <td>{{ habitacion.IdHabitacion }}</td>
-            <td>{{ habitacion.Edificio }}</td>
-            <td>{{ habitacion.Planta }}</td>
-            <td>{{ habitacion.NumeroHabitacion }}</td>
-            <td>
-              <button (click)="borrarHabitacion(habitacion.IdHabitacion)">Borrar</button>
-              <button (click)="actualizarHabitacion(habitacion)">Actualizar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div class="form-container">
-      <h3>Agregar Habitación</h3>
-      <form (ngSubmit)="agregarHabitacion()">
-        <label for="edificio">Edificio:</label>
-        <input type="text" id="edificio" [(ngModel)]="nuevaHabitacion.Edificio" name="edificio">
-        <label for="planta">Planta:</label>
-        <input type="text" id="planta" [(ngModel)]="nuevaHabitacion.Planta" name="planta">
-        <label for="numeroHabitacion">Número Habitación:</label>
-        <input type="text" id="numeroHabitacion" [(ngModel)]="nuevaHabitacion.NumeroHabitacion" name="numeroHabitacion">
-        <button type="submit">Agregar</button>
-      </form>
-    </div>
+  <h2>Habitaciones</h2>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Habitación</th>
+          <th>Edificio</th>
+          <th>Planta</th>
+          <th>Número Habitación</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let habitacion of habitaciones">
+          <td>{{ habitacion.IdHabitacion }}</td>
+          <td>{{ habitacion.Edificio }}</td>
+          <td>{{ habitacion.Planta }}</td>
+          <td>{{ habitacion.NumeroHabitacion }}</td>
+          <td>
+            <button (click)="borrarHabitacion(habitacion.IdHabitacion)">Borrar</button>
+            <button (click)="actualizarHabitacion(habitacion)">Actualizar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+
+  <div class="form-container">
+    <h3>Agregar Habitación</h3>
+    <form (ngSubmit)="agregarHabitacion()">
+      <label for="edificio">Edificio:</label>
+      <input type="text" id="edificio" [(ngModel)]="nuevaHabitacion.Edificio" name="edificio">
+      <label for="planta">Planta:</label>
+      <input type="text" id="planta" [(ngModel)]="nuevaHabitacion.Planta" name="planta">
+      <label for="numeroHabitacion">Número Habitación:</label>
+      <input type="text" id="numeroHabitacion" [(ngModel)]="nuevaHabitacion.NumeroHabitacion" name="numeroHabitacion">
+      <button type="submit">Agregar</button>
+    </form>
+  </div>
+</div>

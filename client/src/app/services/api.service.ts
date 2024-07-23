@@ -185,8 +185,8 @@ export class ApiService {
     return this.http.get<Cama[]>(`${this.apiUrl}/Camas`);
   }
 
-  getCamaById(id: number): Observable<Cama> {
-    return this.http.get<Cama>(`${this.apiUrl}/Camas/${id}`);
+  getCamaByUbi(Ubicacion: string): Observable<Cama> {
+    return this.http.get<Cama>(`${this.apiUrl}/Camas/${Ubicacion}`);
   }
 
   addCama(Cama: Cama): Observable<Cama> {
@@ -197,8 +197,8 @@ export class ApiService {
     return this.http.put<Cama>(`${this.apiUrl}/Camas/${Cama.Ubicacion}`, Cama);
   }
 
-  deleteCama(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/Camas/${id}`);
+  deleteCama(Ubicacion: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/Camas/${Ubicacion}`);
   }
 
   // CRUD para Habitaciones

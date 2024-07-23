@@ -1,1 +1,40 @@
-<p>camas works!</p>
+<div class="camas-section">
+    <h2>Camas</h2>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Ubicación</th>
+            <th>Estado</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cama of camas">
+            <td>{{ cama.Ubicacion }}</td>
+            <td>{{ cama.Estado }}</td>
+            <td>{{ cama.Tipo }}</td>
+            <td>
+              <button (click)="borrarCama(cama.Ubicacion)">Borrar</button>
+              <button (click)="actualizarCama(cama)">Actualizar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="form-container">
+      <h3>Agregar Cama</h3>
+      <form (ngSubmit)="agregarCama()">
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" [(ngModel)]="nuevaCama.Ubicacion" name="ubicacion">
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" [(ngModel)]="nuevaCama.Estado" name="estado">
+        <label for="tipo">Tipo:</label>
+        <input type="text" id="tipo" [(ngModel)]="nuevaCama.Tipo" name="tipo">
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+  

@@ -14,14 +14,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let historialAlta of historialAltas">
-          <td>{{ historialAlta.iD_Historial }}</td>
-          <td>{{ historialAlta.iD_Paciente }}</td>
-          <td>{{ historialAlta.fecha_Alta | date: 'shortDate' }}</td>
+          <td>{{ historialAlta.id_historial }}</td>
+          <td>{{ historialAlta.id_paciente }}</td>
+          <td>{{ historialAlta.fecha_alta | date: 'shortDate' }}</td>
           <td>{{ historialAlta.diagnostico }}</td>
           <td>{{ historialAlta.tratamiento }}</td>
           <td>
-            <button (click)="borrarHistorialAlta(historialAlta.iD_Historial)">Borrar</button>
-            <button (click)="actualizarHistorialAlta(historialAlta.iD_Historial, historialAlta)">Actualizar</button>
+            <button (click)="borrarHistorialAlta(historialAlta.id_historial)">Borrar</button>
+            <button (click)="actualizarHistorialAlta(historialAlta.id_historial, historialAlta)">Actualizar</button>
           </td>
         </tr>
       </tbody>
@@ -32,9 +32,9 @@
     <h3>Agregar Historial de Alta</h3>
     <form (ngSubmit)="agregarHistorialAlta()">
       <label for="idPaciente">ID Paciente:</label>
-      <input type="number" id="idPaciente" [(ngModel)]="nuevoHistorialAlta.iD_Paciente" name="idPaciente">
+      <input type="number" id="idPaciente" [(ngModel)]="nuevoHistorialAlta.id_paciente" name="idPaciente">
       <label for="fechaAlta">Fecha de Alta:</label>
-      <input type="date" id="fechaAlta" [(ngModel)]="nuevoHistorialAlta.fecha_Alta" name="fechaAlta">
+      <input type="date" id="fechaAlta" [(ngModel)]="nuevoHistorialAlta.fecha_alta" name="fechaAlta">
       <label for="diagnostico">Diagnóstico:</label>
       <input type="text" id="diagnostico" [(ngModel)]="nuevoHistorialAlta.diagnostico" name="diagnostico">
       <label for="tratamiento">Tratamiento:</label>

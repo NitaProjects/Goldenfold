@@ -13,9 +13,9 @@ import { ApiService, HistorialAlta } from '../../services/api.service';
 export class HistorialAltasComponent implements OnInit {
   historialAltas: HistorialAlta[] = [];
   nuevoHistorialAlta: HistorialAlta = {
-    iD_Historial: 0,
-    iD_Paciente: 0,
-    fecha_Alta: new Date(),
+    id_historial: 0,
+    id_paciente: 0,
+    fecha_alta: new Date(),
     diagnostico: '',
     tratamiento: ''
   };
@@ -38,9 +38,9 @@ export class HistorialAltasComponent implements OnInit {
       next: (nuevoHistorialAlta: HistorialAlta) => {
         this.historialAltas.push(nuevoHistorialAlta);
         this.nuevoHistorialAlta = {
-          iD_Historial: 0,
-          iD_Paciente: 0,
-          fecha_Alta: new Date(),
+          id_historial: 0,
+          id_paciente: 0,
+          fecha_alta: new Date(),
           diagnostico: '',
           tratamiento: ''
         };
@@ -54,7 +54,7 @@ export class HistorialAltasComponent implements OnInit {
   borrarHistorialAlta(id: number) {
     this.apiService.deleteHistorialAlta(id).subscribe({
       next: () => {
-        this.historialAltas = this.historialAltas.filter(historialAlta => historialAlta.iD_Historial !== id);
+        this.historialAltas = this.historialAltas.filter(historialAlta => historialAlta.id_historial !== id);
       },
       error: (error: any) => {
         console.error('Error al borrar el historial de alta', error);
@@ -65,7 +65,7 @@ export class HistorialAltasComponent implements OnInit {
   actualizarHistorialAlta(id: number, historialAlta: HistorialAlta) {
     this.apiService.updateHistorialAlta(id, historialAlta).subscribe({
       next: (historialAltaActualizado: HistorialAlta) => {
-        const index = this.historialAltas.findIndex(ha => ha.iD_Historial === id);
+        const index = this.historialAltas.findIndex(ha => ha.id_historial === id);
         if (index !== -1) {
           this.historialAltas[index] = historialAltaActualizado;
         }

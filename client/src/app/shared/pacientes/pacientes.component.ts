@@ -6,13 +6,13 @@ import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-pacientes-registrados',
+  selector: 'app-pacientes',
   standalone: true,
   imports: [CommonModule, FormsModule], // Asegúrate de importar CommonModule aquí
-  templateUrl: './pacientes-registrados.component.html',
-  styleUrls: ['./pacientes-registrados.component.css']
+  templateUrl: './pacientes.component.html',
+  styleUrls: ['./pacientes.component.css']
 })
-export class PacientesRegistradosComponent implements OnInit {
+export class PacientesComponent implements OnInit {
   pacientes: Paciente[] = [];
 
   constructor(private apiService: ApiService) { }
@@ -42,7 +42,7 @@ export class PacientesRegistradosComponent implements OnInit {
     this.apiService.deletePaciente(id).subscribe({
       next: () => {
         console.log(`Borrar registro con ID ${id}`);
-        this.pacientes = this.pacientes.filter(paciente => paciente.iD_Paciente !== id);
+        this.pacientes = this.pacientes.filter(paciente => paciente.IdPaciente !== id);
       },
       error: (error: any) => {
         console.error('Error al borrar el paciente', error);

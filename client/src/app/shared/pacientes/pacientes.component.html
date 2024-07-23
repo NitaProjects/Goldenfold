@@ -1,0 +1,45 @@
+<div class="patients-section">
+  <h2>Pacientes Registrados</h2>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Paciente</th>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Síntomas</th>
+          <th>Estado</th>
+          <th>Fecha de Registro</th>
+          <th>Seguridad Social</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>Historial Médico</th>
+          
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paciente of pacientes">
+          <td>{{ paciente.IdPaciente }}</td>
+          <td>{{ paciente.Nombre }}</td>
+          <td>{{ paciente.Edad }}</td>
+          <td>{{ paciente.FechaNacimiento | date: 'shortDate' }}</td>
+          <td>{{ paciente.Sintomas }}</td>
+          <td>{{ paciente.Estado }}</td>
+          <td>{{ paciente.FechaRegistro | date: 'shortDate' }}</td>
+          <td>{{ paciente.SeguridadSocial }}</td>
+          <td>{{ paciente.Direccion }}</td>
+          <td>{{ paciente.Telefono }}</td>
+          <td>{{ paciente.HistorialMedico }}</td>    
+          <td>
+            <button (click)="editarRegistro(paciente.IdPaciente)">Editar</button>
+            <button (click)="borrarRegistro(paciente.IdPaciente)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</div>

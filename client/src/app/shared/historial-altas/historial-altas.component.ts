@@ -13,11 +13,11 @@ import { ApiService, HistorialAlta } from '../../services/api.service';
 export class HistorialAltasComponent implements OnInit {
   historialAltas: HistorialAlta[] = [];
   nuevoHistorialAlta: HistorialAlta = {
-    id_historial: 0,
-    id_paciente: 0,
-    fecha_alta: new Date(),
-    diagnostico: '',
-    tratamiento: ''
+    IdHistorial: 0,
+    IdPaciente: 0,
+    FechaAlta: new Date(),
+    Diagnostico: '',
+    Tratamiento: ''
   };
 
   constructor(private apiService: ApiService) {}
@@ -38,11 +38,11 @@ export class HistorialAltasComponent implements OnInit {
       next: (nuevoHistorialAlta: HistorialAlta) => {
         this.historialAltas.push(nuevoHistorialAlta);
         this.nuevoHistorialAlta = {
-          id_historial: 0,
-          id_paciente: 0,
-          fecha_alta: new Date(),
-          diagnostico: '',
-          tratamiento: ''
+          IdHistorial: 0,
+          IdPaciente: 0,
+          FechaAlta: new Date(),
+          Diagnostico: '',
+          Tratamiento: ''
         };
       },
       error: (error: any) => {
@@ -54,7 +54,7 @@ export class HistorialAltasComponent implements OnInit {
   borrarHistorialAlta(id: number) {
     this.apiService.deleteHistorialAlta(id).subscribe({
       next: () => {
-        this.historialAltas = this.historialAltas.filter(historialAlta => historialAlta.id_historial !== id);
+        this.historialAltas = this.historialAltas.filter(historialAlta => historialAlta.IdHistorial !== id);
       },
       error: (error: any) => {
         console.error('Error al borrar el historial de alta', error);
@@ -65,7 +65,7 @@ export class HistorialAltasComponent implements OnInit {
   actualizarHistorialAlta(id: number, historialAlta: HistorialAlta) {
     this.apiService.updateHistorialAlta(id, historialAlta).subscribe({
       next: (historialAltaActualizado: HistorialAlta) => {
-        const index = this.historialAltas.findIndex(ha => ha.id_historial === id);
+        const index = this.historialAltas.findIndex(ha => ha.IdHistorial === id);
         if (index !== -1) {
           this.historialAltas[index] = historialAltaActualizado;
         }

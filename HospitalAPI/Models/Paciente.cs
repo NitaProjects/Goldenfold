@@ -19,7 +19,7 @@ public class Paciente
     public string nombre { get; set; }
 
     [Required]
-    [Range(0, int.MaxValue, ErrorMessage = "La edad debe ser un número positivo.")]
+    [Range(0, int.MaxValue, ErrorMessage = "La edad debe ser un nï¿½mero positivo.")]
     public int edad { get; set; }
 
     public DateTime? fecha_nacimiento { get; set; }
@@ -50,7 +50,7 @@ public class Paciente
 
     public string historial_medico { get; set; }
 
-    // Propiedades de navegación
+    // Propiedades de navegaciï¿½n
     public ICollection<HistorialAlta> historial_altas { get; set; }
     public ICollection<Asignacion> asignaciones { get; set; }
 

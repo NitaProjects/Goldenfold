@@ -4,26 +4,26 @@ import { Observable } from 'rxjs';
 
 // Definición de la interfaz Paciente
 export interface Paciente {
-  id_paciente: number;
-  nombre: string;
-  edad: number;
-  sintomas: string;
-  estado: string;
-  fecha_registro: Date;
-  seguridad_social: string;
-  direccion: string;
-  telefono: string;
-  historial_medico: string;
-  fecha_nacimiento: Date;
+  IdPaciente: number;
+  Nombre: string;
+  Edad: number;
+  FechaNacimiento: Date;
+  Sintomas: string;
+  Estado: string;
+  FechaRegistro: Date;
+  SeguridadSocial: string;
+  Direccion: string;
+  Telefono: string;
+  HistorialMedico: string;
 }
 
 // Definición de la interfaz HistorialAlta
 export interface HistorialAlta {
-  id_historial: number;
-  id_paciente: number;
-  fecha_alta: Date;
-  diagnostico: string;
-  tratamiento: string;
+  IdHistorial: number;
+  IdPaciente: number;
+  FechaAlta: Date;
+  Diagnostico: string;
+  Tratamiento: string;
 }
 
 @Injectable({

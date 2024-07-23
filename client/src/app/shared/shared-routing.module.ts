@@ -5,9 +5,9 @@ const routes: Routes = [
   { path: 'historial-altas', 
   loadComponent: () => import('./historial-altas/historial-altas.component')
   .then(m => m.HistorialAltasComponent) },
-  { path: 'pacientes-registrados', 
-  loadComponent: () => import('./pacientes-registrados/pacientes-registrados.component')
-  .then(m => m.PacientesRegistradosComponent) }
+  { path: 'pacientes', 
+  loadComponent: () => import('./pacientes/pacientes.component')
+  .then(m => m.PacientesComponent) }
 ];
 
 @NgModule({

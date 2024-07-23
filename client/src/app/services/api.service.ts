@@ -1,3 +1,4 @@
+// src/app/services/api.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -26,6 +27,46 @@ export interface HistorialAlta {
   Tratamiento: string;
 }
 
+// Definición de la interfaz Rol
+export interface Rol {
+  IdRol: number;
+  NombreRol: string;
+}
+
+// Definición de la interfaz Asignacion
+export interface Asignacion {
+  IdAsignacion: number;
+  IdPaciente: number;
+  Ubicacion: string;
+  FechaAsignacion: Date;
+  FechaLiberacion: Date;
+  AsignadoPor: number;
+}
+
+// Definición de la interfaz Habitación
+export interface Habitacion {
+  IdHabitacion: number;
+  Edificio: string;
+  Planta: string;
+  NumeroHabitacion: string;
+}
+
+// Definición de la interfaz Cama
+export interface Cama {
+  Ubicacion: string;
+  Estado: string;
+  Tipo: string;
+}
+
+// Definición de la interfaz Usuario
+export interface Usuario {
+  IdUsuario: number;
+  Nombre: string;
+  NombreUsuario: string;
+  Contrasenya: string;
+  IdRol: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,33 +75,150 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // Método para obtener todos los pacientes
+  // CRUD para Pacientes
   getPacientes(): Observable<Paciente[]> {
     return this.http.get<Paciente[]>(`${this.apiUrl}/Pacientes`);
   }
 
-  // Método para eliminar un paciente por ID
+  getPacienteById(id: number): Observable<Paciente> {
+    return this.http.get<Paciente>(`${this.apiUrl}/Pacientes/${id}`);
+  }
+
+  addPaciente(paciente: Paciente): Observable<Paciente> {
+    return this.http.post<Paciente>(`${this.apiUrl}/Pacientes`, paciente);
+  }
+
+  updatePaciente(paciente: Paciente): Observable<Paciente> {
+    return this.http.put<Paciente>(`${this.apiUrl}/Pacientes/${paciente.IdPaciente}`, paciente);
+  }
+
   deletePaciente(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/Pacientes/${id}`);
   }
 
-  // Método para obtener todos los registros de historial de altas
+  // CRUD para HistorialAltas
   getHistorialAltas(): Observable<HistorialAlta[]> {
     return this.http.get<HistorialAlta[]>(`${this.apiUrl}/HistorialAltas`);
   }
 
-  // Método para agregar un nuevo registro de historial de alta
+  getHistorialAltaById(id: number): Observable<HistorialAlta> {
+    return this.http.get<HistorialAlta>(`${this.apiUrl}/HistorialAltas/${id}`);
+  }
+
   addHistorialAlta(historialAlta: HistorialAlta): Observable<HistorialAlta> {
     return this.http.post<HistorialAlta>(`${this.apiUrl}/HistorialAltas`, historialAlta);
   }
 
-  // Método para eliminar un registro de historial de alta por ID
+  updateHistorialAlta(historialAlta: HistorialAlta): Observable<HistorialAlta> {
+    return this.http.put<HistorialAlta>(`${this.apiUrl}/HistorialAltas/${historialAlta.IdHistorial}`, historialAlta);
+  }
+
   deleteHistorialAlta(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/HistorialAltas/${id}`);
   }
 
-  // Método para actualizar un registro de historial de alta
-  updateHistorialAlta(id: number, historialAlta: HistorialAlta): Observable<HistorialAlta> {
-    return this.http.put<HistorialAlta>(`${this.apiUrl}/HistorialAltas/${id}`, historialAlta);
+  // CRUD para Roles
+  getRoles(): Observable<Rol[]> {
+    return this.http.get<Rol[]>(`${this.apiUrl}/Roles`);
+  }
+
+  getRolById(id: number): Observable<Rol> {
+    return this.http.get<Rol>(`${this.apiUrl}/Roles/${id}`);
+  }
+
+  addRol(rol: Rol): Observable<Rol> {
+    return this.http.post<Rol>(`${this.apiUrl}/Roles`, rol);
+  }
+
+  updateRol(rol: Rol): Observable<Rol> {
+    return this.http.put<Rol>(`${this.apiUrl}/Roles/${rol.IdRol}`, rol);
+  }
+
+  deleteRol(idRol: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/Roles/${idRol}`);
+  }
+
+  // CRUD para Asignaciones
+  getAsignaciones(): Observable<Asignacion[]> {
+    return this.http.get<Asignacion[]>(`${this.apiUrl}/Asignaciones`);
+  }
+
+  getAsignacionById(id: number): Observable<Asignacion> {
+    return this.http.get<Asignacion>(`${this.apiUrl}/Asignaciones/${id}`);
+  }
+
+  addAsignacion(asignacion: Asignacion): Observable<Asignacion> {
+    return this.http.post<Asignacion>(`${this.apiUrl}/Asignaciones`, asignacion);
+  }
+
+  updateAsignacion(asignacion: Asignacion): Observable<Asignacion> {
+    return this.http.put<Asignacion>(`${this.apiUrl}/Asignaciones/${asignacion.IdAsignacion}`, asignacion);
+  }
+
+  deleteAsignacion(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/Asignaciones/${id}`);
+  }
+
+  // CRUD para Usuarios
+  getUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/Usuarios`);
+  }
+
+  getUsuarioById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}/Usuarios/${id}`);
+  }
+
+  addUsuario(Usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/Usuarios`, Usuario);
+  }
+
+  updateUsuario(Usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.apiUrl}/Usuarios/${Usuario.IdUsuario}`, Usuario);
+  }
+
+  deleteUsuario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/Usuarios/${id}`);
+  }
+
+  // CRUD para Camas
+  getCamas(): Observable<Cama[]> {
+    return this.http.get<Cama[]>(`${this.apiUrl}/Camas`);
+  }
+
+  getCamaById(id: number): Observable<Cama> {
+    return this.http.get<Cama>(`${this.apiUrl}/Camas/${id}`);
+  }
+
+  addCama(Cama: Cama): Observable<Cama> {
+    return this.http.post<Cama>(`${this.apiUrl}/Camas`, Cama);
+  }
+
+  updateCama(Cama: Cama): Observable<Cama> {
+    return this.http.put<Cama>(`${this.apiUrl}/Camas/${Cama.Ubicacion}`, Cama);
+  }
+
+  deleteCama(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/Camas/${id}`);
+  }
+
+  // CRUD para Habitaciones
+  getHabitaciones(): Observable<Habitacion[]> {
+    return this.http.get<Habitacion[]>(`${this.apiUrl}/Habitaciones`);
+  }
+
+  getHabitacionById(id: number): Observable<Habitacion> {
+    return this.http.get<Habitacion>(`${this.apiUrl}/Habitaciones/${id}`);
+  }
+
+  addHabitacion(Habitacion: Habitacion): Observable<Habitacion> {
+    return this.http.post<Habitacion>(`${this.apiUrl}/Habitaciones`, Habitacion);
+  }
+
+  updateHabitacion(Habitacion: Habitacion): Observable<Habitacion> {
+    return this.http.put<Habitacion>(`${this.apiUrl}/Habitaciones/${Habitacion.IdHabitacion}`, Habitacion);
+  }
+
+  deleteHabitacion(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/Habitaciones/${id}`);
   }
 }

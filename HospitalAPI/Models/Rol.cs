@@ -23,4 +23,5 @@ public class Rol
     // Propiedad de navegaci�n
     public ICollection<Usuario> Usuarios { get; set; }
 
+    
 }

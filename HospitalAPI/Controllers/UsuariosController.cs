@@ -50,16 +50,17 @@ namespace HospitalApi.Controllers
             return Ok(usuarioDTO);
         }
 
-        // GET: api/Usuarios/ByName/{NombreUsuario}
-        [HttpGet("/ByName/{NombreUsuario}")]
-        public async Task<ActionResult<UsuarioDTO>> GetUserByName(string nombre)
+        // GET: api/Usuarios/ByName/{nombre}
+        [HttpGet("ByName/{nombre}")]
+        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> GetUserByName(string nombre)
         {
-            var usuarios = await _context.Usuarios.Where(u => u.NombreUsuario.Contains(nombre))
+            var usuarios = await _context.Usuarios
+                .Where(u => u.NombreUsuario.Contains(nombre))
                 .ToListAsync();
-            
+
             if (!usuarios.Any())
             {
-                return NotFound("No se ha encontrado ningun usuario con este nombre.");
+                return NotFound("No se ha encontrado ningún usuario con este nombre.");
             }
 
             var usuariosDTO = _mapper.Map<IEnumerable<UsuarioDTO>>(usuarios);
@@ -136,15 +137,15 @@ namespace HospitalApi.Controllers
             return NoContent();
         }
 
-        // PUT: api/Usuarios/ByName/{NombreUsuario}
-        [HttpPut("/ByName/{NombreUsuario}")]
+        // PUT: api/Usuarios/ByName/{name}
+        [HttpPut("ByName/{name}")]
         public async Task<IActionResult> EditUserByName(string name, UsuarioDTO usuarioDTO)
         {
             var usuarioExiste = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == name);
 
             if (usuarioExiste == null)
             {
-                return NotFound("No se ha encontrado ningun usuario con ese nombre de usuario.");
+                return NotFound("No se ha encontrado ningún usuario con ese nombre de usuario.");
             }
 
             if (await _context.Usuarios.AnyAsync(u => u.IdUsuario != usuarioExiste.IdUsuario && u.NombreUsuario == usuarioDTO.NombreUsuario))
@@ -164,8 +165,9 @@ namespace HospitalApi.Controllers
             }
 
             return NoContent();
-
         }
+
+
 
         // DELETE: api/Usuarios/{id}
         [HttpDelete("{id}")]
@@ -184,15 +186,15 @@ namespace HospitalApi.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Usuarios/ByName/{NombreUsuario}
-        [HttpDelete("/ByName/{NombreUsuario}")]
+        // DELETE: api/Usuarios/ByName/{name}
+        [HttpDelete("ByName/{name}")]
         public async Task<IActionResult> DeleteUserByName(string name)
         {
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == name);
 
             if (usuario == null)
             {
-                return NotFound("No se ha encontrado este usuario. Asegurate de que el nombre de usuario es correcto");
+                return NotFound("No se ha encontrado este usuario. Asegúrate de que el nombre de usuario es correcto.");
             }
 
             _context.Usuarios.Remove(usuario);
@@ -200,6 +202,8 @@ namespace HospitalApi.Controllers
 
             return NoContent();
         }
+
+
 
         private bool UsuarioExists(int id)
         {

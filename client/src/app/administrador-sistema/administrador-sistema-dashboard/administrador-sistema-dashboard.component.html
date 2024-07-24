@@ -10,14 +10,16 @@
   </header>
 
   <nav class="navbar">
-    <input type="text" class="search-bar" placeholder="Buscar usuario...">
-    <select class="filter" id="filter-rol" (change)="filterUsuarios()">
-      <option value="">Rol</option>
-      <option value="admin">Administrador</option>
-      <option value="doctor">Doctor</option>
-      <option value="nurse">Enfermera</option>
-      <option value="staff">Personal</option>
-    </select>
+    <ul>
+      <li><a routerLink="pacientes" class="nav-link">Pacientes</a></li>
+      <li><a routerLink="altas" class="nav-link">Altas</a></li>
+      <li><a routerLink="asignaciones" class="nav-link">Asignaciones</a>
+      <li><a routerLink="usuarios" class="nav-link">Pacientes</a></li>
+      <li><a routerLink="roles" class="nav-link">Roles</a></li>
+      <li><a routerLink="habitaciones" class="nav-link">Habitaciones</a>
+      <li><a routerLink="camas" class="nav-link">Camas</a>
+      </li>
+    </ul>
   </nav>
 
   <div class="content">

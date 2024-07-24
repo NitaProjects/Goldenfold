@@ -24,56 +24,79 @@ namespace HospitalApi.Controllers
         public async Task<ActionResult<IEnumerable<PacienteDTO>>> GetPacientes()
         {
             var pacientes = await _context.Pacientes.ToListAsync();
+
+            if (!pacientes.Any())
+            {
+                return NotFound("No se han encontrado pacientes.");
+            }
+
             var pacientesDTO = _mapper.Map<IEnumerable<PacienteDTO>>(pacientes);
+
             return Ok(pacientesDTO);
         }
 
         // GET: api/Pacientes/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<PacienteDTO>> GetPaciente(int id)
+        public async Task<ActionResult<PacienteDTO>> GetPacienteById(int id)
         {
             var paciente = await _context.Pacientes.FindAsync(id);
 
             if (paciente == null)
             {
-                return NotFound();
+                return NotFound("No se ha encontrado ningún paciente con este id.");
             }
 
             var pacienteDTO = _mapper.Map<PacienteDTO>(paciente);
             return Ok(pacienteDTO);
         }
 
+        // GET: api/Pacientes/ByName/{nombre}
+        [HttpGet("ByName/{nombre}")]
+        public async Task<ActionResult<IEnumerable<PacienteDTO>>> GetPacienteByName(string nombre)
+        {
+            var pacientes = await _context.Pacientes
+                .Where(p => p.Nombre.Contains(nombre))
+                .ToListAsync();
+
+            if (!pacientes.Any())
+            {
+                return NotFound("No se ha encontrado ningún paciente con este nombre.");
+            }
+
+            var pacientesDTO = _mapper.Map<IEnumerable<PacienteDTO>>(pacientes);
+            return Ok(pacientesDTO);
+        }
+
         // POST: api/Pacientes
         [HttpPost]
-        public async Task<ActionResult<PacienteDTO>> PostPaciente(PacienteDTO pacienteDTO)
+        public async Task<ActionResult<PacienteDTO>> AddPaciente(PacienteDTO pacienteDTO)
         {
             var paciente = _mapper.Map<Paciente>(pacienteDTO);
 
             _context.Pacientes.Add(paciente);
             await _context.SaveChangesAsync();
 
-            pacienteDTO.ID_Paciente = paciente.ID_Paciente;
-            return CreatedAtAction("GetPaciente", new { id = pacienteDTO.ID_Paciente }, pacienteDTO);
+            pacienteDTO.IdPaciente = paciente.IdPaciente;
+            return CreatedAtAction(nameof(GetPacienteById), new { id = pacienteDTO.IdPaciente }, pacienteDTO);
         }
 
         // PUT: api/Pacientes/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPaciente(int id, PacienteDTO pacienteDTO)
+        public async Task<IActionResult> EditPacienteById(int id, PacienteDTO pacienteDTO)
         {
-            if (id != pacienteDTO.ID_Paciente)
+            if (id != pacienteDTO.IdPaciente)
             {
-                return BadRequest();
+                return BadRequest("El ID del paciente proporcionado no coincide con el ID en la solicitud.");
             }
 
-            var paciente = await _context.Pacientes.FindAsync(id);
-            if (paciente == null)
+            var pacienteExistente = await _context.Pacientes.FindAsync(id);
+
+            if (pacienteExistente == null)
             {
-                return NotFound();
+                return NotFound("No se encontró el paciente especificado.");
             }
 
-            _mapper.Map(pacienteDTO, paciente);
-
-            _context.Entry(paciente).State = EntityState.Modified;
+            _mapper.Map(pacienteDTO, pacienteExistente);
 
             try
             {
@@ -83,7 +106,7 @@ namespace HospitalApi.Controllers
             {
                 if (!PacienteExists(id))
                 {
-                    return NotFound();
+                    return NotFound("No se encontró el paciente especificado.");
                 }
                 else
                 {
@@ -94,14 +117,57 @@ namespace HospitalApi.Controllers
             return NoContent();
         }
 
+        // PUT: api/Pacientes/ByName/{name}
+        [HttpPut("ByName/{name}")]
+        public async Task<IActionResult> EditPacienteByName(string name, PacienteDTO pacienteDTO)
+        {
+            var pacienteExistente = await _context.Pacientes.FirstOrDefaultAsync(p => p.Nombre == name);
+
+            if (pacienteExistente == null)
+            {
+                return NotFound("No se ha encontrado ningún paciente con ese nombre.");
+            }
+
+            _mapper.Map(pacienteDTO, pacienteExistente);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(500, "Ocurrió un error al actualizar el paciente.");
+            }
+
+            return NoContent();
+        }
+
         // DELETE: api/Pacientes/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePaciente(int id)
+        public async Task<IActionResult> DeletePacienteById(int id)
         {
             var paciente = await _context.Pacientes.FindAsync(id);
+
             if (paciente == null)
             {
-                return NotFound();
+                return NotFound("No se encontró el paciente especificado.");
+            }
+
+            _context.Pacientes.Remove(paciente);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // DELETE: api/Pacientes/ByName/{name}
+        [HttpDelete("ByName/{name}")]
+        public async Task<IActionResult> DeletePacienteByName(string name)
+        {
+            var paciente = await _context.Pacientes.FirstOrDefaultAsync(p => p.Nombre == name);
+
+            if (paciente == null)
+            {
+                return NotFound("No se ha encontrado este paciente. Asegúrate de que el nombre es correcto.");
             }
 
             _context.Pacientes.Remove(paciente);
@@ -112,7 +178,7 @@ namespace HospitalApi.Controllers
 
         private bool PacienteExists(int id)
         {
-            return _context.Pacientes.Any(e => e.ID_Paciente == id);
+            return _context.Pacientes.Any(e => e.IdPaciente == id);
         }
     }
 }

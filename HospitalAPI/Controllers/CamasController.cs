@@ -23,56 +23,83 @@ namespace HospitalApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CamaDTO>>> GetCamas()
         {
-            var camas = await _context.Cama.ToListAsync();
+            var camas = await _context.Camas.ToListAsync();
+
+            if (!camas.Any())
+            {
+                return NotFound("No se han encontrado camas.");
+            }
+
             var camasDTO = _mapper.Map<IEnumerable<CamaDTO>>(camas);
             return Ok(camasDTO);
         }
 
         // GET: api/Camas/{ubicacion}
         [HttpGet("{ubicacion}")]
-        public async Task<ActionResult<CamaDTO>> GetCama(string ubicacion)
+        public async Task<ActionResult<CamaDTO>> GetCamaByUbicacion(string ubicacion)
         {
-            var cama = await _context.Cama.FindAsync(ubicacion);
+            var cama = await _context.Camas.FindAsync(ubicacion);
 
             if (cama == null)
             {
-                return NotFound();
+                return NotFound("No se ha encontrado ninguna cama con esta ubicación.");
             }
 
             var camaDTO = _mapper.Map<CamaDTO>(cama);
             return Ok(camaDTO);
         }
 
+        // GET: api/Camas/ByUbicacion/{ubicacion}
+        [HttpGet("ByUbicacion/{ubicacion}")]
+        public async Task<ActionResult<IEnumerable<CamaDTO>>> GetCamaByUbicacionPartial(string ubicacion)
+        {
+            var camas = await _context.Camas
+                .Where(c => c.Ubicacion.Contains(ubicacion))
+                .ToListAsync();
+
+            if (!camas.Any())
+            {
+                return NotFound("No se ha encontrado ninguna cama con esta ubicación.");
+            }
+
+            var camasDTO = _mapper.Map<IEnumerable<CamaDTO>>(camas);
+            return Ok(camasDTO);
+        }
+
         // POST: api/Camas
         [HttpPost]
-        public async Task<ActionResult<CamaDTO>> PostCama(CamaDTO camaDTO)
+        public async Task<ActionResult<CamaDTO>> AddCama(CamaDTO camaDTO)
         {
+            if (await _context.Camas.AnyAsync(c => c.Ubicacion == camaDTO.Ubicacion))
+            {
+                return Conflict("La ubicación de la cama ya está en uso.");
+            }
+
             var cama = _mapper.Map<Cama>(camaDTO);
 
-            _context.Cama.Add(cama);
+            _context.Camas.Add(cama);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCama", new { ubicacion = cama.Ubicacion }, camaDTO);
+            return CreatedAtAction(nameof(GetCamaByUbicacion), new { ubicacion = cama.Ubicacion }, camaDTO);
         }
 
         // PUT: api/Camas/{ubicacion}
         [HttpPut("{ubicacion}")]
-        public async Task<IActionResult> PutCama(string ubicacion, CamaDTO camaDTO)
+        public async Task<IActionResult> EditCamaByUbicacion(string ubicacion, CamaDTO camaDTO)
         {
             if (ubicacion != camaDTO.Ubicacion)
             {
-                return BadRequest();
+                return BadRequest("La ubicación de la cama proporcionada no coincide con la ubicación en la solicitud.");
             }
 
-            var cama = await _context.Cama.FindAsync(ubicacion);
-            if (cama == null)
+            var camaExistente = await _context.Camas.FindAsync(ubicacion);
+
+            if (camaExistente == null)
             {
-                return NotFound();
+                return NotFound("No se encontró la cama especificada.");
             }
 
-            _mapper.Map(camaDTO, cama);
-
-            _context.Entry(cama).State = EntityState.Modified;
+            _mapper.Map(camaDTO, camaExistente);
 
             try
             {
@@ -82,7 +109,7 @@ namespace HospitalApi.Controllers
             {
                 if (!CamaExists(ubicacion))
                 {
-                    return NotFound();
+                    return NotFound("No se encontró la cama especificada.");
                 }
                 else
                 {
@@ -95,15 +122,35 @@ namespace HospitalApi.Controllers
 
         // DELETE: api/Camas/{ubicacion}
         [HttpDelete("{ubicacion}")]
-        public async Task<IActionResult> DeleteCama(string ubicacion)
+        public async Task<IActionResult> DeleteCamaByUbicacion(string ubicacion)
         {
-            var cama = await _context.Cama.FindAsync(ubicacion);
+            var cama = await _context.Camas.FindAsync(ubicacion);
+
             if (cama == null)
             {
-                return NotFound();
+                return NotFound("No se encontró la cama especificada.");
             }
 
-            _context.Cama.Remove(cama);
+            _context.Camas.Remove(cama);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // DELETE: api/Camas/ByUbicacion/{ubicacion}
+        [HttpDelete("ByUbicacion/{ubicacion}")]
+        public async Task<IActionResult> DeleteCamaByUbicacionPartial(string ubicacion)
+        {
+            var camas = await _context.Camas
+                .Where(c => c.Ubicacion.Contains(ubicacion))
+                .ToListAsync();
+
+            if (!camas.Any())
+            {
+                return NotFound("No se encontró ninguna cama con esta ubicación parcial.");
+            }
+
+            _context.Camas.RemoveRange(camas);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -111,7 +158,7 @@ namespace HospitalApi.Controllers
 
         private bool CamaExists(string ubicacion)
         {
-            return _context.Cama.Any(e => e.Ubicacion == ubicacion);
+            return _context.Camas.Any(e => e.Ubicacion == ubicacion);
         }
     }
 }

@@ -19,5 +19,5 @@ public class Habitacion
 
     [Required]
     [StringLength(2)]
-    public string NumeroHabitacion { get; set; }
+    public int NumeroHabitacion { get; set; }
 }

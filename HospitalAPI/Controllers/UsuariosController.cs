@@ -137,11 +137,11 @@ namespace HospitalApi.Controllers
             return NoContent();
         }
 
-        // PUT: api/Usuarios/ByName/{name}
-        [HttpPut("ByName/{name}")]
-        public async Task<IActionResult> EditUserByName(string name, UsuarioDTO usuarioDTO)
+        // PUT: api/Usuarios/ByName/{nombre}
+        [HttpPut("ByName/{nombre}")]
+        public async Task<IActionResult> EditUserByName(string nombre, UsuarioDTO usuarioDTO)
         {
-            var usuarioExiste = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == name);
+            var usuarioExiste = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == nombre);
 
             if (usuarioExiste == null)
             {
@@ -186,11 +186,11 @@ namespace HospitalApi.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Usuarios/ByName/{name}
-        [HttpDelete("ByName/{name}")]
-        public async Task<IActionResult> DeleteUserByName(string name)
+        // DELETE: api/Usuarios/ByName/{nombre}
+        [HttpDelete("ByName/{nombre}")]
+        public async Task<IActionResult> DeleteUserByName(string nombre)
         {
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == name);
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == nombre);
 
             if (usuario == null)
             {

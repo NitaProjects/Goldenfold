@@ -54,19 +54,20 @@ namespace HospitalApi.Controllers
                 return NotFound("No se ha encontrado ningún rol con este nombre");
             }
 
-
+            var rolesDTO = _mapper.Map<IEnumerable<RolDTO>>(roles);
+            return Ok(rolesDTO);
         }
 
         // POST: api/Roles
         [HttpPost]
         public async Task<ActionResult<RolDTO>> AddRol(RolDTO rolDTO)
         {
-            if (!Enum.IsDefined(typeof(RoleType), rolDTO.nombre_rol))
+            if (!Enum.IsDefined(typeof(RoleType), rolDTO.NombreRol))
             {
                 return BadRequest("El nombre del rol proporcionado no es válido.");
             }
 
-            if (await _context.Roles.AnyAsync(r => r.nombre_rol == rolDTO.nombre_rol))
+            if (await _context.Roles.AnyAsync(r => r.NombreRol == rolDTO.NombreRol))
             {
                 return Conflict("Ya existe un rol con el nombre proporcionado.");
             }
@@ -76,20 +77,20 @@ namespace HospitalApi.Controllers
             _context.Roles.Add(rol);
             await _context.SaveChangesAsync();
 
-            rolDTO.id_rol = rol.id_rol;
-            return CreatedAtAction(nameof(GetRol), new { id = rolDTO.id_rol }, rolDTO);
+            rolDTO.IdRol = rol.IdRol;
+            return CreatedAtAction(nameof(GetRolById), new { id = rolDTO.IdRol }, rolDTO);
         }
 
         // PUT: api/Roles/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> EditRol(int id, RolDTO rolDTO)
         {
-            if (id != rolDTO.id_rol)
+            if (id != rolDTO.IdRol)
             {
                 return BadRequest("El ID del rol proporcionado no coincide con el ID en la solicitud.");
             }
 
-            if (!Enum.IsDefined(typeof(RoleType), rolDTO.nombre_rol))
+            if (!Enum.IsDefined(typeof(RoleType), rolDTO.NombreRol))
             {
                 return BadRequest("El nombre del rol proporcionado no es válido.");
             }
@@ -102,7 +103,7 @@ namespace HospitalApi.Controllers
             }
 
             // Verificar si el nombre de rol ya existe (excepto para el rol actual que se está actualizando)
-            if (await _context.Roles.AnyAsync(r => r.id_rol != id && r.nombre_rol == rolDTO.nombre_rol))
+            if (await _context.Roles.AnyAsync(r => r.IdRol != id && r.NombreRol == rolDTO.NombreRol))
             {
                 return Conflict("Ya existe un rol con el nombre proporcionado.");
             }
@@ -147,7 +148,7 @@ namespace HospitalApi.Controllers
 
         private bool RolExists(int id)
         {
-            return _context.Roles.Any(e => e.id_rol == id);
+            return _context.Roles.Any(e => e.IdRol == id);
         }
     }
 }

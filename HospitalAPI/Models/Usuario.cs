@@ -27,4 +27,5 @@ public class Usuario
     public Rol Rol { get; set; }
     public ICollection<Asignacion> Asignaciones { get; set; }
 
+    
 }

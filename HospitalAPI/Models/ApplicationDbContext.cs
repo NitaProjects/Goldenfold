@@ -112,7 +112,7 @@ public class ApplicationDbContext : DbContext
             new Rol { IdRol = 1, NombreRol = RoleType.Administrativo },
             new Rol { IdRol = 2, NombreRol = RoleType.Medico },
             new Rol { IdRol = 3, NombreRol = RoleType.ControladorCamas },
-            new Rol { IdRol = 4, NombreRol = RoleType.AdministrativoSistemas }
+            new Rol { IdRol = 4, NombreRol = RoleType.AdministradorSistemas }
         );
     }
 }

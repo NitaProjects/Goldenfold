@@ -119,7 +119,9 @@ body {
 
 /* Estilo para la barra de navegación */
 .navbar {
-  background-color: #333;
+  background-color: #929292;
+display: flex;
+justify-content: center;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -155,13 +157,11 @@ body {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilo para el enlace activo */
 .navbar .nav-link.active {
   background-color: #4CAF50;
   color: white;
 }
 
-/* Estilo para dispositivos móviles */
 @media screen and (max-width: 600px) {
   .navbar ul {
     flex-direction: column;
@@ -175,7 +175,6 @@ body {
   }
 }
 
-/* Estilo adicional para el fondo del cuerpo */
 body::before {
   content: '';
   position: fixed;

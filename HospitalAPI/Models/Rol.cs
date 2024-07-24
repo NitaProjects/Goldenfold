@@ -8,7 +8,7 @@ public enum RoleType
     Administrativo = 1,
     Medico = 2,
     ControladorCamas = 3,
-    AdministrativoSistemas = 4
+    AdministradorSistemas = 4
 }
 public class Rol
 {
@@ -20,7 +20,7 @@ public class Rol
     [StringLength(50)]
     public RoleType NombreRol { get; set; }
 
-    // Propiedad de navegación
+    // Propiedad de navegaciï¿½n
     public ICollection<Usuario> Usuarios { get; set; }
 
 }

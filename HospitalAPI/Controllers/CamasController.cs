@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using HospitalApi.Models;
 using HospitalApi.DTO;
 using AutoMapper;
+using API.Models;
 
 namespace HospitalApi.Controllers
 {
@@ -12,11 +13,16 @@ namespace HospitalApi.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly CamaService _camaService;
 
         public CamasController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
+        }
+        public CamasController(CamaService camaService)
+        {
+            _camaService = camaService;
         }
 
         // GET: api/Camas
@@ -36,7 +42,7 @@ namespace HospitalApi.Controllers
 
         // GET: api/Camas/{ubicacion}
         [HttpGet("{ubicacion}")]
-        public async Task<ActionResult<CamaDTO>> GetCamaByUbicacion(string ubicacion)
+        public async Task<ActionResult<CamaDTO>> GetCama(string ubicacion)
         {
             var cama = await _context.Camas.FindAsync(ubicacion);
 
@@ -49,76 +55,60 @@ namespace HospitalApi.Controllers
             return Ok(camaDTO);
         }
 
-        // GET: api/Camas/ByUbicacion/{ubicacion}
-        [HttpGet("ByUbicacion/{ubicacion}")]
-        public async Task<ActionResult<IEnumerable<CamaDTO>>> GetCamaByUbicacionPartial(string ubicacion)
-        {
-            var camas = await _context.Camas
-                .Where(c => c.Ubicacion.Contains(ubicacion))
-                .ToListAsync();
-
-            if (!camas.Any())
-            {
-                return NotFound("No se ha encontrado ninguna cama con esta ubicación.");
-            }
-
-            var camasDTO = _mapper.Map<IEnumerable<CamaDTO>>(camas);
-            return Ok(camasDTO);
-        }
-
         // POST: api/Camas
         [HttpPost]
-        public async Task<ActionResult<CamaDTO>> AddCama(CamaDTO camaDTO)
+        public async Task<ActionResult<CamaDTO>> AddCama(CamaDTO camaDTO, int idHabitacion)
         {
-            if (await _context.Camas.AnyAsync(c => c.Ubicacion == camaDTO.Ubicacion))
-            {
-                return Conflict("La ubicación de la cama ya está en uso.");
-            }
-
             var cama = _mapper.Map<Cama>(camaDTO);
 
-            _context.Camas.Add(cama);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _camaService.CrearCamaAsync(cama, idHabitacion);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
-            return CreatedAtAction(nameof(GetCamaByUbicacion), new { ubicacion = cama.Ubicacion }, camaDTO);
+            return CreatedAtAction(nameof(GetCama), new { id = cama.Ubicacion }, camaDTO);
         }
 
         // PUT: api/Camas/{ubicacion}
         [HttpPut("{ubicacion}")]
-        public async Task<IActionResult> EditCamaByUbicacion(string ubicacion, CamaDTO camaDTO)
-        {
-            if (ubicacion != camaDTO.Ubicacion)
+            public async Task<IActionResult> EditCamaByUbicacion(string ubicacion, CamaDTO camaDTO)
             {
-                return BadRequest("La ubicación de la cama proporcionada no coincide con la ubicación en la solicitud.");
-            }
+                if (ubicacion != camaDTO.Ubicacion)
+                {
+                    return BadRequest("La ubicación de la cama proporcionada no coincide con la ubicación en la solicitud.");
+                }
 
-            var camaExistente = await _context.Camas.FindAsync(ubicacion);
+                var camaExistente = await _context.Camas.FindAsync(ubicacion);
 
-            if (camaExistente == null)
-            {
-                return NotFound("No se encontró la cama especificada.");
-            }
-
-            _mapper.Map(camaDTO, camaExistente);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CamaExists(ubicacion))
+                if (camaExistente == null)
                 {
                     return NotFound("No se encontró la cama especificada.");
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
-        }
+                _mapper.Map(camaDTO, camaExistente);
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CamaExists(ubicacion))
+                    {
+                        return NotFound("No se encontró la cama especificada.");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return NoContent();
+            }
 
         // DELETE: api/Camas/{ubicacion}
         [HttpDelete("{ubicacion}")]

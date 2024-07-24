@@ -45,35 +45,91 @@ namespace HospitalApi.Controllers
 
         // POST: api/Asignaciones
         [HttpPost]
-        public async Task<ActionResult<AsignacionDTO>> PostAsignacion(AsignacionDTO asignacionDTO)
+        public async Task<ActionResult<AsignacionDTO>> AddAsignacion(AsignacionDTO asignacionDTO)
         {
-            var asignacion = _mapper.Map<Asignacion>(asignacionDTO);
+            // Verificar que el paciente existe
+            var pacienteExistente = await _context.Pacientes
+                .FindAsync(asignacionDTO.IdPaciente);
 
+            if (pacienteExistente == null)
+            {
+                return NotFound("No se ha encontrado ningún paciente con el ID proporcionado.");
+            }
+
+            // Verificar que la ubicación (cama) existe
+            var ubicacionExistente = await _context.Camas
+                .FindAsync(asignacionDTO.Ubicacion);
+
+            if (ubicacionExistente == null)
+            {
+                return NotFound("No se ha encontrado ninguna ubicación (cama) con el ID proporcionado.");
+            }
+
+            // Verificar que el usuario que asigna existe
+            var usuarioExistente = await _context.Usuarios
+                .FindAsync(asignacionDTO.AsignadoPor);
+
+            if (usuarioExistente == null)
+            {
+                return NotFound("No se ha encontrado ningún usuario con el ID proporcionado.");
+            }
+
+            // Crear la nueva asignación
+            var asignacion = _mapper.Map<Asignacion>(asignacionDTO);
             _context.Asignaciones.Add(asignacion);
             await _context.SaveChangesAsync();
 
             asignacionDTO.IdAsignacion = asignacion.IdAsignacion;
-            return CreatedAtAction("GetAsignacion", new { id = asignacionDTO.IdAsignacion }, asignacionDTO);
+            return CreatedAtAction(nameof(GetAsignacion), new { id = asignacionDTO.IdAsignacion }, asignacionDTO);
         }
 
         // PUT: api/Asignaciones/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsignacion(int id, AsignacionDTO asignacionDTO)
+        public async Task<IActionResult> UpdateAsignacion(int id, AsignacionDTO asignacionDTO)
         {
             if (id != asignacionDTO.IdAsignacion)
             {
-                return BadRequest();
+                return BadRequest("El ID de la asignación proporcionado no coincide con el ID en la solicitud.");
             }
 
-            var asignacion = await _context.Asignaciones.FindAsync(id);
-            if (asignacion == null)
+            // Verificar que el paciente existe
+            var pacienteExistente = await _context.Pacientes
+                .FindAsync(asignacionDTO.IdPaciente);
+
+            if (pacienteExistente == null)
             {
-                return NotFound();
+                return NotFound("No se ha encontrado ningún paciente con el ID proporcionado.");
             }
 
-            _mapper.Map(asignacionDTO, asignacion);
+            // Verificar que la ubicación (cama) existe
+            var ubicacionExistente = await _context.Camas
+                .FindAsync(asignacionDTO.Ubicacion);
 
-            _context.Entry(asignacion).State = EntityState.Modified;
+            if (ubicacionExistente == null)
+            {
+                return NotFound("No se ha encontrado ninguna ubicación (cama) con el ID proporcionado.");
+            }
+
+            // Verificar que el usuario que asigna existe
+            var usuarioExistente = await _context.Usuarios
+                .FindAsync(asignacionDTO.AsignadoPor);
+
+            if (usuarioExistente == null)
+            {
+                return NotFound("No se ha encontrado ningún usuario con el ID proporcionado.");
+            }
+
+            // Verificar que la asignación a actualizar existe
+            var asignacionExistente = await _context.Asignaciones
+                .FindAsync(id);
+
+            if (asignacionExistente == null)
+            {
+                return NotFound("No se ha encontrado ninguna asignación con el ID proporcionado.");
+            }
+
+            // Mapear los cambios al objeto existente
+            _mapper.Map(asignacionDTO, asignacionExistente);
 
             try
             {
@@ -83,7 +139,7 @@ namespace HospitalApi.Controllers
             {
                 if (!AsignacionExists(id))
                 {
-                    return NotFound();
+                    return NotFound("No se ha encontrado ninguna asignación con el ID proporcionado.");
                 }
                 else
                 {

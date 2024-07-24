@@ -23,7 +23,7 @@ namespace HospitalApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<HistorialAltaDTO>>> GetHistorialAltas()
         {
-            var historialAltas = await _context.HistorialAlta.ToListAsync();
+            var historialAltas = await _context.HistorialesAltas.ToListAsync();
             var historialAltasDTO = _mapper.Map<IEnumerable<HistorialAltaDTO>>(historialAltas);
             return Ok(historialAltasDTO);
         }
@@ -32,7 +32,7 @@ namespace HospitalApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<HistorialAltaDTO>> GetHistorialAlta(int id)
         {
-            var historialAlta = await _context.HistorialAlta.FindAsync(id);
+            var historialAlta = await _context.HistorialesAltas.FindAsync(id);
 
             if (historialAlta == null)
             {
@@ -49,23 +49,23 @@ namespace HospitalApi.Controllers
         {
             var historialAlta = _mapper.Map<HistorialAlta>(historialAltaDTO);
 
-            _context.HistorialAlta.Add(historialAlta);
+            _context.HistorialesAltas.Add(historialAlta);
             await _context.SaveChangesAsync();
 
-            historialAltaDTO.ID_Historial = historialAlta.ID_Historial;
-            return CreatedAtAction("GetHistorialAlta", new { id = historialAltaDTO.ID_Historial }, historialAltaDTO);
+            historialAltaDTO.IdHistorial = historialAlta.IdHistorial;
+            return CreatedAtAction("GetHistorialAlta", new { id = historialAltaDTO.IdHistorial }, historialAltaDTO);
         }
 
         // PUT: api/HistorialAltas/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHistorialAlta(int id, HistorialAltaDTO historialAltaDTO)
         {
-            if (id != historialAltaDTO.ID_Historial)
+            if (id != historialAltaDTO.IdHistorial)
             {
                 return BadRequest();
             }
 
-            var historialAlta = await _context.HistorialAlta.FindAsync(id);
+            var historialAlta = await _context.HistorialesAltas.FindAsync(id);
             if (historialAlta == null)
             {
                 return NotFound();
@@ -98,13 +98,13 @@ namespace HospitalApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHistorialAlta(int id)
         {
-            var historialAlta = await _context.HistorialAlta.FindAsync(id);
+            var historialAlta = await _context.HistorialesAltas.FindAsync(id);
             if (historialAlta == null)
             {
                 return NotFound();
             }
 
-            _context.HistorialAlta.Remove(historialAlta);
+            _context.HistorialesAltas.Remove(historialAlta);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -112,7 +112,7 @@ namespace HospitalApi.Controllers
 
         private bool HistorialAltaExists(int id)
         {
-            return _context.HistorialAlta.Any(e => e.ID_Historial == id);
+            return _context.HistorialesAltas.Any(e => e.IdHistorial == id);
         }
     }
 }

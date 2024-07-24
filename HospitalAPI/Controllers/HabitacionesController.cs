@@ -47,20 +47,20 @@ namespace HospitalApi.Controllers
         [HttpPost]
         public async Task<ActionResult<HabitacionDTO>> PostHabitacion(HabitacionDTO habitacionDTO)
         {
-            var habitacion = _mapper.Map<Habitaciones>(habitacionDTO);
+            var habitacion = _mapper.Map<Habitacion>(habitacionDTO);
 
             _context.Habitaciones.Add(habitacion);
             await _context.SaveChangesAsync();
 
-            habitacionDTO.ID_Habitacion = habitacion.ID_Habitacion;
-            return CreatedAtAction("GetHabitacion", new { id = habitacionDTO.ID_Habitacion }, habitacionDTO);
+            habitacionDTO.IdHabitacion = habitacion.IdHabitacion;
+            return CreatedAtAction("GetHabitacion", new { id = habitacionDTO.IdHabitacion }, habitacionDTO);
         }
 
         // PUT: api/Habitaciones/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHabitacion(int id, HabitacionDTO habitacionDTO)
         {
-            if (id != habitacionDTO.ID_Habitacion)
+            if (id != habitacionDTO.IdHabitacion)
             {
                 return BadRequest();
             }
@@ -112,7 +112,7 @@ namespace HospitalApi.Controllers
 
         private bool HabitacionExists(int id)
         {
-            return _context.Habitaciones.Any(e => e.ID_Habitacion == id);
+            return _context.Habitaciones.Any(e => e.IdHabitacion == id);
         }
     }
 }

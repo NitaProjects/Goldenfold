@@ -23,7 +23,7 @@ namespace HospitalApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AsignacionDTO>>> GetAsignaciones()
         {
-            var asignaciones = await _context.Asignacion.ToListAsync();
+            var asignaciones = await _context.Asignaciones.ToListAsync();
             var asignacionesDTO = _mapper.Map<IEnumerable<AsignacionDTO>>(asignaciones);
             return Ok(asignacionesDTO);
         }
@@ -32,7 +32,7 @@ namespace HospitalApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AsignacionDTO>> GetAsignacion(int id)
         {
-            var asignacion = await _context.Asignacion.FindAsync(id);
+            var asignacion = await _context.Asignaciones.FindAsync(id);
 
             if (asignacion == null)
             {
@@ -49,23 +49,23 @@ namespace HospitalApi.Controllers
         {
             var asignacion = _mapper.Map<Asignacion>(asignacionDTO);
 
-            _context.Asignacion.Add(asignacion);
+            _context.Asignaciones.Add(asignacion);
             await _context.SaveChangesAsync();
 
-            asignacionDTO.ID_Asignacion = asignacion.ID_Asignacion;
-            return CreatedAtAction("GetAsignacion", new { id = asignacionDTO.ID_Asignacion }, asignacionDTO);
+            asignacionDTO.IdAsignacion = asignacion.IdAsignacion;
+            return CreatedAtAction("GetAsignacion", new { id = asignacionDTO.IdAsignacion }, asignacionDTO);
         }
 
         // PUT: api/Asignaciones/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsignacion(int id, AsignacionDTO asignacionDTO)
         {
-            if (id != asignacionDTO.ID_Asignacion)
+            if (id != asignacionDTO.IdAsignacion)
             {
                 return BadRequest();
             }
 
-            var asignacion = await _context.Asignacion.FindAsync(id);
+            var asignacion = await _context.Asignaciones.FindAsync(id);
             if (asignacion == null)
             {
                 return NotFound();
@@ -98,13 +98,13 @@ namespace HospitalApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsignacion(int id)
         {
-            var asignacion = await _context.Asignacion.FindAsync(id);
+            var asignacion = await _context.Asignaciones.FindAsync(id);
             if (asignacion == null)
             {
                 return NotFound();
             }
 
-            _context.Asignacion.Remove(asignacion);
+            _context.Asignaciones.Remove(asignacion);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -112,7 +112,7 @@ namespace HospitalApi.Controllers
 
         private bool AsignacionExists(int id)
         {
-            return _context.Asignacion.Any(e => e.ID_Asignacion == id);
+            return _context.Asignaciones.Any(e => e.IdAsignacion == id);
         }
     }
 }

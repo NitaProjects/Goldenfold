@@ -71,7 +71,7 @@ export interface Usuario {
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:5076/api'; // URL base de la API
+  private apiUrl = 'http://localhost:5076/api'; 
 
   constructor(private http: HttpClient) { }
 
@@ -119,6 +119,7 @@ export class ApiService {
 
   // CRUD para Roles
   getRoles(): Observable<Rol[]> {
+    console.log('Fetching roles from API...');
     return this.http.get<Rol[]>(`${this.apiUrl}/Roles`);
   }
 

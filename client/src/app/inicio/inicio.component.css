@@ -94,9 +94,7 @@ article img {
     transition: transform 0.3s ease, filter 0.3s ease;
 
 }
-.service img:hover {
-    transform: scale(1.05);
-}
+
 
 h3 {
     margin: 10px 0px 10px 0px;

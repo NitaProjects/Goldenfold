@@ -1,0 +1,121 @@
+<div class="register-section" >
+  <h2>Registro de Paciente</h2>
+  <div *ngIf="notificacion" class="notification">{{ notificacion }}</div>
+  <form (ngSubmit)="registerPatient(pacienteForm)" #pacienteForm="ngForm" class="register-form">
+
+    <!-- Nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input
+        type="text"
+        id="nombre"
+        [(ngModel)]="nuevoPaciente.Nombre"
+        name="Nombre"
+        required
+        placeholder="Nombre del paciente"
+        #nombre="ngModel" />
+      <div *ngIf="nombre.invalid && nombre.touched" class="error-message">El nombre es requerido.</div>
+    </div>
+
+    <!-- DNI -->
+    <div class="form-group">
+      <label for="dni">DNI/NIE</label>
+      <input
+        type="text"
+        id="dni"
+        [(ngModel)]="nuevoPaciente.Dni"
+        name="Dni"
+        required
+        placeholder="DNI del paciente"
+        min="0"
+        #dni="ngModel" />
+      <div *ngIf="dni.invalid && dni.touched" class="error-message">Por favor, ingresa un DNI válido.</div>
+    </div>
+
+    <!-- Fecha de Nacimiento -->
+    <div class="form-group">
+      <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+      <input
+        type="date"
+        id="fecha-nacimiento"
+        [(ngModel)]="nuevoPaciente.FechaNacimiento"
+        name="FechaNacimiento"
+        required
+        #fechaNacimiento="ngModel" />
+      <div *ngIf="fechaNacimiento.invalid && fechaNacimiento.touched" class="error-message">La fecha de nacimiento es requerida.</div>
+    </div>
+
+    <!-- Número de Seguridad Social -->
+    <div class="form-group">
+      <label for="seguridad-social">Número de Seguridad Social</label>
+      <input
+        type="text"
+        id="seguridad-social"
+        [(ngModel)]="nuevoPaciente.SeguridadSocial"
+        name="SeguridadSocial"
+        required
+        minlength="12"
+        maxlength="12"
+        placeholder="Número de Seguridad Social"
+        #seguridadSocial="ngModel" />
+      <div *ngIf="seguridadSocial.invalid && seguridadSocial.touched" class="error-message">El número de seguridad social debe tener 12 dígitos.</div>
+    </div>
+
+    <!-- Dirección -->
+    <div class="form-group">
+      <label for="direccion">Dirección</label>
+      <input
+        type="text"
+        id="direccion"
+        [(ngModel)]="nuevoPaciente.Direccion"
+        name="Direccion"
+        required
+        placeholder="Dirección del paciente"
+        #direccion="ngModel" />
+      <div *ngIf="direccion.invalid && direccion.touched" class="error-message">La dirección es requerida.</div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input
+        type="text"
+        id="telefono"
+        [(ngModel)]="nuevoPaciente.Telefono"
+        name="Telefono"
+        required
+        placeholder="Teléfono de contacto"
+        #telefono="ngModel" />
+      <div *ngIf="telefono.invalid && telefono.touched" class="error-message">El teléfono es requerido.</div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="nuevoPaciente.Email"
+        name="Email"
+        required
+        placeholder="Correo electrónico"
+        #email="ngModel" />
+      <div *ngIf="email.invalid && email.touched" class="error-message">El correo electrónico es inválido.</div>
+    </div>
+
+    <!-- Historial Médico -->
+    <div class="form-group">
+      <label for="historial-medico">Historial Médico</label>
+      <textarea
+        id="historial-medico"
+        [(ngModel)]="nuevoPaciente.HistorialMedico"
+        name="HistorialMedico"
+        required
+        placeholder="Historial médico del paciente"
+        #historialMedico="ngModel"></textarea>
+      <div *ngIf="historialMedico.invalid && historialMedico.touched" class="error-message">El historial médico es requerido.</div>
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="pacienteForm.invalid">Registrar Paciente</button>
+  </form>
+</div>

@@ -1,0 +1,22 @@
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <ul>
+      <li><a routerLink="camas" routerLinkActive="active">Camas</a></li>
+      <li><a routerLink="asignaciones" routerLinkActive="active">Asignaciones</a></li>
+      <li><a routerLink="habitaciones" routerLinkActive="active">Habitaciones</a></li>
+      <li><a routerLink="historial-altas" routerLinkActive="active">Historial de Altas</a></li>
+      <li><a routerLink="pacientes" routerLinkActive="active">Pacientes</a></li>
+      <li><a routerLink="roles" routerLinkActive="active">Roles</a></li>
+      <li><a routerLink="usuarios" routerLinkActive="active">Usuarios</a></li>
+      <li><a routerLink="ingresos" routerLinkActive="active">Ingresos</a></li>
+      <li><a routerLink="consultas" routerLinkActive="active">Consultas</a></li>
+
+    </ul>
+  </aside>
+
+  <div class="content">
+
+    <!-- Aquí se cargarán las páginas dinámicas -->
+    <router-outlet></router-outlet>
+  </div>
+</div>

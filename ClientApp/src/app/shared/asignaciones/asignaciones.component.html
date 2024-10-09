@@ -1,0 +1,75 @@
+<div class="asignaciones-section">
+  <h2>Asignaciones</h2>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Asignacion</th>
+          <th>ID Paciente</th>
+          <th>Ubicación</th>
+          <th>Fecha de Asignación</th>
+          <th>Fecha de Liberación</th>
+          <th>Asignado Por</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asignacion of asignaciones">
+          <td>{{ asignacion.IdAsignacion }}</td>
+          <td>{{ asignacion.IdPaciente }}</td>
+          <td>{{ asignacion.IdCama }}</td>
+          <td>{{ asignacion.FechaAsignacion | date:'dd/MM/yyyy HH:mm\'h\'' }}</td>
+          <td>{{ asignacion.FechaLiberacion ? (asignacion.FechaLiberacion | date:'dd/MM/yyyy HH:mm') : 'N/A' }}</td>
+          <td>{{ asignacion.AsignadoPor }}</td>
+          <td>
+            <button (click)="toggleActualizarAsignacion(asignacion)">Actualizar</button>
+            <button (click)="borrarAsignacion(asignacion.IdAsignacion)">Borrar</button>
+          </td>
+        </tr>
+        <tr *ngIf="asignacionParaActualizar">
+          <td colspan="6">
+            <div class="form-container">
+              <h3>Actualizar Asignación</h3>
+              <form (ngSubmit)="actualizarAsignacion()">
+                <label for="idPaciente">ID Paciente:</label>
+                <input type="number" id="idPaciente" [(ngModel)]="asignacionParaActualizar.IdPaciente" name="idPaciente"disabled
+                  required>
+                <label for="idCama">Ubicación:</label>
+                <input type="text" id="idCama" [(ngModel)]="asignacionParaActualizar.IdCama" name="idCama"
+                  required>
+                <label for="fechaAsignacion">Fecha de Asignación:</label>
+                <input type="date" id="fechaAsignacion" [(ngModel)]="asignacionParaActualizar.FechaAsignacion"
+                  name="fechaAsignacion" required>
+                <label for="fechaLiberacion">Fecha de Liberación:</label>
+                <input type="date" id="fechaLiberacion" [(ngModel)]="asignacionParaActualizar.FechaLiberacion"
+                  name="fechaLiberacion">
+                <label for="asignadoPor">Asignado Por:</label>
+                <input type="number" id="asignadoPor" [(ngModel)]="asignacionParaActualizar.AsignadoPor"
+                  name="asignadoPor" required>
+                <button type="submit">Guardar</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-container">
+    <h3>Agregar Asignación</h3>
+    <form (ngSubmit)="agregarAsignacion()">
+      <label for="idPaciente">ID Paciente:</label>
+      <input type="number" id="idPaciente" [(ngModel)]="nuevaAsignacion.IdPaciente" name="idPaciente" required>
+      <label for="idCama">Ubicación:</label>
+      <input type="text" id="idCama" [(ngModel)]="nuevaAsignacion.IdCama" name="idCama" required>
+      <label for="fechaAsignacion">Fecha de Asignación:</label>
+      <input type="date" id="fechaAsignacion" [(ngModel)]="nuevaAsignacion.FechaAsignacion" name="fechaAsignacion"
+        required>
+      <label for="fechaLiberacion">Fecha de Liberación:</label>
+      <input type="date" id="fechaLiberacion" [(ngModel)]="nuevaAsignacion.FechaLiberacion" name="fechaLiberacion">
+      <label for="asignadoPor">Asignado Por:</label>
+      <input type="number" id="asignadoPor" [(ngModel)]="nuevaAsignacion.AsignadoPor" name="asignadoPor" required>
+      <button type="submit">Agregar</button>
+    </form>
+  </div>
+</div>

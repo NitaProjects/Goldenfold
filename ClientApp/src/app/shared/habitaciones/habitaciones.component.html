@@ -1,0 +1,105 @@
+<div class="habitaciones-section">
+  <h2>Habitaciones</h2>
+
+  <!-- Tabla Angular Material -->
+  <div class="table-container">
+    <app-snackbar></app-snackbar>
+    <table mat-table [dataSource]="habitaciones" class="mat-elevation-z8" matSort>
+
+      <!-- Columna Edificio -->
+      <ng-container matColumnDef="Edificio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Edificio</th>
+        <td mat-cell *matCellDef="let habitacion">{{ habitacion.Edificio }}</td>
+      </ng-container>
+
+      <!-- Columna Planta -->
+      <ng-container matColumnDef="Planta">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Planta</th>
+        <td mat-cell *matCellDef="let habitacion">{{ habitacion.Planta }}</td>
+      </ng-container>
+
+      <!-- Columna Número de Habitación -->
+      <ng-container matColumnDef="NumeroHabitacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Número de Habitación</th>
+        <td mat-cell *matCellDef="let habitacion">{{ habitacion.NumeroHabitacion }}</td>
+      </ng-container>
+
+      <!-- Columna Acciones -->
+      <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let habitacion">
+          <button mat-raised-button color="primary" (click)="toggleActualizarHabitacion(habitacion)">
+            Actualizar
+          </button>
+          <button mat-raised-button color="warn" (click)="borrarHabitacion(habitacion.IdHabitacion)">
+            Borrar
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Filas de la tabla -->
+      <tr mat-header-row *matHeaderRowDef="['Edificio', 'Planta', 'NumeroHabitacion', 'Acciones']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Edificio', 'Planta', 'NumeroHabitacion', 'Acciones'];"></tr>
+
+    </table>
+  </div>
+
+  <!-- Formulario para Actualizar Habitación -->
+  <div class="form-container" *ngIf="habitacionParaActualizar">
+    <h3>Actualizar Habitación</h3>
+    <form (ngSubmit)="actualizarHabitacion()">
+      <mat-form-field appearance="outline">
+        <mat-label>Edificio</mat-label>
+        <input matInput [(ngModel)]="habitacionParaActualizar.Edificio" name="edificio" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Planta</mat-label>
+        <input matInput [(ngModel)]="habitacionParaActualizar.Planta" name="planta" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Número de Habitación</mat-label>
+        <input matInput [(ngModel)]="habitacionParaActualizar.NumeroHabitacion" name="numeroHabitacion" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-button type="button" (click)="habitacionParaActualizar = null">Cancelar</button>
+    </form>
+  </div>
+
+  <!-- Formulario para Agregar Habitación -->
+  <mat-card class="form-container">
+    <h3>Agregar Habitación</h3>
+    <form (ngSubmit)="agregarHabitacion()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Edificio</mat-label>
+        <input matInput [(ngModel)]="nuevaHabitacion.Edificio" name="edificio" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Planta</mat-label>
+        <input matInput [(ngModel)]="nuevaHabitacion.Planta" name="planta" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Número de Habitación</mat-label>
+        <input matInput [(ngModel)]="nuevaHabitacion.NumeroHabitacion" name="numeroHabitacion" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tipo de Cama</mat-label>
+        <mat-select [(ngModel)]="nuevaHabitacion.TipoCama" name="tipoCama" required>
+          <mat-option value="General">General</mat-option>
+          <mat-option value="UCI">UCI</mat-option>
+          <mat-option value="Postoperatorio">Postoperatorio</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button color="primary" type="submit">Agregar</button>
+        <button mat-button type="button" (click)="cancelarNuevoHabitacion()">Cancelar</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

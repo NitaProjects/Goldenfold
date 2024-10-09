@@ -1,0 +1,74 @@
+<div class="consultas-section">
+    <h2>Consultas</h2>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Consulta</th>
+            <th>ID Paciente</th>
+            <th>ID Médico</th>
+            <th>Motivo</th>
+            <th>Fecha de Solicitud</th>
+            <th>Fecha de Consulta</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let consulta of consultas">
+            <td>{{ consulta.IdConsulta }}</td>
+            <td>{{ consulta.IdPaciente }}</td>
+            <td>{{ consulta.IdMedico }}</td>
+            <td>{{ consulta.Motivo }}</td>
+            <td>{{ consulta.FechaSolicitud | date:'dd/MM/yyyy HH:mm\'h\'' }}</td>
+            <td>{{ consulta.FechaConsulta ? (consulta.FechaConsulta | date:'dd/MM/yyyy HH:mm\'h\'') : 'Pendiente' }}</td>
+            <td>{{ consulta.Estado }}</td>
+            <td>
+              <button (click)="toggleActualizarConsulta(consulta)">Actualizar</button>
+              <button (click)="borrarConsulta(consulta.IdConsulta)">Borrar</button>
+            </td>
+          </tr>
+          <tr *ngIf="consultaParaActualizar">
+            <td colspan="8">
+              <div class="form-container">
+                <h3>Actualizar Consulta</h3>
+                <form (ngSubmit)="actualizarConsulta()">
+                  <label for="idPaciente">ID Paciente:</label>
+                  <input type="number" id="idPaciente" [(ngModel)]="consultaParaActualizar.IdPaciente" name="idPaciente" disabled>
+                  <label for="idMedico">ID Médico:</label>
+                  <input type="number" id="idMedico" [(ngModel)]="consultaParaActualizar.IdMedico" name="idMedico" required>
+                  <label for="motivo">Motivo:</label>
+                  <input type="text" id="motivo" [(ngModel)]="consultaParaActualizar.Motivo" name="motivo" required>
+                  <label for="fechaSolicitud">Fecha de Solicitud:</label>
+                  <input type="date" id="fechaSolicitud" [(ngModel)]="consultaParaActualizar.FechaSolicitud" name="fechaSolicitud" required>
+                  <label for="fechaConsulta">Fecha de Consulta:</label>
+                  <input type="date" id="fechaConsulta" [(ngModel)]="consultaParaActualizar.FechaConsulta" name="fechaConsulta">
+                  <label for="estado">Estado:</label>
+                  <input type="text" id="estado" [(ngModel)]="consultaParaActualizar.Estado" name="estado" required>
+                  <button type="submit">Guardar</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="form-container">
+      <h3>Agregar Consulta</h3>
+      <form (ngSubmit)="agregarConsulta()">
+        <label for="idPaciente">ID Paciente:</label>
+        <input type="number" id="idPaciente" [(ngModel)]="nuevaConsulta.IdPaciente" name="idPaciente" required>
+        <label for="idMedico">ID Médico:</label>
+        <input type="number" id="idMedico" [(ngModel)]="nuevaConsulta.IdMedico" name="idMedico" required>
+        <label for="motivo">Motivo:</label>
+        <input type="text" id="motivo" [(ngModel)]="nuevaConsulta.Motivo" name="motivo" required>
+        <label for="fechaSolicitud">Fecha de Solicitud:</label>
+        <input type="date" id="fechaSolicitud" [(ngModel)]="nuevaConsulta.FechaSolicitud" name="fechaSolicitud" required>
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" [(ngModel)]="nuevaConsulta.Estado" name="estado" required>
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,255 @@
+[33mcommit 7171d0a031be43d304c506ad9e8cfed85474d861[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Wed Sep 4 09:00:17 2024 +0200
+
+    administrativo funcional
+
+[33mcommit 4487f02a0dc3e9bef8b3e2e19d30d91b1b7acc89[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Tue Sep 3 13:05:58 2024 +0200
+
+    retocado usuarioscontroller + usuarioDTO
+
+[33mcommit 9131375f4a335a04802349bb87a7e6d0f91cbe11[m
+Merge: b914a38 bb37bdb
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Tue Sep 3 11:55:41 2024 +0200
+
+    hay que arreglar todos los controladores con las nuevas indicaciones
+
+[33mcommit b914a38533d79c0038121785c388d32d438c3118[m
+Merge: 778f84d 410427d
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Tue Sep 3 11:54:55 2024 +0200
+
+    hay que arreglar todos los controladores con las nuevas indicaciones
+
+[33mcommit bb37bdbfb476c9f31cbdb9d5a337a27d42d993ea[m
+Author: Maria <mini.mar@hotmail.com>
+Date:   Mon Sep 2 11:47:38 2024 +0200
+
+    adding jwt settings appsettings.json
+
+[33mcommit 372b5c312ac93f2686567aa4bb715d072f7cb89f[m
+Author: Maria <mini.mar@hotmail.com>
+Date:   Mon Sep 2 10:43:56 2024 +0200
+
+    adding login model
+
+[33mcommit 410427d8b3bb207ae094f6bafd9c3c9b08bd3a03[m
+Author: Ashe7Amat <amatashenafi7@gmail.com>
+Date:   Wed Jul 31 12:09:02 2024 +0200
+
+    Paginado y Orden de listas
+
+[33mcommit 778f84dcb648ebdff4245031f2fc2745589f0895[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Wed Jul 31 10:49:39 2024 +0200
+
+    empezaré a probar de separar los services de la app
+
+[33mcommit 014b4f676a89994a66a475953c2e63aeaff5c0b0[m
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Tue Jul 30 13:00:05 2024 +0200
+
+    presentacion sprint
+
+[33mcommit 89e8e6c533089cd4242b7a67509ebc650eefb73e[m
+Merge: 2bd5f26 a32b69b
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Tue Jul 30 12:12:37 2024 +0200
+
+    rolescontroller completado y comentado 2
+
+[33mcommit 2bd5f26bd1e71b068eac76c2db9116e867956970[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Tue Jul 30 12:05:49 2024 +0200
+
+    rolescontroller completado y comentado
+
+[33mcommit a32b69b4098bbd81a5c6807aece1931d83c73873[m
+Merge: c3c90bb 24b96cc
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Tue Jul 30 12:05:36 2024 +0200
+
+    Merge branch 'main' of https://github.com/alexgpareja/Goldenfold
+
+[33mcommit c3c90bb552d88eb278c2f23ab5c1f40e1c70636d[m
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Tue Jul 30 12:05:24 2024 +0200
+
+    todos las tablas listas
+
+[33mcommit 24b96ccf1c44f4b1ef97a9cf68a1461ce339a83a[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Tue Jul 30 09:50:42 2024 +0200
+
+    usuariosController completado y comentado
+
+[33mcommit 53063faab1799843a368cc814bff7bd1c097ff73[m
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Tue Jul 30 01:35:30 2024 +0200
+
+    todo funcional, pre sprint
+
+[33mcommit ffbfbfb257a6ea04eb3fd6e967040bdbfba6709b[m
+Merge: c47015d db0b737
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Mon Jul 29 13:55:41 2024 +0200
+
+    Merge branch 'main' of https://github.com/alexgpareja/Goldenfold
+
+[33mcommit c47015dea510695d602e7beb4675729a9904b48c[m
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Mon Jul 29 13:55:30 2024 +0200
+
+    CRUD camas
+
+[33mcommit db0b7379d3040005cd424a6ddef044394021be70[m
+Merge: c8c00d2 cf39cba
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Mon Jul 29 12:02:48 2024 +0200
+
+    arreglado cors
+
+[33mcommit c8c00d2173b566a85203514218a31017c429dc17[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Mon Jul 29 12:01:15 2024 +0200
+
+    arreglado cors
+
+[33mcommit cf39cba266ddeda84a7a97b5ebee1e9150ee73ef[m
+Author: Ashe7Amat <amatashenafi7@gmail.com>
+Date:   Mon Jul 29 10:54:49 2024 +0200
+
+    Diseño NavBar
+
+[33mcommit c13f65fc0fac3962d242be98a4d61ff061d6db4e[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Mon Jul 29 10:36:08 2024 +0200
+
+    pre modificar angular pacientes fechas...
+
+[33mcommit 3cebe76321f8c3586ac51363f379c626c89c4a1d[m
+Author: Ashe7Amat <amatashenafi7@gmail.com>
+Date:   Mon Jul 29 09:58:56 2024 +0200
+
+    Detalles Inicio
+
+[33mcommit c80c81ae773d464d1fc0d72aa81bee8786c279a7[m
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Sun Jul 28 23:29:31 2024 +0200
+
+    nombres bd en procceso
+
+[33mcommit 594b2d6f6f41f975d5a26493cb03ded64475df55[m
+Merge: 231834f 3aff4d5
+Author: Ashe7Amat <amatashenafi7@gmail.com>
+Date:   Fri Jul 26 13:19:36 2024 +0200
+
+    Merge branch 'main' of https://github.com/alexgpareja/Goldenfold
+
+[33mcommit 231834f9be7f028407e8cccf4e553be9d805eecc[m
+Author: Ashe7Amat <amatashenafi7@gmail.com>
+Date:   Fri Jul 26 13:19:15 2024 +0200
+
+    minimalista
+
+[33mcommit 3aff4d5c4ae7f0e36166121e22e739c9fbaf607a[m
+Author: Maria <mini.mar@hotmail.com>
+Date:   Fri Jul 26 13:11:43 2024 +0200
+
+    adding authentication controller
+
+[33mcommit 0eb53c9424bc23c5fc1b702bab26530956e185c5[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Fri Jul 26 13:10:58 2024 +0200
+
+    pacientes controller requisitos cumplidos pa crear y modificar
+
+[33mcommit df56b44d58720116091123c24d73df3402ab7981[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Fri Jul 26 12:30:11 2024 +0200
+
+    pacientes controller y camas fuera enums
+
+[33mcommit da75f75646cabe06d1eacba364911610277e4a5d[m
+Merge: 7f50407 42a1634
+Author: Ashe7Amat <amatashenafi7@gmail.com>
+Date:   Fri Jul 26 11:58:23 2024 +0200
+
+    Merge branch 'main' of https://github.com/alexgpareja/Goldenfold
+
+[33mcommit 7f504071e4d6bb650c7376e5d758124e497e26c8[m
+Author: Ashe7Amat <amatashenafi7@gmail.com>
+Date:   Fri Jul 26 11:57:47 2024 +0200
+
+    Pagina Inicio Imagenes
+
+[33mcommit 42a1634764d657dc0a92130424c7841dbadc2d12[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Fri Jul 26 10:42:23 2024 +0200
+
+    usuarioscontroller no pide id al crear. Funciona perfe
+
+[33mcommit add21c2d67e8065e1ea656995b74c97e47e5ef35[m
+Merge: 8bf9459 af48141
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Fri Jul 26 09:42:11 2024 +0200
+
+    rolescontroller sobreescribir 2
+
+[33mcommit 8bf94597d5d9736bedf1a0bc60baefe6ceae8d89[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Fri Jul 26 09:39:09 2024 +0200
+
+    rolescontroller sobreescribir 2
+
+[33mcommit 48c933f716c8129c3429bd79378e4ca0c89ba4b6[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Fri Jul 26 09:35:44 2024 +0200
+
+    rolescontroller sobreescribir
+
+[33mcommit af48141b5ebe58c16efeb4b4d019d42fb1eb5634[m
+Author: Maria <mini.mar@hotmail.com>
+Date:   Fri Jul 26 09:33:49 2024 +0200
+
+    chaning rol table name to map it
+
+[33mcommit 2b258b02e65fdadd80d98c6008864bb6d4e5143e[m
+Merge: ba5d126 053719d
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Fri Jul 26 09:27:28 2024 +0200
+
+    quitado enum, cambio a string roles
+
+[33mcommit ba5d126d2070d33b8ee7ab054124e84329744983[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Fri Jul 26 09:21:18 2024 +0200
+
+    quitado enum, cambio a string roles
+
+[33mcommit 053719dc872c7b4b22137d66036e4b2d90204d03[m
+Author: Maria <mini.mar@hotmail.com>
+Date:   Fri Jul 26 09:17:51 2024 +0200
+
+    removing extensions folder
+
+[33mcommit 7e609e6f7d21a96266db4cdf04508270e389cdf8[m
+Author: Maria <mini.mar@hotmail.com>
+Date:   Fri Jul 26 09:16:44 2024 +0200
+
+    connecting bd and adding annotations to map tables and columns
+
+[33mcommit fe5a592479db63e2fb4317b75b262f3089df16ea[m
+Author: Daniel Nita <daniel.nita@hotmail.com>
+Date:   Thu Jul 25 18:13:03 2024 +0200
+
+    substitucion carpeta src
+
+[33mcommit 55f218b0a8318287a6e8394dd9b0f7dc5490dace[m
+Author: Alex Gil <alexgpareja@icloud.com>
+Date:   Thu Jul 25 13:02:39 2024 +0200
+
+    Agregar archivos de proyecto.

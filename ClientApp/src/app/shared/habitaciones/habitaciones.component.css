@@ -1,0 +1,175 @@
+/* Estilo general de la sección de habitaciones */
+.habitaciones-section {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+/* Estilo para el título principal */
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Estilo del contenedor de la tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+  background-color: #f3f0f0;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(8, 8, 8, 0.1);
+}
+
+/* Estilo de la tabla */
+.mat-elevation-z8 {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table th,
+.table td {
+  padding: 8px 12px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mat-header-cell {
+  background-color: #0078d4;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.mat-cell {
+  background-color: white;
+  font-size: 14px;
+}
+
+.mat-cell button {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.mat-cell button:hover {
+  background-color: #066fdf;
+  color: #e0e0e0;
+  transition: 0.3s;
+}
+
+/* Estilo del formulario de agregar y actualizar */
+.form-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de los grupos del formulario */
+.form-container h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.mat-form-field .mat-input-element {
+  font-size: 14px;
+}
+
+/* Botones */
+.form-container button {
+  width: auto;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+}
+
+.form-container button.mat-button {
+  background-color: #007bff;
+  color: white;
+  margin-right: 10px;
+}
+
+.form-container button.mat-button:hover {
+  background-color: #0a4c93;
+}
+
+.form-container button.mat-raised-button {
+  background-color: #28a745;
+}
+
+.form-container button:hover {
+  background-color: #218838;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 15px;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    font-size: 12px;
+  }
+
+  .form-container button {
+    font-size: 14px;
+  }
+}
+
+/* Estilo de la paginación */
+.mat-paginator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 5px;
+}
+
+.mat-paginator button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: #f0f0f0;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.mat-paginator button:disabled {
+  cursor: not-allowed;
+  background-color: #e0e0e0;
+  color: #999;
+}
+
+.mat-paginator button:not(:disabled):hover {
+  background-color: #0a4c93;
+  color: #fff;
+}
+
+.mat-paginator-range-label {
+  font-size: 12px;
+  color: #333;
+}

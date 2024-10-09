@@ -1,0 +1,123 @@
+body {
+  font-family: "Nunito Sans";
+}
+
+.header {
+  position: relative;
+  background-image: url("../../assets/images/cover2.jpg"); /* Ruta ajustada */
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.header h1 {
+  font-size: 2.9rem;
+  margin: 0;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding-bottom: 10px;
+}
+
+.row {
+  padding-bottom: 40px;
+}
+.header h2 {
+  font-size: 1.3rem;
+  padding-left: 25rem;
+  position: relative;
+  z-index: 2;
+  font-weight: 700;
+}
+
+.services-container {
+  width: 950px;
+  height: 300px;
+  flex-shrink: 0;
+  position: relative;
+  top: -50px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 7px;
+  z-index: 3;
+}
+
+.services {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+article h4 {
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+article img {
+  display: flex;
+  width: 280px;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+h3 {
+  margin: 10px 0px 10px 0px;
+  color: #000;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.service-image {
+  width: 250px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.service.habitaciones .service-image {
+  background-image: url("../../assets/images/habitaciones.jpg");
+}
+
+.service.camas .service-image {
+  background-image: url("../../assets/images/camas.jpg");
+}
+
+.service.pacientes .service-image {
+  background-image: url("../../assets/images/pacientes.jpg");
+}

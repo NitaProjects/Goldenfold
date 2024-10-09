@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>{{ data.IdPaciente ? 'Actualizar Paciente' : 'Agregar Paciente' }}</h2>
+<mat-dialog-content>
+  <form (ngSubmit)="guardar()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="data.Nombre" name="Nombre" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>DNI</mat-label>
+      <input matInput [(ngModel)]="data.Dni" name="Dni" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput [(ngModel)]="data.FechaNacimiento" name="FechaNacimiento" type="date" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Seguridad Social</mat-label>
+      <input matInput [(ngModel)]="data.SeguridadSocial" name="SeguridadSocial" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Dirección</mat-label>
+      <input matInput [(ngModel)]="data.Direccion" name="Direccion" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Teléfono</mat-label>
+      <input matInput [(ngModel)]="data.Telefono" name="Telefono" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="data.Email" name="Email" type="email" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Historial Médico</mat-label>
+      <textarea matInput [(ngModel)]="data.HistorialMedico" name="HistorialMedico" required></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardar()">
+    {{ data.IdPaciente ? 'Actualizar' : 'Guardar' }}
+  </button>
+</mat-dialog-actions>

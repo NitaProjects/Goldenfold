@@ -1,0 +1,124 @@
+<div class="ingresos-section">
+    <h2>Ingresos</h2>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Ingreso</th>
+            <th>ID Paciente</th>
+            <th>ID Médico</th>
+            <th>Motivo de Ingreso</th>
+            <th>Fecha de Solicitud</th>
+            <th>Fecha de Ingreso</th>
+            <th>Estado</th>
+            <th>Cama</th>
+             
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ingreso of ingresos">
+            <td>{{ ingreso.IdIngreso }}</td>
+            <td>{{ ingreso.IdPaciente }}</td>
+            <td>{{ ingreso.IdMedico }}</td>
+            <td>{{ ingreso.Motivo }}</td>
+            <td>{{ ingreso.FechaSolicitud | date:'dd/MM/yyyy HH:mm\'h\'' }}</td>
+            <td>{{ ingreso.FechaIngreso | date:'dd/MM/yyyy HH:mm\'h\'' }}</td>
+            <td>{{ ingreso.Estado }}</td>
+            <td>{{ ingreso.TipoCama }}</td>
+            <td>
+              <button (click)="toggleActualizarIngreso(ingreso)">Actualizar</button>
+              <button (click)="borrarIngreso(ingreso.IdIngreso)">Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="form-container" *ngIf="ingresoParaActualizar">
+      <h3>Actualizar Ingreso</h3>
+      <form [formGroup]="ingresoForm"  (ngSubmit)="actualizarIngreso()">
+        <label for="idPaciente">Paciente:</label>
+        <select formControlName="IdPaciente" required>
+          <option *ngFor="let paciente of pacientes" [value]="paciente.IdPaciente">{{paciente.Nombre}}</option>
+        </select>
+        <div *ngIf="ingresoForm.get('IdPaciente')?.invalid && ingresoForm.get('IdPaciente')?.touched">
+          <small *ngIf="ingresoForm.get('IdPaciente')?.hasError('required')">Selecciona un paciente</small>
+        </div>
+        <label for="idMedico">Médico:</label>
+        <select formControlName="IdMedico" required>
+            <option *ngFor="let medico of medicos"  [value]="medico.IdUsuario">{{medico.Nombre}}</option>
+        </select>
+        <div *ngIf="ingresoForm.get('IdMedico')?.invalid&&ingresoForm.get('IdMedico')?.touched">
+          <small *ngIf="ingresoForm.get('IdMedico')?.hasError('required')">Selecciona un médico</small>
+        </div>
+        <label for="motivo">Motivo de Ingreso:</label>
+        <input type="text" id="motivo" formControlName="Motivo" name="motivo" required>
+        <div *ngIf="ingresoForm.get('Motivo')?.invalid&&ingresoForm.get('Motivo')?.touched">
+          <small *ngIf="ingresoForm.get('Motivo')?.hasError('whitespace')">El motivo no puede estar en blanco</small>
+        </div>
+        <label for="estado">Estado:</label>
+        <select formControlName="Estado" required>
+            <option *ngFor="let estado of estados" [value]="estado.label">{{estado.label}}</option>
+        </select>
+        <div *ngIf="ingresoForm.get('Estado')?.invalid&&ingresoForm.get('Estado')?.touched">
+          <small *ngIf="ingresoForm.get('Estado')?.getError('required')">Selecciona un estado</small>
+        </div>
+        <label for="tipoCama">Tipo cama:</label>
+        <select formControlName="TipoCama" required>
+            <option *ngFor="let tipo of tipos" [value]="tipo.label">{{tipo.label}}</option>
+        </select>
+        <div *ngIf="ingresoForm.get('TipoCama')?.invalid&&ingresoForm.get('TipoCama')?.touched">
+            <small *ngIf="ingresoForm.get('TipoCama')?.invalid&&ingresoForm.get('TipoCama')?.touched">Selecciona el tipo de cama</small>
+        </div>
+        <div>
+          <button type="submit" [disabled]="ingresoForm.invalid">Actualizar</button>
+          <button type="button" (click)="cancelarActualizarIngreso()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  
+    <div class="form-container" *ngIf="!ingresoParaActualizar">
+      <h3>Agregar Ingreso</h3>
+      <form [formGroup]="ingresoForm"  (ngSubmit)="agregarIngreso()">
+        <label for="idPaciente">Paciente:</label>
+        <select formControlName="IdPaciente" required>
+          <option *ngFor="let paciente of pacientes" [value]="paciente.IdPaciente">{{paciente.Nombre}}</option>
+        </select>
+        <div *ngIf="ingresoForm.get('IdPaciente')?.invalid && ingresoForm.get('IdPaciente')?.touched">
+          <small *ngIf="ingresoForm.get('IdPaciente')?.hasError('required')">Selecciona un paciente</small>
+        </div>
+        <label for="idMedico">Médico:</label>
+        <select formControlName="IdMedico" required>
+            <option *ngFor="let medico of medicos"  [value]="medico.IdUsuario">{{medico.Nombre}}</option>
+        </select>
+        <div *ngIf="ingresoForm.get('IdMedico')?.invalid&&ingresoForm.get('IdMedico')?.touched">
+          <small *ngIf="ingresoForm.get('IdMedico')?.hasError('required')">Selecciona un médico</small>
+        </div>
+        <label for="motivo">Motivo de Ingreso:</label>
+        <input type="text" id="motivo" formControlName="Motivo" name="motivo" required>
+        <div *ngIf="ingresoForm.get('Motivo')?.invalid&&ingresoForm.get('Motivo')?.touched">
+          <small *ngIf="ingresoForm.get('Motivo')?.hasError('whitespace')">El motivo no puede estar en blanco</small>
+        </div>
+        <label for="estado">Estado:</label>
+        <select formControlName="Estado" required>
+            <option *ngFor="let estado of estados" [value]="estado.label">{{estado.label}}</option>
+        </select>
+        <div *ngIf="ingresoForm.get('Estado')?.invalid&&ingresoForm.get('Estado')?.touched">
+          <small *ngIf="ingresoForm.get('Estado')?.getError('required')">Selecciona un estado</small>
+        </div>
+        <label for="tipoCama">Tipo cama:</label>
+        <select formControlName="TipoCama" required>
+            <option *ngFor="let tipo of tipos" [value]="tipo.label">{{tipo.label}}</option>
+        </select>
+        <div *ngIf="ingresoForm.get('TipoCama')?.invalid&&ingresoForm.get('TipoCama')?.touched">
+            <small *ngIf="ingresoForm.get('TipoCama')?.invalid&&ingresoForm.get('TipoCama')?.touched">Selecciona el tipo de cama</small>
+        </div>
+        <div>
+          <button type="submit" [disabled]="ingresoForm.invalid">Agregar</button>
+          <button type="button" (click)="cancelarNuevoIngreso()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

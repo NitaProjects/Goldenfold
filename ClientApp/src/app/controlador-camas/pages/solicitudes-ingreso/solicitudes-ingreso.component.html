@@ -1,0 +1,76 @@
+<div class="solicitudes-ingreso-section">
+  <h2>Solicitudes de Ingreso Pendientes</h2>
+
+  <!-- Mensaje de error si ocurre algún problema -->
+  <div *ngIf="errorMensaje" class="error-message">{{ errorMensaje }}</div>
+
+  <!-- Mostrar las solicitudes de ingreso si existen -->
+  <ng-container *ngIf="solicitudesPendientes.length > 0; else noSolicitudes">
+    <table class="solicitudes-table">
+      <thead>
+        <tr>
+          <th>ID Paciente</th>
+          <th>ID Médico</th>
+          <th>Motivo</th>
+          <th>Fecha de Solicitud</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let solicitud of solicitudesPendientes">
+          <td>{{ solicitud.IdPaciente }}</td>
+          <td>{{ solicitud.IdMedico }}</td>
+          <td>{{ solicitud.Motivo }}</td>
+          <td>{{ solicitud.FechaSolicitud | date:'dd/MM/yyyy HH:mm\'h\'' }}</td>
+          <td>{{ solicitud.Estado }}</td>
+          <td>
+            <!-- Botón para asignar cama -->
+            <button (click)="addAsignacion(solicitud)">Asignar Cama</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <!-- Mensaje si no hay solicitudes pendientes -->
+  <ng-template #noSolicitudes>
+    <p></p>
+  </ng-template>
+
+  <!-- Opciones de acciones para la solicitud seleccionada -->
+  <div *ngIf="solicitudSeleccionada">
+    <h3>Acciones para la solicitud de ingreso del paciente: {{ solicitudSeleccionada.IdPaciente }}</h3>
+    
+    <!-- Botones para "Rechazar" o "Seleccionar Cama" -->
+    <!--<button (click)="mostrarFormulario('alta')">Dar de Alta</button> -->
+    <button (click)="mostrarFormulario('seleccionarCama')">Seleccionar Cama</button>
+
+    <!-- Formulario para "Dar de Alta" -->
+    <div *ngIf="formularioSeleccionado === 'alta'">
+      <h4>Formulario de Alta</h4>
+      <form (ngSubmit)="darDeAlta()">
+        <label for="diagnostico">Diagnóstico:</label>
+        <input id="diagnostico" [(ngModel)]="diagnostico" name="diagnostico" required />
+
+        <label for="tratamiento">Tratamiento:</label>
+        <input id="tratamiento" [(ngModel)]="tratamiento" name="tratamiento" required />
+
+        <button type="submit">Confirmar Alta</button>
+      </form>
+    </div>
+
+    <!-- Formulario para seleccionar cama -->
+    <div *ngIf="formularioSeleccionado === 'seleccionarCama'">
+      <h4>Formulario de Selección de Cama</h4>
+      <form (ngSubmit)="confirmarCama()">
+        <label for="cama">Seleccionar Cama Disponible:</label>
+        <select id="cama" [(ngModel)]="camaSeleccionada" name="cama" required>
+          <option *ngFor="let cama of camasDisponibles" [value]="cama.IdCama">{{ cama.Ubicacion }} ({{ cama.Tipo }})</option>
+        </select>
+        
+        <button type="submit">Confirmar Cama</button>
+      </form>
+    </div>
+  </div>
+</div>

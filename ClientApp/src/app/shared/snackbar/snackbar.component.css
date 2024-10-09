@@ -1,0 +1,66 @@
+.snackbar {
+  position: fixed;
+  top: 20px; /* Posición en la parte superior derecha */
+  right: 20px; /* A la derecha */
+  padding: 6px 12px; /* Reducción del padding alrededor del texto */
+  color: #ffffff; /* Color del texto en blanco */
+  border-radius: 4px; /* Esquinas menos redondeadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más ligera */
+  min-width: 220px; /* Ancho mínimo ajustado */
+  max-width: 300px; /* Ancho máximo ajustado */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+  font-size: 14px; /* Tamaño de fuente */
+  font-weight: 500; /* Peso de la fuente normal */
+  letter-spacing: 0.2px; /* Espaciado entre letras más sutil */
+  display: flex; /* Flexbox para el alineamiento */
+  align-items: center; /* Alinear verticalmente */
+  z-index: 1000; /* Asegurarse de que esté encima de otros elementos */
+  transition: all 0.3s ease-in-out; /* Transición suave para cualquier cambio */
+  animation: slide-in 0.5s ease forwards; /* Animación al aparecer */
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%); /* Empieza fuera de la pantalla a la derecha */
+    opacity: 0; /* Invisible al inicio */
+  }
+  100% {
+    transform: translateX(0); /* Llega a su posición final */
+    opacity: 1; /* Se vuelve completamente visible */
+  }
+}
+
+.snackbar.hide {
+  animation: slide-out 0.5s ease forwards; /* Animación al salir */
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0); /* Posición final */
+    opacity: 1; /* Visible al inicio */
+  }
+  100% {
+    transform: translateX(100%); /* Sale hacia la derecha */
+    opacity: 0; /* Invisible al final */
+  }
+}
+
+.snackbar mat-icon {
+  margin-right: 6px; /* Espaciado entre el ícono y el texto reducido */
+  font-size: 20px; /* Tamaño del ícono */
+}
+
+.snackbar.success {
+  background-color: #66bb6a; /* Verde más suave para éxito */
+  border-left: 6px solid #388e3c; /* Barra lateral verde */
+}
+
+.snackbar.error {
+  background-color: #ef5350; /* Rojo más suave para error */
+  border-left: 6px solid #c62828; /* Barra lateral roja */
+}
+
+.snackbar.alert {
+  background-color: #ffb300; /* Naranja más suave para advertencia */
+  border-left: 6px solid #f57c00; /* Barra lateral naranja */
+}

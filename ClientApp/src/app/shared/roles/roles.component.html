@@ -1,0 +1,106 @@
+<div class="roles-section">
+  <h2>Roles</h2>
+  <app-search-box [searchOptions]="[
+      { label: 'Nombre', value: 'nombreRol' },
+      { label: 'ID', value: 'id' }
+    ]" [defaultSearchType]="'nombreRol'" placeholder="Escribe para buscar..." (search)="filtrarRoles($event)">
+  </app-search-box>
+ 
+  <!-- Tabla de Angular Material -->
+  <div class="table-container">
+    <table mat-table [dataSource]="roles" matSort class="mat-elevation-z8">
+ 
+      <!-- Columna ID -->
+      <ng-container matColumnDef="IdRol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Rol</th>
+        <td mat-cell *matCellDef="let rol">{{ rol.IdRol }}</td>
+      </ng-container>
+ 
+      <!-- Columna Nombre -->
+      <ng-container matColumnDef="NombreRol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Rol</th>
+        <td mat-cell *matCellDef="let rol">{{ rol.NombreRol }}</td>
+      </ng-container>
+ 
+      <!-- Columna Acciones -->
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let rol">
+          <button mat-button (click)="onEdit(rol)">Actualizar</button>
+          <button mat-button color="warn" (click)="onDelete(rol)">Eliminar</button>
+        </td>
+      </ng-container>
+ 
+      <!-- Header de la tabla -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- Filas de la tabla -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+ 
+    <!-- Paginación -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  </div>
+ 
+  <!-- Formulario de Actualizar Rol -->
+  <mat-card *ngIf="rolParaActualizar">
+    <h3>Actualizar Rol</h3>
+    <form [formGroup]="actualizarRolForm">
+ 
+      <!-- Campo ID del Rol (no editable) -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Id Rol</mat-label>
+        <input matInput formControlName="IdRol" IdRol.disabled />
+      </mat-form-field>
+ 
+      <!-- Campo Nombre del Rol (editable) -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre del Rol</mat-label>
+        <input matInput formControlName="NombreRol" />
+        <mat-error *ngIf="actualizarRolForm.get('NombreRol')?.hasError('whitespace')">
+          El campo no puede estar vacío o contener solo espacios.
+        </mat-error>
+        <mat-error
+          *ngIf="actualizarRolForm.get('NombreRol')?.hasError('asyncFieldExisting') && actualizarRolForm.get('NombreRol')?.touched">
+          Este rol ya existe.
+        </mat-error>
+      </mat-form-field>
+ 
+      <div>
+        <button mat-raised-button color="primary" type="submit" (click)="actualizarRol()"
+          [disabled]="actualizarRolForm.invalid">
+          Actualizar
+        </button>
+        <button mat-button type="button" (click)="limpiarFormulario()">Cancelar</button>
+      </div>
+    </form>
+  </mat-card>
+ 
+  <!-- Formulario de Agregar Rol -->
+  <mat-card>
+    <h3>Agregar Rol</h3>
+    <form [formGroup]="agregarRolForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre del Rol</mat-label>
+        <input matInput formControlName="NombreRol" />
+        @if (agregarRolForm.get('NombreRol')?.hasError('whitespace')) {
+        <mat-error>El campo no puede estar vacío o contener solo espacios.</mat-error>
+        }
+        @if (agregarRolForm.get('NombreRol')?.hasError('asyncFieldExisting') &&
+        agregarRolForm.get('NombreRol')?.touched)
+        {
+        <mat-error>Este rol ya existe.</mat-error>
+        }
+      </mat-form-field>
+ 
+      <div>
+        <button mat-raised-button color="primary" type="submit" (click)="agregarRol()"
+          [disabled]="agregarRolForm.invalid">
+          Agregar
+        </button>
+        <button mat-button type="button" (click)="limpiarFormulario()">Cancelar</button>
+      </div>
+    </form>
+  </mat-card>
+ 
+</div>
+ 

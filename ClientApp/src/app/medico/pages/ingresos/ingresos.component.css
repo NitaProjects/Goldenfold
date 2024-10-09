@@ -1,0 +1,133 @@
+/* Estilo general de la sección de ingresos */
+.ingresos-section {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+/* Estilo para el título principal */
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #d9534f;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Estilo de la tabla de ingresos */
+.ingresos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+  background-color: rgb(243, 240, 240);
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  table-layout: auto;
+}
+
+.ingresos-table th,
+.ingresos-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ingresos-table th {
+  background-color: #0078d4;
+  color: white;
+  cursor: pointer;
+}
+
+.ingresos-table th:hover {
+  background-color: #0056b3;
+}
+
+.ingresos-table td {
+  background-color: white;
+}
+
+/* Estilo de los botones dentro de la tabla */
+.ingresos-table td button {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.ingresos-table td button:hover {
+  background-color: #218838;
+}
+
+/* Estilo del formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+form label {
+  font-weight: bold;
+  color: #333;
+}
+
+form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Botones de formulario */
+form button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background-color: #218838;
+}
+
+/* Título del formulario de alta */
+h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .ingresos-table th,
+  .ingresos-table td {
+    font-size: 12px;
+  }
+
+  form button {
+    font-size: 14px;
+  }
+}

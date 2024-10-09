@@ -1,0 +1,213 @@
+/* Estilo general de la sección de usuarios */
+.usuarios-section {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+/* Estilo para el título principal */
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+/* Estilo de la caja de búsqueda */
+.search-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-container input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 60%;
+  font-size: 14px;
+}
+
+/* Estilo del contenedor de la tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background-color: rgb(243, 240, 240);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de la tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: auto;
+}
+
+.table th,
+.table td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table th {
+  background-color: #0078d4;
+  color: white;
+  cursor: pointer;
+}
+
+.table th:hover {
+  background-color: #0056b3;
+}
+
+.table td {
+  background-color: rgb(255, 255, 255);
+}
+
+.table td button {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+td button {
+  margin: 2px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+td button:hover {
+  background-color: #066fdf;
+  color: #e0e0e0;
+  transition: 0.3s;
+}
+
+/* Estilo de los botones de mostrar contraseña */
+td .password {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.hidden-text {
+  color: #ccc;
+}
+
+/* Estilo del formulario de agregar y actualizar */
+.form-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de los títulos del formulario */
+.form-container h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Estilo de los inputs y selects del formulario */
+.form-container label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+/* Estilo de los mensajes de error */
+small {
+  color: #d9534f;
+  font-size: 12px;
+}
+/* Estilo de los botones */
+.botones {
+  display: flex;
+  justify-content: space-between;
+}
+
+.botones button {
+  width: 48%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.botones button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.botones button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo del formulario de agregar usuario */
+.form-container button {
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #218838;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 15px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 12px;
+  }
+
+  .form-container button {
+    font-size: 14px;
+  }
+}

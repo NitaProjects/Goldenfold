@@ -1,0 +1,149 @@
+<div class="usuarios-section">
+  <h2>Usuarios</h2>
+  <app-snackbar #snackbar></app-snackbar>
+
+  <!-- Caja de búsqueda -->
+  <app-search-box
+  [searchOptions]="[
+  { label: 'ID Usuario', value: 'IdUsuario' },
+  { label: 'Nombre', value: 'Nombre' },
+  { label: 'Nombre Usuario', value: 'NombreUsuario' },
+  { label: 'ID Rol', value: 'IdRol' }
+]"
+   [defaultSearchType]="'IdUsuario'" placeholder="Escribe para buscar..." (search)="filtrarUsuarios($event)">
+  </app-search-box>
+
+  <!--Tabla Angular Material-->
+  <div class="table-container">
+    <table mat-table [dataSource]="usuarios" matSort class="mat-elevation-z8">
+      <!--Columna ID-->
+      <ng-container matColumnDef="IdUsuario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Usuario</th>
+        <td mat-cell *matCellDef="let usuario">{{ usuario.IdUsuario }}</td>
+      </ng-container>
+
+      <!--Columna Nombre-->
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+        <td mat-cell *matCellDef="let usuario">{{ usuario.Nombre }}</td>
+      </ng-container>
+
+      <!--Columna Nombre Usuario-->
+      <ng-container matColumnDef="NombreUsuario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Usuario</th>
+        <td mat-cell *matCellDef="let usuario">{{ usuario.NombreUsuario }}</td>
+      </ng-container>
+
+      <!--Columna IdRol-->
+      <ng-container matColumnDef="IdRol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Rol</th>
+        <td mat-cell *matCellDef="let usuario">{{ usuario.IdRol }}</td>
+      </ng-container>
+
+      <!--Columna Acciones-->
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+        <td mat-cell *matCellDef="let usuario">
+          <button mat-button (click)="toggleActualizarUsuario(usuario)">Actualizar</button>
+          <button mat-button color="warn" (click)="borrarUsuario(usuario.IdUsuario)">Eliminar</button>
+        </td>
+      </ng-container>
+
+      <!-- Header de la tabla -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+      <!-- Filas de la tabla -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Paginación -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <div class="form-container" *ngIf="usuarioParaActualizar">
+    <h3>Actualizar Usuario</h3>
+    <form [formGroup]="usuarioForm" (ngSubmit)="actualizarUsuario()">
+      <label for="idUsuario">ID Usuario:</label>
+      <input type="number" id="idUsuario" formControlName="IdUsuario" />
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" formControlName="Nombre" />
+      <div *ngIf="usuarioForm.get('Nombre')?.invalid && usuarioForm.get('Nombre')?.touched">
+        <small *ngIf="usuarioForm.get('Nombre')?.hasError('whitespace')">El nombre no puede estar en blanco</small>
+        <br *ngIf="usuarioForm.get('Nombre')?.hasError('whitespace') && usuarioForm.get('Nombre')?.hasError('pattern')">
+        <small *ngIf="usuarioForm.get('Nombre')?.hasError('pattern')">Introduzca el nombre completo</small>
+      </div>
+      <label for="nombreUsuario">Nombre Usuario:</label>
+      <input type="text" id="nombreUsuario" formControlName="NombreUsuario" />
+      <div *ngIf="usuarioForm.get('NombreUsuario')?.invalid">
+        <small
+          *ngIf="usuarioForm.get('NombreUsuario')?.hasError('whitespace')&&usuarioForm.get('NombreUsuario')?.touched">El
+          nombre de usuario no puede estar en blanco</small>
+        <small
+          *ngIf="usuarioForm.get('NombreUsuario')?.hasError('asyncFieldExisting')&&usuarioForm.get('NombreUsuario')?.dirty">El
+          nombre de usuario ya existe</small>
+      </div>
+      <label for="contrasenya">Contraseña:</label>
+      <input type="password" id="contrasenya" formControlName="Contrasenya" />
+      <div *ngIf="usuarioForm.get('Contrasenya')?.invalid&&usuarioForm.get('Contrasenya')?.touched">
+        <small *ngIf="usuarioForm.get('Contrasenya')?.hasError('required')">La contraseña es requerida</small>
+      </div>
+      <label for="idRol">Rol:</label>
+      <select formControlName="IdRol" required>
+        <option *ngFor="let rol of roles" [value]="rol.IdRol">
+          {{ rol.NombreRol }}
+        </option>
+      </select>
+      <div *ngIf="usuarioForm.get('IdRol')?.invalid && usuarioForm.get('IdRol')?.touched">
+        <small *ngIf="usuarioForm.get('IdRol')?.hasError('required')">El rol es requerido</small>
+      </div>
+      <div class="botones">
+        <button type="submit" [disabled]="usuarioForm.invalid">Guardar</button>
+        <button type="button" (click)="cancelarActualizarUsuario()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!--Agregar usuario form-->
+  <mat-card *ngIf="!usuarioParaActualizar">
+    <mat-card-title>Agregar Usuario</mat-card-title>
+    <br/>
+    <form [formGroup]="usuarioForm" (ngSubmit)="agregarUsuario()" >
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre:*</mat-label>
+        <input matInput formControlName="Nombre" />
+        <mat-error *ngIf="usuarioForm.get('Nombre')?.hasError('whitespace')">El nombre no puede estar en
+          blanco</mat-error>
+        <mat-error
+          *ngIf="usuarioForm.get('Nombre')?.hasError('pattern')&&!usuarioForm.get('Nombre')?.hasError('whitespace')">Introduzca
+          el nombre completo</mat-error>
+        <br />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre usuario:*</mat-label>
+        <input matInput formControlName="NombreUsuario" />
+        <mat-error *ngIf="usuarioForm.get('NombreUsuario')?.hasError('whitespace')">El nombre de usuario no puede estar
+          en blanco</mat-error>
+        <mat-error *ngIf="usuarioForm.get('NombreUsuario')?.hasError('asyncFieldExisting')">El de nombre de usuario ya
+          existe</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña:</mat-label>
+        <input matInput formControlName="Contrasenya" type="password" />
+        <mat-error *ngIf="usuarioForm.get('Contrasenya')?.hasError('required')">Introduzca una contraseña</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>ID Rol:</mat-label>
+        <input matInput formControlName="IdRol" />
+        <mat-error *ngIf="usuarioForm.get('IdRol')?.hasError('required')">Introduzca un rol</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid">
+          Agregar
+        </button>
+        <button mat-button type="button" (click)="cancelarNuevoUsuario()">Cancelar</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

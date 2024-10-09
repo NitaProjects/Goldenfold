@@ -1,0 +1,16 @@
+
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <ul>
+      <li><a routerLink="medico-inicio" routerLinkActive="active" title="Página de inicio del médico">Inicio</a></li>
+      <li><a routerLink="buscar-paciente" routerLinkActive="active" title="Buscar pacientes en el sistema">Buscar Paciente</a></li>
+      <li><a routerLink="consultas-programadas" routerLinkActive="active" title="Ver las consultas asignadas al médico">Consultas Programadas</a></li>
+      <li><a routerLink="ingresos" routerLinkActive="active" title="Ver pacientes ingresados">Pacientes ingresados</a></li>
+    </ul>
+  </aside>
+
+  <div class="content">
+    
+    <router-outlet></router-outlet>
+  </div>
+</div>

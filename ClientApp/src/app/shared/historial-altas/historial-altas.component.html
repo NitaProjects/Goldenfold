@@ -1,0 +1,140 @@
+<div class="historial-altas-section">
+  <h2>Historial de Altas</h2>
+
+  <main>
+    <div class="filters-container">
+      <div class="search-container">
+        <label for="searchNumeroSS">NSS:</label>
+        <input placeholder="NSS" name="searchNumeroSS" [(ngModel)]="numSSFiltro" type="text" id="searchNumeroSS" (input)="filtrarPorNumeroSS()">
+      </div>
+      
+      <div class="filter-container">
+        <label for="filterFechaAlta">Fecha Alta:</label>
+        <input type="date" id="filterFechaAlta" [(ngModel)]="fechaAltaFiltro" (change)="filtrarPorFecha()" />
+      </div>
+      
+    </div>
+    
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th (click)="ordenar('IdHistorial')">ID Historial <span *ngIf="columnaOrdenada === 'IdHistorial'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+            <th (click)="ordenar('IdPaciente')">ID Paciente <span *ngIf="columnaOrdenada === 'IdPaciente'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+            <th (click)="ordenar('FechaAlta')">Fecha de Alta <span *ngIf="columnaOrdenada === 'FechaAlta'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+            <th (click)="ordenar('Diagnostico')">Diagnóstico <span *ngIf="columnaOrdenada === 'Diagnostico'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+            <th (click)="ordenar('Tratamiento')">Tratamiento <span *ngIf="columnaOrdenada === 'Tratamiento'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let historial of historialAltas">
+            <td>{{ historial.IdHistorial }}</td>
+            <td>{{ historial.IdPaciente }}</td>
+            <td>{{ historial.FechaAlta | date }}</td>
+            <td>{{ historial.Diagnostico }}</td>
+            <td>{{ historial.Tratamiento }}</td>
+            <td>
+              <button (click)="toggleActualizarHistorialAlta(historial)">Actualizar</button>
+              <button (click)="borrarHistorialAlta(historial.IdHistorial)">Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Formulario para agregar y actualizar -->
+    <div class="form-container" *ngIf="historialAltaParaActualizar">
+      <h3>Actualizar Historial de Alta</h3>
+      <form [formGroup]="historialAltaForm" (ngSubmit)="actualizarHistorialAlta()">
+        <div class="label-container">
+          <label for="idPaciente">ID Paciente </label><span class="required">*</span>
+        </div>
+        <input type="number" id="idPaciente" formControlName="IdPaciente" name="idPaciente" readonly>
+        <span class="error" *ngIf="(historialAltaForm.get('IdPaciente')?.hasError('required')) && historialAltaForm.get('IdPaciente')?.touched">
+          El Id del paciente es obligatorio.
+        </span>
+        <span class="error" *ngIf="historialAltaForm.get('IdPaciente')?.hasError('consultaNotFound') && historialAltaForm.get('IdPaciente')?.touched">
+          El Id del paciente no tiene ninguna consulta asociada.
+        </span>
+        <span class="error" *ngIf="historialAltaForm.get('IdPaciente')?.hasError('patientIdNotFound') && historialAltaForm.get('IdPaciente')?.touched">
+          El Id de paciente no existe.
+        </span>
+        <div class="label-container">
+          <label for="fechaAlta">Fecha alta </label><span class="required">*</span>
+        </div>
+        <input type="date" id="fechaAlta" formControlName="FechaAlta" name="fechaAlta">
+        <span class="error" *ngIf="historialAltaForm.get('FechaAlta')?.hasError('required') && historialAltaForm.get('FechaAlta')?.touched">
+          La fecha de alta es obligatoria.
+        </span>
+        <span class="error" *ngIf="historialAltaForm.get('FechaAlta')?.hasError('fechaInvalida') && historialAltaForm.get('FechaAlta')?.touched">
+          La fecha de alta no puede ser posterior a la fecha de ingreso.
+        </span>
+
+        <div class="label-container">
+          <label for="diagnostico">Diagnóstico </label><span class="required">*</span>
+        </div>
+        <input type="text" id="diagnostico" formControlName="Diagnostico" name="diagnostico">
+        <span class="error" *ngIf="(historialAltaForm.get('Diagnostico')?.hasError('required') || (historialAltaForm.get('Diagnostico')?.hasError('whitespace'))) && historialAltaForm.get('Diagnostico')?.touched">
+          El diagnóstico es obligatorio.
+        </span>
+
+        <div class="label-container">
+          <label for="Tratamiento">Tratamiento </label><span class="required">*</span>
+        </div>
+        <input type="text" id="tratamiento" formControlName="Tratamiento" name="tratamiento">
+        <span class="error" *ngIf="(historialAltaForm.get('Tratamiento')?.hasError('required') || (historialAltaForm.get('Tratamiento')?.hasError('whitespace'))) && historialAltaForm.get('Tratamiento')?.touched">
+          El tratamiento es obligatorio.
+        </span>
+        <button type="submit" [disabled]="historialAltaForm.invalid">Actualizar</button>
+      </form>
+    </div>
+
+    <div class="form-container">
+      <h3>Agregar Historial de Alta</h3>
+      <form [formGroup]="historialAltaForm" (ngSubmit)="agregarHistorialAlta()">
+        <div class="label-container">
+          <label for="idPaciente">ID Paciente </label><span class="required">*</span>
+        </div>
+        <input type="number" id="idPaciente" formControlName="IdPaciente" name="idPaciente">
+        <span class="error" *ngIf="(historialAltaForm.get('IdPaciente')?.hasError('required')) && historialAltaForm.get('IdPaciente')?.touched">
+          El Id del paciente es obligatorio.
+        </span>
+        <span class="error" *ngIf="historialAltaForm.get('IdPaciente')?.hasError('consultaNotFound') && historialAltaForm.get('IdPaciente')?.touched">
+          El Id del paciente no tiene ninguna consulta asociada.
+        </span>
+        <span class="error" *ngIf="historialAltaForm.get('IdPaciente')?.hasError('patientIdNotFound') && historialAltaForm.get('IdPaciente')?.touched">
+          El Id de paciente no existe.
+        </span>
+        <div class="label-container">
+          <label for="fechaAlta">Fecha alta </label><span class="required">*</span>
+        </div>
+        <input type="date" id="fechaAlta" formControlName="FechaAlta" name="fechaAlta">
+        <span class="error" *ngIf="historialAltaForm.get('FechaAlta')?.hasError('required') && historialAltaForm.get('FechaAlta')?.touched">
+          La fecha de alta es obligatoria.
+        </span>
+        <span class="error" *ngIf="historialAltaForm.get('FechaAlta')?.hasError('fechaInvalida') && historialAltaForm.get('FechaAlta')?.touched">
+          La fecha de alta no puede ser posterior a la fecha de ingreso.
+        </span>
+
+        <div class="label-container">
+          <label for="diagnostico">Diagnóstico </label><span class="required">*</span>
+        </div>
+        <input type="text" id="diagnostico" formControlName="Diagnostico" name="diagnostico">
+        <span class="error" *ngIf="(historialAltaForm.get('Diagnostico')?.hasError('required') || (historialAltaForm.get('Diagnostico')?.hasError('whitespace'))) && historialAltaForm.get('Diagnostico')?.touched">
+          El diagnóstico es obligatorio.
+        </span>
+
+        <div class="label-container">
+          <label for="Tratamiento">Tratamiento </label><span class="required">*</span>
+        </div>
+        <input type="text" id="tratamiento" formControlName="Tratamiento" name="tratamiento">
+        <span class="error" *ngIf="(historialAltaForm.get('Tratamiento')?.hasError('required') || (historialAltaForm.get('Tratamiento')?.hasError('whitespace'))) && historialAltaForm.get('Tratamiento')?.touched">
+          El tratamiento es obligatorio.
+        </span>
+        <button type="submit" [disabled]="historialAltaForm.invalid">Agregar</button>
+      </form>
+    </div>
+  </main>
+</div>
+

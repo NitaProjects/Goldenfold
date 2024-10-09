@@ -1,0 +1,13 @@
+<div class="search-container">
+  <form [formGroup]="searchForm">
+    <div class="search-group">
+      <select formControlName="searchType">
+        <option *ngFor="let option of searchOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+
+      <input type="text" formControlName="searchTerm" [placeholder]="placeholder" (input)="onSearch()" />
+    </div>
+  </form>
+</div>

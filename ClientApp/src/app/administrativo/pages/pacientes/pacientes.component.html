@@ -1,0 +1,247 @@
+<div class="pacientes-section">
+  <h2>Pacientes</h2>
+  <app-snackbar #snackbar></app-snackbar>
+  <div *ngIf="notificacion" class="notification">{{ notificacion }}</div>
+
+  <!-- Filtro y botón de agregar paciente -->
+  <div class="filter-container">
+    <input type="text" placeholder="Buscar Nombre/DNI..." [(ngModel)]="filtro" (ngModelChange)="aplicarFiltro($event)">
+
+
+    <button (click)="toggleFormularioAgregar()" class="btn-agregar">
+    Agregar Paciente
+    </button>
+  </div>
+
+  <!-- Tabla de pacientes -->
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th (click)="ordenar('IdPaciente')">ID Paciente <span *ngIf="columnaOrdenada === 'IdPaciente'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+          <th (click)="ordenar('Nombre')">Nombre <span *ngIf="columnaOrdenada === 'Nombre'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+          <th (click)="ordenar('Dni')">DNI <span *ngIf="columnaOrdenada === 'Dni'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+          <th (click)="ordenar('FechaNacimiento')">Fecha de Nacimiento <span *ngIf="columnaOrdenada === 'FechaNacimiento'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+          <th (click)="ordenar('Estado')">Estado <span *ngIf="columnaOrdenada === 'Estado'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+          <th (click)="ordenar('FechaRegistro')">Fecha de Registro <span *ngIf="columnaOrdenada === 'FechaRegistro'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+          <th (click)="ordenar('SeguridadSocial')">Seguridad Social <span *ngIf="columnaOrdenada === 'SeguridadSocial'">{{ orden === 'asc' ? '▲' : '▼' }}</span></th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paciente of pacientesPaginados">
+          <td>{{ paciente.IdPaciente }}</td>
+          <td>{{ paciente.Nombre }}</td>
+          <td>{{ paciente.Dni }}</td>
+          <td>{{ paciente.FechaNacimiento | date:'dd/MM/yyyy' }}</td>
+          <td>{{ paciente.Estado }}</td>
+          <td>{{ paciente.FechaRegistro | date:'dd/MM/yyyy HH:mm\'h\'' }}</td>
+          <td>{{ paciente.SeguridadSocial }}</td>
+          <td>
+            <button (click)="toggleActualizarPaciente(paciente)">Actualizar</button>
+            <button (click)="mostrarDetallesPaciente(paciente)">Ver más</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pop-up para mostrar detalles -->
+  <div *ngIf="pacienteSeleccionado" class="popup-overlay" (click)="cerrarPopup()">
+    <div class="popup" (click)="$event.stopPropagation()">
+      <header class="popup-header">
+        <h2>Detalles del Paciente</h2>
+        <button (click)="cerrarPopup()" class="btn-close" aria-label="Cerrar">&times;</button>
+      </header>
+      <div class="popup-body">
+        <div class="detail-item">
+          <span class="detail-label">ID Paciente:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.IdPaciente }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Nombre:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.Nombre }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">DNI:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.Dni }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Fecha de Nacimiento:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.FechaNacimiento | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Estado:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.Estado }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Fecha de Registro:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.FechaRegistro | date:'dd/MM/yyyy HH:mm\'h\'' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Seguridad Social:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.SeguridadSocial }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Dirección:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.Direccion }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Teléfono:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.Telefono }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Email:</span>
+          <span class="detail-value">{{ pacienteSeleccionado.Email }}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- Navegación de Paginación -->
+<div class="paginacion">
+  <button (click)="irAPrimeraPagina()" [disabled]="paginaActual === 1">Primera</button>
+  <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+
+  <!-- Mostrar la página actual y el total de páginas -->
+  <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+
+  <button (click)="paginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+  <button (click)="irALaUltimaPagina()" [disabled]="paginaActual === totalPaginas">Última</button>
+</div>
+
+ <!-- Formulario de actualización paciente modal -->
+<div class="modal" *ngIf="mostrarFormularioActualizar">
+  <div class="modal-content">
+    <span class="close" (click)="toggleActualizarPaciente(pacienteParaActualizar!)">&times;</span>
+    <h3>Actualizar Paciente</h3>
+
+<form (ngSubmit)="actualizarPaciente()" class="update-form">
+  <div class="form-container">
+    <div class="form-column">
+      <div class="form-group">
+        <label for="idPaciente">ID Paciente:</label>
+        <input type="number" id="idPaciente" [(ngModel)]="pacienteParaActualizar!.IdPaciente" name="idPaciente" disabled>
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="pacienteParaActualizar!.Nombre" name="nombre">
+      </div>
+
+      <div class="form-group">
+        <label for="edad">DNI:</label>
+        <input type="text" id="dni" [(ngModel)]="pacienteParaActualizar!.Dni" name="dni">
+      </div>
+
+      <div class="form-group">
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" [(ngModel)]="pacienteParaActualizar!.FechaNacimiento" name="fechaNacimiento">
+      </div>
+
+      <div class="form-group">
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" [(ngModel)]="pacienteParaActualizar!.Estado" name="estado">
+      </div>
+    </div>
+
+    <div class="form-column">
+      <div class="form-group">
+        <label for="seguridadSocial">Seguridad Social:</label>
+        <input type="text" id="seguridadSocial" [(ngModel)]="pacienteParaActualizar!.SeguridadSocial" name="seguridadSocial">
+      </div>
+
+      <div class="form-group">
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" [(ngModel)]="pacienteParaActualizar!.Direccion" name="direccion">
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" [(ngModel)]="pacienteParaActualizar!.Telefono" name="telefono">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="pacienteParaActualizar!.Email" name="email">
+      </div>
+
+      <div class="form-group">
+        <label for="historialMedico">Historial Médico:</label>
+        <input type="text" id="historialMedico" [(ngModel)]="pacienteParaActualizar!.HistorialMedico" name="historialMedico">
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="submit-btn">Guardar</button>
+
+
+    </form>
+  </div>
+</div>
+
+  <!-- Formulario de agregar paciente desplegable -->
+  <div class="modal" *ngIf="mostrarFormularioAgregar">
+    <div class="modal-content">
+      <span class="close" (click)="toggleFormularioAgregar()">&times;</span>
+      <h2>Registro de Paciente</h2>
+      <form (submit)="registerPatient($event)" class="register-form" #pacienteForm="ngForm">
+        <div class="form-container">
+          <div class="form-column">
+            <div class="form-group">
+              <label for="nombre">Nombre*</label>
+              <input type="text" id="nombre" [(ngModel)]="nuevoPaciente.Nombre" name="Nombre" required placeholder="Nombre del paciente" />
+              <div *ngIf="pacienteForm.submitted && pacienteForm.controls['Nombre']?.invalid" class="error-message">El nombre es requerido.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="edad">DNI*</label>
+              <input type="text" id="dni" [(ngModel)]="nuevoPaciente.Dni" name="Dni" required placeholder="DNI del paciente" min="0" />
+              <div *ngIf="pacienteForm.submitted && pacienteForm.controls['Dni']?.invalid" class="error-message">Por favor, ingresa una edad válida.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="fecha-nacimiento">Fecha de Nacimiento*</label>
+              <input type="date" id="fecha-nacimiento" [(ngModel)]="nuevoPaciente.FechaNacimiento" name="FechaNacimiento" required />
+              <div *ngIf="pacienteForm.submitted && pacienteForm.controls['FechaNacimiento']?.invalid" class="error-message">La fecha de nacimiento es requerida.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="seguridad-social">Número de Seguridad Social*</label>
+              <input type="text" id="seguridad-social" [(ngModel)]="nuevoPaciente.SeguridadSocial" name="SeguridadSocial" required minlength="12" maxlength="12" placeholder="Número de Seguridad Social" />
+              <div *ngIf="pacienteForm.submitted && pacienteForm.controls['SeguridadSocial']?.invalid" class="error-message">El número de seguridad social debe tener 12 dígitos.</div>
+            </div>
+          </div>
+          <div class="form-column">
+            <div class="form-group">
+              <label for="direccion">Dirección</label>
+              <input type="text" id="direccion" [(ngModel)]="nuevoPaciente.Direccion" name="Direccion" required placeholder="Dirección del paciente" />
+              <div *ngIf="pacienteForm.submitted && pacienteForm.controls['Direccion']?.invalid" class="error-message">La dirección es requerida.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="text" id="telefono" [(ngModel)]="nuevoPaciente.Telefono" name="Telefono" required placeholder="Teléfono de contacto" />
+              <div *ngIf="pacienteForm.submitted && pacienteForm.controls['Telefono']?.invalid" class="error-message">El teléfono es requerido.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" [(ngModel)]="nuevoPaciente.Email" name="Email" required placeholder="Correo electrónico" />
+              <div *ngIf="pacienteForm.submitted && pacienteForm.controls['Email']?.invalid" class="error-message">El correo electrónico es inválido.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="historial-medico">Historial Médico</label>
+              <textarea id="historial-medico" [(ngModel)]="nuevoPaciente.HistorialMedico" name="HistorialMedico" required placeholder="Historial médico del paciente"></textarea>
+              <div *ngIf="pacienteForm.submitted && pacienteForm.controls['HistorialMedico']?.invalid" class="error-message">El historial médico es requerido.</div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn">Registrar Paciente</button>
+      </form>
+    </div>
+  </div>
+</div>

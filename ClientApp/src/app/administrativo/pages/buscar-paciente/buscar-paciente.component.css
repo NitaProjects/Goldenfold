@@ -1,0 +1,303 @@
+/* Estilo general de la sección de búsqueda de pacientes */
+.search-section {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+/* Estilo para el título principal */
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Estilo de la caja de búsqueda */
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-form .form-group {
+  width: 60%;
+}
+
+.search-form label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.search-form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Estilo de los botones de búsqueda */
+.search-form .submit-btn {
+  width: 100px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-form .submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #d9534f;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Estilo de los resultados de los pacientes */
+.resultados {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.pacientes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.paciente-info {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: left;
+}
+
+.paciente-info p {
+  margin: 5px 0;
+}
+
+/* Botones de acción en los resultados */
+.paciente-info button {
+  width: 100px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.paciente-info .edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.paciente-info .edit-btn:hover {
+  background-color: #0056b3;
+}
+
+.paciente-info .consulta-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.paciente-info .consulta-btn:hover {
+  background-color: #218838;
+}
+
+/* Estilo del formulario de edición */
+.edit-section {
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-section h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-section .form-group {
+  margin-bottom: 15px;
+}
+
+.edit-section label {
+  font-weight: bold;
+  color: #333;
+}
+
+.edit-section input,
+.edit-section textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Estilo de los botones del formulario de edición */
+.edit-section .update-btn,
+.edit-section .cancel-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.edit-section .update-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.edit-section .update-btn:hover {
+  background-color: #218838;
+}
+
+.edit-section .cancel-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.edit-section .cancel-btn:hover {
+  background-color: #c82333;
+}
+
+/* Estilo del formulario de consulta */
+.consulta-section {
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.consulta-section h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.consulta-section .form-group {
+  margin-bottom: 15px;
+}
+
+.consulta-section label {
+  font-weight: bold;
+  color: #333;
+}
+
+.consulta-section input,
+.consulta-section textarea,
+.consulta-section select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Estilo de los botones del formulario de consulta */
+.consulta-section .submit-btn,
+.consulta-section .cancel-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.consulta-section .submit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.consulta-section .submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.consulta-section .cancel-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.consulta-section .cancel-btn:hover {
+  background-color: #c82333;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .search-form .form-group {
+    width: 90%;
+  }
+
+  .paciente-info {
+    width: 100%;
+  }
+
+  .paciente-info button {
+    width: 100%;
+  }
+}
+
+/* Posiciona el snackbar en la parte superior y centrado */
+.mat-snack-bar-container {
+  top: 20px !important; /* Ajusta la posición desde la parte superior */
+  left: 50% !important; /* Asegura que esté centrado horizontalmente */
+  transform: translateX(-50%) !important; /* Compensa el desplazamiento por el 50% de su ancho */
+  width: auto !important; /* Asegura que el snackbar no ocupe todo el ancho */
+  min-width: 300px !important; /* Ajusta el ancho mínimo del snackbar */
+  max-width: 500px !important; /* Ajusta el ancho máximo del snackbar */
+  text-align: center;
+}
+
+/* Cambia el color del snackbar según el tipo de notificación */
+.snack-bar-success {
+  background-color: #28a745 !important; /* Verde para el éxito */
+  color: white !important;
+}
+
+.snack-bar-error {
+  background-color: #dc3545 !important; /* Rojo para los errores */
+  color: white !important;
+}
+
+.snack-bar-warning {
+  background-color: #ffc107 !important; /* Amarillo para las advertencias */
+  color: black !important;
+}
+
+/* Diseño responsivo para el snackbar */
+@media (max-width: 768px) {
+  .mat-snack-bar-container {
+    max-width: 90% !important; /* Reduce el ancho máximo en pantallas pequeñas */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+}

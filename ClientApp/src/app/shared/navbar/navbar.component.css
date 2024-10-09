@@ -1,0 +1,171 @@
+/* Estilo general del body y los elementos de texto */
+body,
+p,
+h1,
+h2,
+h3,
+span,
+.nav-link {
+    color: #ffffff;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+/* Estilo del navbar y sus elementos */
+.navbar {
+    background-color: #383838;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: white;
+}
+
+/* Estilo del botón de login */
+.nav-item button {
+    border-radius: 5px;
+    background-color: #0078d4;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-item button:hover {
+    transform: scale(1.05);
+    background-color: #0056b3;
+}
+
+/* Estilo para los elementos del navbar cuando están activos o al pasar el mouse */
+.nav-item .nav-link.active,
+.nav-item .nav-link:hover {
+    color: #81e6ff;
+}
+
+.nav-item {
+    cursor: pointer;
+    padding: 0px 10px;
+    border-radius: 5px;
+}
+
+/* Modal de Login */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-dialog {
+    margin: 15vh auto;
+    max-width: 500px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: animatezoom 0.3s;
+}
+
+/* Estilo del modal de login (cabecera, cuerpo y botones) */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.modal-body {
+    padding: 15px;
+}
+
+.modal-body form label {
+    font-weight: bold;
+    color: #0078d4;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal-body form input[type=text],
+.modal-body form input[type=password] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-body form button[type=submit] {
+    width: 100%;
+    background-color: #0078d4;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.modal-body form button[type=submit]:hover {
+    background-color: #0056b3;
+}
+
+.modal-body form .cancelbtn {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 8px 14px;
+    border: solid 1px red;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.modal-body form .cancelbtn:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+    color: white;
+}
+
+/* Animación para el modal */
+@keyframes animatezoom {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Estilo de la marca del navbar */
+.navbar-brand {
+    display: block;
+    width: 130px;
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

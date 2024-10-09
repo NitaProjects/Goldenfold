@@ -1,0 +1,57 @@
+<div class="ingresos-section">
+    <h2>Pacientes Ingresados</h2>
+  
+    <!-- Mensaje de error si ocurre algún problema -->
+    <div *ngIf="errorMensaje" class="error-message">{{ errorMensaje }}</div>
+  
+    <!-- Mostrar los pacientes ingresados -->
+    <ng-container *ngIf="ingresos.length > 0; else noIngresos">
+      <table class="ingresos-table">
+        <thead>
+          <tr>
+            <th>ID Paciente</th>
+            <th>ID Médico</th>
+            <th>Motivo</th>
+            <th>Fecha de Solicitud</th>
+            <th>Estado</th>
+            <th>Fecha de Ingreso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ingreso of ingresos">
+            <td>{{ ingreso.IdPaciente }}</td>
+            <td>{{ ingreso.IdMedico }}</td>
+            <td>{{ ingreso.Motivo }}</td>
+            <td>{{ ingreso.FechaSolicitud | date:'dd/MM/yyyy HH:mm\'h\'' }}</td>
+            <td>{{ ingreso.Estado }}</td>
+            <td>{{ ingreso.FechaIngreso | date:'dd/MM/yyyy HH:mm\'h\'' }}</td>
+            <td>
+              <!-- Botón para dar de alta -->
+              <button (click)="darDeAlta(ingreso)">Dar de Alta</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  
+    <!-- Mensaje si no hay ingresos -->
+    <ng-template #noIngresos>
+      <p></p>
+    </ng-template>
+  
+    <!-- Formulario de alta si un paciente está seleccionado -->
+    <div *ngIf="ingresoSeleccionado">
+      <h3>Dar de Alta al Paciente</h3>
+      <form (ngSubmit)="confirmarAlta()">
+        <label for="diagnostico">Diagnóstico:</label>
+        <input id="diagnostico" [(ngModel)]="diagnostico" name="diagnostico" required />
+  
+        <label for="tratamiento">Tratamiento:</label>
+        <input id="tratamiento" [(ngModel)]="tratamiento" name="tratamiento" required />
+  
+        <button type="submit">Confirmar Alta</button>
+      </form>
+    </div>
+  </div>
+  

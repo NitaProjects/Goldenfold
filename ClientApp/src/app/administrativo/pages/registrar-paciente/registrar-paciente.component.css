@@ -1,0 +1,112 @@
+/* Estilo general de la sección de registro */
+.register-section {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  max-width: 100%; /* Ajusta según el ancho que prefieras */
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Estilo para el título del formulario */
+.register-section h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Estilo para los grupos de formularios */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.form-group input[type="date"] {
+  padding: 8px;
+}
+
+.form-group textarea {
+  height: 100px; /* Ajusta la altura del textarea */
+  resize: vertical; /* Permite cambiar el tamaño verticalmente */
+}
+
+/* Estilo de los mensajes de error */
+.error-message {
+  color: #d9534f;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Estilo del botón de envío */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+  .register-section {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 8px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+  }
+}
+/* Estilo para notificaciones */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #28a745; /* Verde para éxito */
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.notification.hidden {
+  opacity: 0;
+}

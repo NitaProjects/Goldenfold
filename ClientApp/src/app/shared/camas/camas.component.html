@@ -1,0 +1,60 @@
+<div class="camas-section">
+  <h2>Camas</h2>
+  <main>
+    <div class="filters-container">
+      <div class="search-container">
+        <label for="searchUbicacion">Buscar por ubicación:</label>
+        <input placeholder="Ubicación" name="searchUbicacion" type="text" id="searchUbicacion" (input)="filtrarPorUbicacion($event)">
+      </div>
+
+      <div class="filter-container">
+        <label for="filterEstado">Filtrar por estado:</label>
+        <select id="filterEstado" (change)="filtrarPorEstado($event)">
+          <option value="">Todos</option>
+          <option value="Disponible">Disponible</option>
+          <option value="NoDisponible">Ocupada</option>
+        </select>
+
+        <label for="filterTipo">Filtrar por tipo:</label>
+        <select id="filterTipo" (change)="filtrarPorTipo($event)">
+          <option value="">Todos</option>
+          <option value="General">General</option>
+          <option value="UCI">UCI</option>
+          <option value="Postoperatorio">Postoperatorio</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id cama</th>
+            <th>Ubicación</th>
+            <th>Estado</th>
+            <th>Tipo</th>
+            <th>Id Habitacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cama of obtenerCamasParaPagina()">
+            <td>{{ cama.IdCama }}</td>
+            <td>{{ cama.Ubicacion }}</td>
+            <td>{{ cama.Estado }}</td>
+            <td>{{ cama.Tipo }}</td>
+            <td>{{ cama.IdHabitacion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="paginacion">
+      <button (click)="primeraPagina()" [disabled]="paginaActual === 1">Primera</button>
+      <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+      <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+      <button (click)="siguientePagina()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+      <button (click)="ultimaPagina()" [disabled]="paginaActual === totalPaginas">Última</button>
+    </div>
+
+  </main>
+</div>

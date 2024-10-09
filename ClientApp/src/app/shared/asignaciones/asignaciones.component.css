@@ -1,0 +1,145 @@
+/* Estilo general de la sección de asignaciones */
+.asignaciones-section {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+/* Estilo para el título principal */
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Estilo del contenedor de la tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+  background-color: rgb(255, 250, 250);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(8, 8, 8, 0.1);
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+/* Estilo de la tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px; /* Tamaño de texto adecuado */
+  table-layout: auto; /* Permite ajustar el tamaño de las columnas automáticamente */
+}
+
+.table th,
+.table td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table th {
+  background-color: #0078d4;
+  color: white;
+  font-size: 14px;
+}
+
+.table td {
+  background-color: rgb(245, 245, 245);
+}
+
+.table td button {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+td button {
+  margin: 2px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+td button:hover {
+  background-color: #066fdf;
+  color: #e0e0e0;
+  transition: 0.3s;
+}
+
+/* Estilo del formulario de agregar y actualizar */
+.form-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de los grupos del formulario */
+.form-container h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.form-container label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+/* Estilo del botón de envío */
+.form-container button {
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #218838;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 15px;
+  }
+
+  .table th, 
+  .table td {
+    font-size: 12px;
+  }
+
+  .form-container button {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,425 @@
+/* Estilo general de la sección de pacientes */
+.pacientes-section {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+/* Estilo para el título principal */
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+/* Contenedor del filtro y botón de agregar */
+.filter-container {
+  padding-left: 20px;
+  display: flex;
+  gap:250px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 70%;
+}
+
+.btn-agregar {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-agregar:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo del contenedor de la tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+  background-color: rgb(228, 224, 224);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(8, 8, 8, 0.1);
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px; /* Tamaño de texto más pequeño para compactar todo */
+  table-layout: auto;
+
+}
+
+.table th,
+.table td {
+  padding: 10px 8px; /* Reduce el espacio dentro de las celdas */
+  border: 1px solid #ccc;
+  white-space: nowrap; /* Mantiene el texto en una sola línea */
+  overflow: hidden; /* Oculta cualquier desbordamiento de contenido */
+ }
+
+.table th {
+  background-color: #0078d4;
+  color: white;
+  font-size: 13px;
+}
+
+.table td {
+  background-color: rgb(228, 224, 224);
+}
+
+.table td button {
+  font-size: 11px; /* Reduce el tamaño de los botones */
+  padding: 5px 10px; /* Ajusta el padding de los botones */
+  border-radius: 3px;
+}
+
+td button {
+  margin: 2px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.filter-container input[type="text"] {
+  width: 60%; /* Ajusta el tamaño del input para dejar más espacio */
+}
+
+.filter-container .btn-agregar {
+  padding: 5px 12px; /* Reduce el tamaño del botón de agregar */
+  font-size: 12px;
+}
+td button:hover{
+  background-color: #066fdf;
+  color: #e0e0e0;
+  transition: 0.3s;
+}
+
+.table td {
+  background-color: rgb(228, 224, 224);
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table th span {
+  font-size: 12px;
+}
+
+/* Estilo de la paginación */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 5px;
+}
+
+.paginacion button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: #f0f0f0;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.paginacion button:disabled {
+  cursor: not-allowed;
+  background-color: #e0e0e0;
+  color: #999;
+}
+
+.paginacion button:not(:disabled):hover {
+  background-color: #0a4c93;
+  color: #fff;
+}
+
+.paginacion span {
+  font-size: 12px;
+  color: #333;
+}
+
+/* Estilo general del formulario */
+.register-form {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor para las columnas del formulario */
+.form-container {
+  display: flex;
+  gap: 20px; /* Espacio entre columnas */
+  flex-wrap: wrap;
+}
+
+/* Estilo de las columnas del formulario */
+.form-column {
+  flex: 1;
+  min-width: 300px; /* Asegura que las columnas no se vuelvan demasiado estrechas */
+}
+
+/* Estilo de los grupos del formulario */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box; /* Asegura que el padding se incluya en el ancho */
+}
+
+.form-group input[type="date"] {
+  padding: 6px;
+}
+
+/* Estilo de los mensajes de error */
+.error-message {
+  color: #d9534f;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Estilo del botón de enviar */
+.submit-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .form-container {
+    flex-direction: column;
+  }
+}
+
+/* Estilo del botón de envío (específico) */
+button[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Estilo del botón "Ver más" */
+.btn-ver-mas {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 7px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-ver-mas:hover {
+  background-color: #0056b3;
+  color: #e0e0e0; /* Opcional, para el cambio de color de texto en hover */
+}
+
+/* Estilo para elementos ocultos */
+.hidden {
+  display: none;
+}
+
+/* Estilo para notificaciones */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #28a745; /* Verde para éxito */
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.notification.hidden {
+  opacity: 0;
+}
+
+/* Estilo para el modal emergente */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 10px;
+  width: 60%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.close {
+  width: 28px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 97%;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Estilo para el overlay del popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Estilo para el popup */
+.popup {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.popup-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.popup-close {
+  font-size: 20px;
+  cursor: pointer;
+  color: #aaa;
+
+}
+
+.popup-close:hover {
+  color: #333;
+}
+
+/* Cuerpo del popup */
+.popup-body {
+  padding: 10px 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Elemento de detalle en el popup */
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 6px;
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #0056b3;
+}
+
+.detail-value {
+  color: #333;
+}

@@ -1,0 +1,110 @@
+<div class="search-section">
+  <h2>Buscar Paciente</h2>
+  <div *ngIf="notificacion" class="notification">{{ notificacion }}</div>
+  <form (submit)="buscarPaciente($event)" class="search-form">
+    <div class="form-group">
+      <label for="search-name">Nombre</label>
+      <input
+        type="text"
+        id="search-name"
+        [(ngModel)]="searchName"
+        name="searchName"
+        placeholder="Nombre del paciente"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="search-ss">Número de Seguridad Social</label>
+      <input
+        type="text"
+        id="search-ss"
+        [(ngModel)]="searchSS"
+        name="searchSS"
+        placeholder="Número de Seguridad Social"
+      />
+    </div>
+
+    <button type="submit" class="submit-btn">Buscar Paciente</button>
+  </form>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMensaje" class="error-message">
+    {{ errorMensaje }}
+  </div>
+
+  <!-- Mostrar los resultados si se encuentran pacientes -->
+  <div *ngIf="pacientesEncontrados.length > 0" class="resultados">
+    <h3>Información del Paciente</h3>
+
+    <div class="pacientes-container">
+      <div *ngFor="let paciente of pacientesEncontrados" class="paciente-info">
+        <p><strong>Nombre:</strong> {{ paciente.Nombre }}</p>
+        <p><strong>DNI:</strong> {{ paciente.Dni }}</p>
+        <p><strong>Fecha de Nacimiento:</strong> {{ paciente.FechaNacimiento | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Estado:</strong> {{ paciente.Estado }}</p>
+        <p><strong>Seguridad Social:</strong> {{ paciente.SeguridadSocial }}</p>
+        <p><strong>Dirección:</strong> {{ paciente.Direccion }}</p>
+        <p><strong>Teléfono:</strong> {{ paciente.Telefono }}</p>
+        <p><strong>Email:</strong> {{ paciente.Email }}</p>
+        <p><strong>Historial Médico:</strong> {{ paciente.HistorialMedico }}</p>
+
+        <!-- Botones para editar y pasar a consulta -->
+        <button (click)="editarPaciente(paciente)" class="edit-btn">Editar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario de edición que aparece al seleccionar un paciente -->
+  <div *ngIf="pacienteSeleccionado && mostrarFormularioEdicion" class="edit-section">
+    <h3>Editar Paciente</h3>
+    <form (submit)="actualizarPaciente()">
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input type="text" [(ngModel)]="pacienteSeleccionado.Nombre" name="Nombre" required />
+      </div>
+
+      <div class="form-group">
+        <label>DNI:</label>
+        <input type="text" [(ngModel)]="pacienteSeleccionado.Dni" name="Dni" required />
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" [(ngModel)]="pacienteSeleccionado.FechaNacimiento" name="FechaNacimiento" required />
+      </div>
+
+      <div class="form-group">
+        <label>Estado:</label>
+        <input type="text" [(ngModel)]="pacienteSeleccionado.Estado" name="Estado" required />
+      </div>
+
+      <div class="form-group">
+        <label>Número de Seguridad Social:</label>
+        <input type="text" [(ngModel)]="pacienteSeleccionado.SeguridadSocial" name="SeguridadSocial" required />
+      </div>
+
+      <div class="form-group">
+        <label>Dirección:</label>
+        <input type="text" [(ngModel)]="pacienteSeleccionado.Direccion" name="Direccion" required />
+      </div>
+
+      <div class="form-group">
+        <label>Teléfono:</label>
+        <input type="text" [(ngModel)]="pacienteSeleccionado.Telefono" name="Telefono" required />
+      </div>
+
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" [(ngModel)]="pacienteSeleccionado.Email" name="Email" required />
+      </div>
+
+      <div class="form-group">
+        <label>Historial Médico:</label>
+        <textarea [(ngModel)]="pacienteSeleccionado.HistorialMedico" name="HistorialMedico" required></textarea>
+      </div>
+
+      <button type="submit" class="update-btn">Actualizar Paciente</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+.dashboard-section {
+  background-color: rgb(228, 224, 224);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(8, 8, 8, 0.1);
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border: 1px solid #ccc; 
+}
+
+.table th {
+  background-color: #0078d4;
+  color: white;
+  border-radius: 5px;
+}
+
+.error-message {
+  color: red;
+}
+
+.no-results {
+  margin-top: 20px;
+  color: gray;
+}
